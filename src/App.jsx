@@ -5,15 +5,22 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
- const boxes=[]
- 
- for(let i=0;i<100;i++){
+ const boxes=[[]]
+ let max=300
+ for(let i=0;i<max;i++){
   //TODO- these need all to be unique co-ords...
-   let x=Math.floor(Math.random()*44)
-   let y=Math.floor(Math.random()*44)
-   boxes.push([x,y])
+   let x=Math.floor(Math.random()*31)
+   let y=Math.floor(Math.random()*31)
+  
+   for (let o=0;o<boxes.length;o++){
+     if(boxes[o][0]===x && boxes[o][1]===y){
+       max++;
+       continue;
+      }
+    }
+    boxes.push([x,y])
   }
- 
+ console.log(boxes)
  
 
   return (

@@ -7,10 +7,10 @@
 
 #main{
   display:grid;
-  grid-template-columns: repeat(45, 20px [col-start]);
-  grid-template-rows: repeat(45,20px [row-start]);
-  width:900px;
-  height:900px;
+  grid-template-columns: repeat(30, 20px [col-start]);
+  grid-template-rows: repeat(30,20px [row-start]);
+  width:600px;
+  height:600px;
 
   background-color: aliceblue;
 }

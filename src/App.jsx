@@ -1,33 +1,29 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+ const boxes=[]
+ 
+ for(let i=0;i<100;i++){
+  //TODO- these need all to be unique co-ords...
+   let x=Math.floor(Math.random()*44)
+   let y=Math.floor(Math.random()*44)
+   boxes.push([x,y])
+  }
+ 
+ 
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      
+      <div id="main">
+    {boxes.map((box,index)=>{
+      return <div className="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>X</div>
+    })}
+       </div>
     </>
   )
 }

@@ -4,16 +4,26 @@
   padding: 2rem;
   text-align: center;
 }
-
 #main{
+  height:90vh;
   display:grid;
-  grid-template-columns: repeat(30, 20px [col-start]);
-  grid-template-rows: repeat(30,20px [row-start]);
-  width:600px;
-  height:600px;
-
+  grid-template-columns: repeat(30, 3vh [col-start]);
+  grid-template-rows: repeat(30, 3vh [row-start]);
   background-color: aliceblue;
 }
+
 .tnt{
   background-color: black;
+  font-size: smaller;
+}
+@media screen and (max-width:450px) {
+  #main{
+    margin:0 auto;
+    padding:0;
+    width:90vw;
+    height:90vw;
+  display:grid;
+    grid-template-columns: repeat(30, 3vw [col-start]);
+  grid-template-rows: repeat(30, 3vw [row-start]);
+}
 }

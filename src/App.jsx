@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useEffect } from 'react'
+import { useRef,useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -9,6 +9,11 @@ function App() {
   const [myY,setMyY]=useState(getRnd())
   const [guardX,setGuardX]=useState(getRnd())
   const [guardY,setGuardY]=useState(getRnd())
+  const inputRef=useRef(null)
+  useEffect(() => {
+    inputRef.current.focus();
+}, []);
+
   const [boxes,setBoxes]=useState(()=>{
     let boxes=[]
     let max=300
@@ -28,7 +33,9 @@ function App() {
      return boxes;
   })
 
-//  let boxes=drawScreen()
+// useEffect(()=>{
+//   focusMe.current.focus();
+// },[])
   
   
   const handleKeyDown=(e)=>{
@@ -56,7 +63,7 @@ function App() {
     {boxes.map((box,index)=>{
       return <div className="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>X</div>
     })}
-    <div id="me" tabIndex={0} onKeyDown={handleKeyDown} style={{gridColumn:myX,gridRow:myY}}>S</div>
+    <div ref= {inputRef} id="me" tabIndex={0} onKeyDown={handleKeyDown} style={{gridColumn:myX,gridRow:myY}}>S</div>
     <div id="guard"  style={{gridColumn:guardX,gridRow:guardY}}>G</div>
        </div>
     </>

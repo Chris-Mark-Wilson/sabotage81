@@ -4,6 +4,18 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+
+const getRnd=()=>{
+  return Math.floor(Math.random()*31)
+ }
+
+const getGridElement=(x,y,boxes)=>{
+for(let i=0;i<boxes.length;i++){
+  if(boxes[i][0]===x && boxes[i][1]===y) return true
+}
+return false;
+}
+
 function App() {
   const [myX,setMyX]=useState(getRnd())
   const [myY,setMyY]=useState(getRnd())
@@ -32,29 +44,37 @@ function App() {
      }
      return boxes;
   })
-
-// useEffect(()=>{
-//   focusMe.current.focus();
-// },[])
-  
   
   const handleKeyDown=(e)=>{
   
     if(e.key==="q"){
-     setMyY(myY-1)
+      const boxAbove=getGridElement(myX,myY-1,boxes)
+      if(!boxAbove){
+      if(myY>0) setMyY(myY-1)
     }
+  }
     
     if(e.key==="a"){
-      setMyY(myY+1)
+      const boxBelow=getGridElement(myX,myY+1,boxes)
+      if(!boxBelow){
+      if(myY<30) setMyY(myY+1)
     }
+  }
+  
    if(e.key==="p"){
-    setMyX(myX+1)
-   }
-   if(e.key==="o"){
-    setMyX(myX-1)
+    const boxRight=getGridElement(myX+1,myY,boxes)
+    if(!boxRight){
+    if(myX<30) setMyX(myX+1)
    }
   }
- 
+
+  if(e.key==="o"){
+     const boxLeft=getGridElement(myX-1,myY,boxes)
+     if(!boxLeft){
+    if(myX>0) setMyX(myX-1)
+   }
+  }
+}
 
   return (
     <>
@@ -71,9 +91,7 @@ function App() {
 }
 
 
- const getRnd=()=>{
-  return Math.floor(Math.random()*31)
- }
+ 
  
 
 export default App

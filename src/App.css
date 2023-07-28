@@ -10,6 +10,7 @@
   grid-template-columns: repeat(30, 3vh [col-start]);
   grid-template-rows: repeat(30, 3vh [row-start]);
   background-color: aliceblue;
+  border:10px solid red;
 }
 
 .tnt{

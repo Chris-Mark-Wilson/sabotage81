@@ -9,8 +9,26 @@ function App() {
   const [myY,setMyY]=useState(getRnd())
   const [guardX,setGuardX]=useState(getRnd())
   const [guardY,setGuardY]=useState(getRnd())
+  const [boxes,setBoxes]=useState(()=>{
+    let boxes=[]
+    let max=300
+    for(let i=0;i<max;i++){
+    
+      let x=Math.floor(Math.random()*31)
+      let y=Math.floor(Math.random()*31)
+     
+      for (let o=0;o<boxes.length;o++){
+        if(boxes[o][0]===x && boxes[o][1]===y){
+          max++;
+          continue;
+         }
+       }
+       boxes.push([x,y])
+     }
+     return boxes;
+  })
 
- let boxes=drawScreen()
+//  let boxes=drawScreen()
   
   
   const handleKeyDown=(e)=>{
@@ -44,24 +62,7 @@ function App() {
     </>
   )
 }
-function drawScreen(){
-  let boxes=[]
-  let max=300
-  for(let i=0;i<max;i++){
-  
-    let x=Math.floor(Math.random()*31)
-    let y=Math.floor(Math.random()*31)
-   
-    for (let o=0;o<boxes.length;o++){
-      if(boxes[o][0]===x && boxes[o][1]===y){
-        max++;
-        continue;
-       }
-     }
-     boxes.push([x,y])
-   }
-   return boxes;
- }
+
 
  const getRnd=()=>{
   return Math.floor(Math.random()*31)

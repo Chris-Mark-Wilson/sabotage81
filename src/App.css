@@ -13,7 +13,8 @@
   border:10px solid red;
 }
 #bomb{
-  background-color: rgb(237, 4, 4);
+  border-radius:50%;
+  background-color: rgb(1, 1, 1);
   font-size: larger;
 }
 .tnt{

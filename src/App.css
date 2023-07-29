@@ -12,7 +12,10 @@
   background-color: aliceblue;
   border:10px solid red;
 }
-
+#bomb{
+  background-color: rgb(237, 4, 4);
+  font-size: larger;
+}
 .tnt{
   background-color: rgb(62, 56, 56);
   font-size: larger;

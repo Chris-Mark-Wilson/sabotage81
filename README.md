@@ -18,3 +18,5 @@ And the good thing about that, is that you can RUN AWAY because the event loop i
 same thing to move the guard!!!
 so.. onwards..
 cool, now Ive got  bomb.. I rendered the bomb before "me" so that you see me and not the bomb when Im running around the screen, carrying it with me!
+maybe I'll code in a machine gun later just so I can say "now I too have a machine gun"...
+

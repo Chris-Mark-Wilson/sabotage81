@@ -22,8 +22,8 @@ const App=()=>{
   const [guardY,setGuardY]=useState(getRnd())
   const [bombX,setBombX]=useState(myX)
   const[bombY,setBombY]=useState(myY)
-  const[bombSet,setBombSet]=useState(false)
-
+  let     [count,setCount]=useState(9)
+let [bombSet,setBombSet]=useState(false);
   const inputRef=useRef(null) // used to set focus on player at start
   useEffect(() => {
     inputRef.current.focus();
@@ -85,12 +85,29 @@ const App=()=>{
           }
           }
         }
-        if(e.key==="z"){
-         // this doesnt work, or isnt rendering at least...
-          setBombX(myX)
-          setBombY(myY)
-          createElement("div",{className:'bomb',gridColumn:bombX,gridRow:bombY},"E")
+        if(e.key===" "){
+     setBombSet(true);
+          setCountdown()
         }
+}
+
+const setCountdown=()=>{
+ 
+  if(count>=0) setTimeout(tickdown,1000)
+}
+const tickdown=()=>{
+if(count===0)boomTime();
+count--;
+const bomb=document.getElementById("bomb")
+bomb.textContent=count;
+setCountdown()
+}
+const boomTime=()=>{
+  stopCount()
+  console.log("Bang!")
+}
+const stopCount=()=>{
+setBombSet(false);
 }
 
   return (

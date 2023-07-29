@@ -69,7 +69,9 @@ call function with an array containing bomb position - bangArray
     e.style.gridColumn=y
     which will set an element at a particular grid co-ordinate
 
-    gone teatime...
+    dont forget both me and the bomb are simply part of the screen grid.. maybe the div needs to be removed at the bomb co-ords and reintroduced at my location?
+    
+
     
 
 

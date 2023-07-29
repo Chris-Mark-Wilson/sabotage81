@@ -121,12 +121,17 @@ const boomTime=(bangArray)=>{
   if(bangArray.length===0){
 console.log("finished")
 console.log("score=",score)
-// setMyX(myX)
-// setMyY(myY)
-// setBombX(myX)
-// setBombY(myY)
-bombX=myX;
-bombY=myY;
+let m=document.getElementById("me")
+let x=m.style.gridColumn
+let y=m.style.gridRow
+setMyY(y)
+setMyX(x)
+let b=document.getElementById("me")
+x=b.style.gridColumn
+y=b.style.gridRow
+setBombX(x)
+setBombY(y)
+
 console.log("me->",myX,",",myY)
 console.log("bomb->",bombX,",",bombY)
 

@@ -48,7 +48,7 @@ const App=()=>{
        }
      }
      return boxes;
-  },[])
+  })
 
 ////////////////////////////////////////////////////
   const handleKeyDown=(e)=>{
@@ -89,8 +89,8 @@ const App=()=>{
           }
         }
         if(e.key===" "){
-          console.log(boxes.length,"<-boxes length on fire")
-     setBombSet(true);
+          console.group("fire")
+            setBombSet(true);
           setCountdown()
         }
 }
@@ -115,31 +115,21 @@ const stopCount=()=>{
 ////////////////BAAAAAANNNNNGGGG//////////////////////////////
 
 const boomTime=(bangArray)=>{
-  stopCount()
-  console.log("Bang!")
+  setBombSet(false);
 
+ 
   if(bangArray.length===0){
 console.log("finished")
 console.log("score=",score)
-let m=document.getElementById("me")
-let x=m.style.gridColumn
-let y=m.style.gridRow
-setMyY(y)
-setMyX(x)
-let b=document.getElementById("me")
-x=b.style.gridColumn
-y=b.style.gridRow
-setBombX(x)
-setBombY(y)
+setMyX(myX)
+setMyY(myY)
 
-console.log("me->",myX,",",myY)
-console.log("bomb->",bombX,",",bombY)
+
 
 return
   }
 
- console.log(bangArray[0][0],"bangarray00")
- console.log(boxes.length,"<-boxes length start")
+ 
   if(!stop){
     let testArray=[];
     testArray.push([bangArray[0][0]-1,bangArray[0][1]-1]) // top left
@@ -174,15 +164,14 @@ return
 
 const removeBox=(index)=>{
   let stash=[]
-  console.log(index,"<-index")
+ 
   for(let i=0;i<index;i++){
     let shifted=boxes.shift()
      // remove the front of the 'queue' and 'stash'
     stash.push(shifted)
   }
-  boxes.shift() //remove the box to blow up
+  boxes.shift() //remove the box to blowvisibility:false
   setScore(score+=1)
-  // put the stash back
   for(let i=stash.length-1;i>=0;i--){
     boxes.unshift(stash[i])
   }
@@ -198,7 +187,7 @@ const removeBox=(index)=>{
     {boxes.map((box,index)=>{
       return <div className="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>X</div>
     })}
-    <div id="bomb" style={{gridColumn:bombX,gridRow:bombY,visibility:false}}>10</div>
+    <div id="bomb" style={{gridColumn:bombX,gridRow:bombY,     }}>10</div>
     <div ref= {inputRef} id="me" tabIndex={0} onKeyDown={handleKeyDown} style={{gridColumn:myX,gridRow:myY}}>S</div>
     <div id="guard"  style={{gridColumn:guardX,gridRow:guardY}}>G</div>
     

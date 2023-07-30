@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { useRef,useEffect,createElement } from 'react'
-
+import { createRoot } from 'react-dom/client';
 import './App.css'
 import { render } from 'react-dom'
 
@@ -38,7 +38,7 @@ const App=()=>{
   let [guardY,setGuardY]=useState(getRnd())
   let [bombX,setBombX]=useState(myX)
   let [bombY,setBombY]=useState(myY)
-  let [count,setCount]=useState(10)
+  let [count,setCount]=useState(5)
   let [bombSet,setBombSet]=useState(false);
   let [stop,setStop]=useState(false)
   let [score,setScore]=useState(0)
@@ -48,7 +48,7 @@ const App=()=>{
 }, []);
 
   // state for array of uxb boxes
-  let [boxes,setBoxes]=useState(createBoxArray(300))
+  let [boxes,setBoxes]=useState(createBoxArray(30))
 
 ////////////////////////////////////////////////////
   const handleKeyDown=(e)=>{
@@ -142,6 +142,8 @@ console.log("score=",score)
 // setBombY(()=>bombY=y)
 // setMyX(()=>myX=x)
 // setMyY(()=>myY=y)
+//  I fixed this problem by changing How it handles
+// moving around the screen 'carrying' the bomb
 console.log(myX,myY,"my x,y state")
 console.log(bombX,bombY,"bomb x,y state")
 let e=document.getElementById("me")
@@ -166,12 +168,34 @@ return
     testArray.push([bangArray[0][0],bangArray[0][1]+1]) // bottom mid
     testArray.push([bangArray[0][0]+1,bangArray[0][1]+1]) //bottom right
 
+    //// explosion graphic generation
+
+    const elementArray=Array.from(document.getElementsByClassName("tnt"))
+    testArray.forEach(position=>{ // position is an array [x,y]
+      elementArray.forEach((element,index)=>{
+        let y=+element.style.gridArea.split("/")[0]
+       let x=+element.style.gridArea.split("/")[1]
+        //grid area is [y,x]... weird but hey ho...
+        //prolly the 'mericans again...
+       // we now have the gridref of the tnt element
+        if(x=position[0] && y===position[1]){
+          //we have a match!
+          const bang=(element)=>{
+            element.style.textContent="💥"
+            console.log(element.style.textContent,element.style.gridColumn,element.style.gridRow)
+          }
+          bang(element)
+          
+        }
+      })
+    })
 
     testArray.forEach(position=>{
           boxes.forEach((box,index)=>{  //test for uxb and remove
                 if(box[0]===position[0] && box[1]===position[1]){
                   bangArray.push(position);
-                  setBoxes(removeBox(index))
+                 setBoxes(removeBox(index))
+                //  setBoxes(boxes)
                 }
           })
     })
@@ -179,10 +203,10 @@ return
     bangArray.shift();  //remove this position 
     
 
+  }
     if(bangArray.length>50)stop=true;
     
     boomTime(bangArray) // recursive call
-  }
 }
 
 //////////////////////////////////////
@@ -210,9 +234,9 @@ const removeBox=(index)=>{
       
       <div id="main">
     {boxes.map((box,index)=>{
-      return <div className="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>tnt</div>
+      return <div className="tnt" id="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>tnt</div>
     })}
-    <div id="bomb" style={{gridColumn:bombX,gridRow:bombY,     }}>10</div>
+    <div id="bomb" style={{gridColumn:bombX,gridRow:bombY,     }}>5</div>
     <div ref= {inputRef} id="me" tabIndex={0} onKeyDown={handleKeyDown} style={{gridColumn:myX,gridRow:myY}}>S</div>
     <div id="guard"  style={{gridColumn:guardX,gridRow:guardY}}>G</div>
     

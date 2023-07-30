@@ -19,7 +19,8 @@
 }
 .tnt{
   background-color: rgb(62, 56, 56);
-  font-size: larger;
+  font-size: small;
+  border-radius: 5px;
 }
 #me{
   background-color: brown;
@@ -39,4 +40,12 @@
     grid-template-columns: repeat(30, 3vw [col-start]);
   grid-template-rows: repeat(30, 3vw [row-start]);
 }
+}
+@media screen and (max-height: 800px){
+  #bomb,#guard,#me{
+    font-size:small ;
+  }
+  .tnt{
+    font-size: x-small;
+  }
 }

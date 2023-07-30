@@ -3,16 +3,31 @@ import { useRef,useEffect,createElement } from 'react'
 
 import './App.css'
 
-
 const getRnd=()=>{
   return Math.floor(Math.random()*31)
  }
 
-const getGridElement=(x,y,boxes)=>{
+const checkGridElement=(x,y,boxes)=>{
     for(let i=0;i<boxes.length;i++){
       if(boxes[i][0]===x && boxes[i][1]===y) return true
     }
      return false;
+}
+const createBoxArray=(max)=>{ let boxes=[]
+ 
+  for(let i=0;i<max;i++){
+    let x=Math.floor(Math.random()*31)
+    let y=Math.floor(Math.random()*31)
+  //check for duplication/overlay 
+  boxes.push([x,y])
+  for (let o=0;o<boxes.length-1;o++){
+      if(boxes[o][0]===x && boxes[o][1]===y){
+        boxes.pop()
+        i--;
+       }
+     }
+   }
+   return boxes;
 }
 /////////////////////////////////////////////////////////////////////
 const App=()=>{
@@ -32,28 +47,12 @@ const App=()=>{
 }, []);
 
   // state for array of uxb boxes
-  let [boxes,setBoxes]=useState(()=>{
-    let boxes=[]
-    let max=300
-    for(let i=0;i<max;i++){
-      let x=Math.floor(Math.random()*31)
-      let y=Math.floor(Math.random()*31)
-    //check for duplication/overlay 
-    boxes.push([x,y])
-    for (let o=0;o<boxes.length-1;o++){
-        if(boxes[o][0]===x && boxes[o][1]===y){
-          boxes.pop()
-          i--;
-         }
-       }
-     }
-     return boxes;
-  })
+  let [boxes,setBoxes]=useState(createBoxArray(300))
 
 ////////////////////////////////////////////////////
   const handleKeyDown=(e)=>{
           if(e.key==="q"){
-          const boxAbove=getGridElement(myX,myY-1,boxes)
+          const boxAbove=checkGridElement(myX,myY-1,boxes)
           if(!boxAbove){
           if(myY>0) {
             setMyY(myY-1)
@@ -62,7 +61,7 @@ const App=()=>{
           }
         }
         if(e.key==="a"){
-          const boxBelow=getGridElement(myX,myY+1,boxes)
+          const boxBelow=checkGridElement(myX,myY+1,boxes)
           if(!boxBelow){
           if(myY<30) {
             setMyY(myY+1)
@@ -71,7 +70,7 @@ const App=()=>{
           }
         }
         if(e.key==="p"){
-          const boxRight=getGridElement(myX+1,myY,boxes)
+          const boxRight=checkGridElement(myX+1,myY,boxes)
           if(!boxRight){
           if(myX<30) {
             setMyX(myX+1)
@@ -80,7 +79,7 @@ const App=()=>{
           }
         }
         if(e.key==="o"){
-          const boxLeft=getGridElement(myX-1,myY,boxes)
+          const boxLeft=checkGridElement(myX-1,myY,boxes)
           if(!boxLeft){
           if(myX>0) {
             setMyX(myX-1)
@@ -89,7 +88,7 @@ const App=()=>{
           }
         }
         if(e.key===" "){
-          console.group("fire")
+          console.group("Ticking....")
             setBombSet(true);
           setCountdown()
         }
@@ -115,14 +114,20 @@ const stopCount=()=>{
 ////////////////BAAAAAANNNNNGGGG//////////////////////////////
 
 const boomTime=(bangArray)=>{
-  setBombSet(false);
-
  
+  ///recursive base case
   if(bangArray.length===0){
-console.log("finished")
+    setBombSet(false);
+console.log("Boom!")
 console.log("score=",score)
-setMyX(myX)
-setMyY(myY)
+setBombX(()=>bombX=myX)
+setBombY(()=>bombY=myY)
+console.log(myX,myY,"my x,y state")
+console.log(bombX,bombY,"bomb x,y state")
+let e=document.getElementById("me")
+console.log(e.style.gridColumn,",",e.style.gridRow,"<-my actual x,y")
+e=document.getElementById("bomb")
+console.log(e.style.gridColumn,",",e.style.gridRow,"<-bomb actual x,y")
 
 
 
@@ -185,7 +190,7 @@ const removeBox=(index)=>{
       
       <div id="main">
     {boxes.map((box,index)=>{
-      return <div className="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>X</div>
+      return <div className="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>tnt</div>
     })}
     <div id="bomb" style={{gridColumn:bombX,gridRow:bombY,     }}>10</div>
     <div ref= {inputRef} id="me" tabIndex={0} onKeyDown={handleKeyDown} style={{gridColumn:myX,gridRow:myY}}>S</div>

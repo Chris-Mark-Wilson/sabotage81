@@ -5,15 +5,16 @@ work to date..
 uxb boxes grid co-ordinates held in state in an array - "boxes"
 position of boxes determined randomly on 1st render via a useState function. max 300 boxes to start. Function checks to see if it is trying to place a box over an existing box, if so it increases the maxboxes by 1 to ensure 300 boxes get placed on the screen.
 This may be the cause of a glitch that appears when in certain areas of the screen, there may well be 2 "divs" at that same co-ordinate..
-Its not a 'bug'.. its a feature :) 
+Its not a 'bug'.. its a feature 
+ edit: made the duplication functionality bulletproof so "no more doubledivs..."
 
 collision detection by comparing grid co-ordinates of required move to array, if co-ordinates exist in array, no move is possible as this means the grid square you are attempting to move into contains a uxb box..
 
-keys to move are q-up, a-down, o-left, p-right
-more zxSpectrum than zx81 but I prefer the chuckie egg layout ;)
+keys to move are q-up, a-down, o-left, p-right, space - set bomb
+more zxSpectrum than zx81 but I prefer the chuckie egg layout 
 
 trying to create a new div on the fly to serve as the 'bomb', isnt working at the minute... next job... fix it...
-solution (dreampt up while trying to sleep) - carry the bomb with you, you always had it anyway, isnt that the point of the game? then just set a setTimeout(countdown,1000) to tick the bomb and when it reaches zero... BOOOOOM :) 
+solution (dreampt up while trying to sleep) - carry the bomb with you, you always had it anyway, isnt that the point of the game? then just set a setTimeout(countdown,1000) to tick the bomb and when it reaches zero... BOOOOOM 
 And the good thing about that, is that you can RUN AWAY because the event loop is looking after the ticking so its NON BLOCKING CODE!!
 same thing to move the guard!!!
 so.. onwards..
@@ -75,27 +76,51 @@ call function with an array containing bomb position - bangArray
     so..
     what was happening is the bomb xy state and my xy state were not coherent during the 'ticking' function. I could "run away" but my state wasnt being updated properly and when the bomb went off, it thought my position was where i left the bomb, but it wasnt.. I'd ran away..
 
-    after much head scratching and 3 gallons of coffee, i set the keydown functions to set the bomb xy state to MY state rather than update the bomb xy state... and thats 'cured' the problem..
+    after much head scratching and 3 gallons of coffee, I set the keydown functions to set the bomb xy state to MY state rather than update the bomb xy state... and thats 'cured' the problem..
     although it may be a hack... it worked...
 
     now for a break...
     after break...
     make the recursive "boomTime" function or more to the point the "removeBox" function that is called by the setBoxes state function within the boomtime function... to show some graphical explosions..
 
-    
+
+        right then..
+
+        get an array of all the actual tnt elements with 
+        document.getElementsByClassName("tnt")
+
+        now i can point to or look at all the tnt boxes..
+        so that means i can change their properties..
+        
+        right now Im looking through the test array which is the surrounding area of the particular tnt (or bomb for first time round)
+
+        which means I have the grid co-ordinates of that area
+
+        so, if I look through the tnt array and compare it to the test array and find a match, I can alter that tnt box to look like an explosion, Ill use an emoji for now..
+
+        so lets slow things down a bit, use a setTimeout somwhow...
+
+        ok, lets say we find a match..
+
+        call a "poof!" function...
+        that "poof! function will change that elements text property to an explosion emoji, then setTimeout(turnItBackToSpace,250? say?)
+
+        will that work in react on its own without needing to return the element? or will i need to do this asyncronously returning the div at the end of the timeout being executed on the stack?
+
+        only one way to find out...
+
+        realising as Im writing this functionality that ive already tested whether we have a "match" by literally comparing arrays to pass to the removeBox() function.. the difference is that im jus removing the array index from "boxes", Im not referencing the element directly.. react is looking after the rest.. all im doing is passing the tnt box's index in the array to 
+        removeBox(index)..
+
+        hmm..
+
+        lets just quick write a poof funtion and see what happens...
+        i can pass to actual element itself to poof()...
+        didnt work.. spectacular failure tbh..
+        its all to do with how react renders components, divs, whatever.. need to do some homework...
+        
 
 
-    
-
-    
-
-
-              
-
-
-
-
-    }
 
 
 

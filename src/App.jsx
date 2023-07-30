@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRef,useEffect,createElement } from 'react'
 
 import './App.css'
+import { render } from 'react-dom'
 
 const getRnd=()=>{
   return Math.floor(Math.random()*31)
@@ -56,7 +57,10 @@ const App=()=>{
           if(!boxAbove){
           if(myY>0) {
             setMyY(myY-1)
-              if(!bombSet)setBombY(bombY-1)
+              if(!bombSet){
+                setBombY(myY-1)
+                setBombX(myX)
+              }
           }
           }
         }
@@ -65,7 +69,10 @@ const App=()=>{
           if(!boxBelow){
           if(myY<30) {
             setMyY(myY+1)
-              if(!bombSet)setBombY(bombY+1)
+              if(!bombSet){
+                setBombY(myY+1)
+                setBombX(myX)
+              }
           }
           }
         }
@@ -74,7 +81,10 @@ const App=()=>{
           if(!boxRight){
           if(myX<30) {
             setMyX(myX+1)
-              if(!bombSet)setBombX(bombX+1)
+              if(!bombSet){
+                setBombX(myX+1)
+                setBombY(myY)
+              }
           }
           }
         }
@@ -83,7 +93,10 @@ const App=()=>{
           if(!boxLeft){
           if(myX>0) {
             setMyX(myX-1)
-            if(!bombSet)setBombX(bombX-1)
+            if(!bombSet){
+              setBombX(myX-1)
+              setBombY(myY)
+            }
           }
           }
         }
@@ -100,6 +113,7 @@ const setCountdown=()=>{
 }
 
 const tickdown=()=>{
+  
     if(count===1)boomTime([[bombX,bombY]]);
     count--;
     const bomb=document.getElementById("bomb")
@@ -120,8 +134,14 @@ const boomTime=(bangArray)=>{
     setBombSet(false);
 console.log("Boom!")
 console.log("score=",score)
-setBombX(()=>bombX=myX)
-setBombY(()=>bombY=myY)
+// let e=document.getElementById("bomb")
+// let x=e.style.gridColumn
+// let y=e.style.gridRow
+// render(e)
+// setBombX(()=>bombX=x)
+// setBombY(()=>bombY=y)
+// setMyX(()=>myX=x)
+// setMyY(()=>myY=y)
 console.log(myX,myY,"my x,y state")
 console.log(bombX,bombY,"bomb x,y state")
 let e=document.getElementById("me")

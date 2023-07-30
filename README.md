@@ -70,6 +70,21 @@ call function with an array containing bomb position - bangArray
     which will set an element at a particular grid co-ordinate
 
     dont forget both me and the bomb are simply part of the screen grid.. maybe the div needs to be removed at the bomb co-ords and reintroduced at my location?
+
+    OMG! I wish I knew more about state etc..
+    so..
+    what was happening is the bomb xy state and my xy state were not coherent during the 'ticking' function. I could "run away" but my state wasnt being updated properly and when the bomb went off, it thought my position was where i left the bomb, but it wasnt.. I'd ran away..
+
+    after much head scratching and 3 gallons of coffee, i set the keydown functions to set the bomb xy state to MY state rather than update the bomb xy state... and thats 'cured' the problem..
+    although it may be a hack... it worked...
+
+    now for a break...
+    after break...
+    make the recursive "boomTime" function or more to the point the "removeBox" function that is called by the setBoxes state function within the boomtime function... to show some graphical explosions..
+
+    
+
+
     
 
     

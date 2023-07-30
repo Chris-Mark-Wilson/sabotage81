@@ -21,14 +21,20 @@
   background-color: rgb(62, 56, 56);
   font-size: small;
   border-radius: 5px;
+margin:1px;
+padding:2px;
 }
 #me{
   background-color: brown;
   font-size: larger;
+  border-radius: 5px;
+  margin:1px;
 }
 #guard{
   background-color: blue;
   font-size: larger;
+  border-radius: 5px;
+  margin:1px;
 }
 @media screen and (max-width:425px) {
   #main{

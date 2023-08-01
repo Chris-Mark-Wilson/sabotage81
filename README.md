@@ -118,6 +118,11 @@ call function with an array containing bomb position - bangArray
         i can pass to actual element itself to poof()...
         didnt work.. spectacular failure tbh..
         its all to do with how react renders components, divs, whatever.. need to do some homework...
+        ok dunno why I didnt think if this before but the only thing being held in state thats uxb related is the array of grid coordinates..
+        not the actual elements themselves so that when I change or try to change the appearace it doesnt work... but how come I can change the bomb countdown then?
+        what If I hold the text of each tnt div in state in the same array that holds its grid co-ordinates? shouldnt react then rerender each div that changes its text?
+        that didnt work either....
+        
         
 
 

@@ -14,13 +14,14 @@ const checkGridElement=(x,y,boxes)=>{
     }
      return false;
 }
-const createBoxArray=(max)=>{ let boxes=[]
+const createBoxArray=(max)=>{ 
+  let boxes=[]
  
   for(let i=0;i<max;i++){
     let x=Math.floor(Math.random()*31)
     let y=Math.floor(Math.random()*31)
   //check for duplication/overlay 
-  boxes.push([x,y])
+  boxes.push([x,y,"tnt"])
   for (let o=0;o<boxes.length-1;o++){
       if(boxes[o][0]===x && boxes[o][1]===y){
         boxes.pop()
@@ -48,7 +49,7 @@ const App=()=>{
 }, []);
 
   // state for array of uxb boxes
-  let [boxes,setBoxes]=useState(createBoxArray(30))
+  let [boxes,setBoxes]=useState(createBoxArray(300))
 
 ////////////////////////////////////////////////////
   const handleKeyDown=(e)=>{
@@ -178,13 +179,21 @@ return
         //grid area is [y,x]... weird but hey ho...
         //prolly the 'mericans again...
        // we now have the gridref of the tnt element
-        if(x=position[0] && y===position[1]){
+        if(x===position[0] && y===position[1]){
           //we have a match!
-          const bang=(element)=>{
+          const bang=(element,index)=>{
             element.style.textContent="💥"
             console.log(element.style.textContent,element.style.gridColumn,element.style.gridRow)
+            ///error --> at this point the box at 'index' has already been deleted from the array.. it logs these AFTER the explosions, in fact AFTER the recursive function has finished... so theres something async I havent accounted for..
+            //this setBoxes below thinks 'index' is the boxes array?
+            setBoxes((index)=>{
+              // console.log(index)
+              // console.log(boxes[index])
+              // boxes[index][2]="💥"
+              return boxes;
+            })
           }
-          bang(element)
+          bang(element,index)
           
         }
       })
@@ -203,14 +212,14 @@ return
     bangArray.shift();  //remove this position 
     
 
+    if(bangArray.length>50)setStop(true);
   }
-    if(bangArray.length>50)stop=true;
     
     boomTime(bangArray) // recursive call
 }
 
 //////////////////////////////////////
-
+// this function isnt actually using state or setState but still removes the boxes? what is going on?
 const removeBox=(index)=>{
   let stash=[]
  
@@ -219,7 +228,7 @@ const removeBox=(index)=>{
      // remove the front of the 'queue' and 'stash'
     stash.push(shifted)
   }
-  boxes.shift() //remove the box to blowvisibility:false
+  boxes.shift() //remove the box to blow
   setScore(score+=1)
   for(let i=stash.length-1;i>=0;i--){
     boxes.unshift(stash[i])
@@ -234,7 +243,7 @@ const removeBox=(index)=>{
       
       <div id="main">
     {boxes.map((box,index)=>{
-      return <div className="tnt" id="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>tnt</div>
+      return <div className="tnt" id="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>{box[2]}</div>
     })}
     <div id="bomb" style={{gridColumn:bombX,gridRow:bombY,     }}>5</div>
     <div ref= {inputRef} id="me" tabIndex={0} onKeyDown={handleKeyDown} style={{gridColumn:myX,gridRow:myY}}>S</div>

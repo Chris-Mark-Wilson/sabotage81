@@ -5,14 +5,6 @@ import checkGridElement from './utils/checkGridElement'
 import getRnd from './utils/getRnd'
 import createBoxArray from './utils/createBoxArray';
 
-
-
-
-
-
-
-
-
 const App=()=>{
   const [myX,setMyX]=useState(getRnd())
    const [myY,setMyY]=useState(getRnd())
@@ -130,9 +122,6 @@ let e=document.getElementById("me")
 console.log(e.style.gridColumn,",",e.style.gridRow,"<-my actual x,y")
 e=document.getElementById("bomb")
 console.log(e.style.gridColumn,",",e.style.gridRow,"<-bomb actual x,y")
-
-
-
 return
   }
 
@@ -150,37 +139,37 @@ return
 
     //// explosion graphic generation
 
-    const elementArray=Array.from(document.getElementsByClassName("tnt"))
-    testArray.forEach(position=>{ // position is an array [x,y]
-      elementArray.forEach((element,index)=>{
-        let y=+element.style.gridArea.split("/")[0]
-       let x=+element.style.gridArea.split("/")[1]
-        //grid area is [y,x]... weird but hey ho...
-        //prolly the 'mericans again...
-       // we now have the gridref of the tnt element
-        if(x===position[0] && y===position[1]){
-          //we have a match!
-          const bang=(element,index)=>{
-            element.style.textContent="💥"
-            console.log(element.style.textContent,element.style.gridColumn,element.style.gridRow)
+    // const elementArray=Array.from(document.getElementsByClassName("tnt"))
+    // testArray.forEach(position=>{ // position is an array [x,y]
+    //   elementArray.forEach((element,index)=>{
+    //     let y=+element.style.gridArea.split("/")[0]
+    //    let x=+element.style.gridArea.split("/")[1]
+    //     //grid area is [y,x]... weird but hey ho...
+    //     //prolly the 'mericans again...
+    //    // we now have the gridref of the tnt element
+    //     if(x===position[0] && y===position[1]){
+    //       //we have a match!
+    //       const bang=(element,index)=>{
+    //         element.style.textContent="💥"
+    //         console.log(element.style.textContent,element.style.gridColumn,element.style.gridRow)
           
-            setBoxes(()=>{
-              console.log(index)
+    //         setBoxes(()=>{
+    //           console.log(index)
             
              
-             // something odd going on now
-            })
-          }
-          bang(element,index)
+    //          // something odd going on now
+    //         })
+    //       }
+    //       bang(element,index)
           
-        }
-      })
-    })
+    //     }
+    //   })
+    // })
 
 //////// remove box from array //////////////////
     testArray.forEach(position=>{
           boxes.forEach((box,index)=>{  //test for uxb and remove
-                if(box[0]===position[0] && box[1]===position[1]){
+                if(box.props.x===position[0] && box.props.y===position[1]){
                   bangArray.push(position);
                  setBoxes(removeBox(index))
                 //  setBoxes(boxes)

@@ -144,7 +144,9 @@ call function with an array containing bomb position - bangArray
         if bomb IS placed near tnt, doesnt work,
         fails on the map (line 224)... so we're altering the array during the explosion process.. start there..
 
-        
+        ok, commented out the explosion function,
+        adjusted the box detection function to use box.props.x and box.props.y
+        and now recursion works again to delete boxes..        
         
 
 

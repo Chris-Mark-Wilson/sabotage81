@@ -137,6 +137,13 @@ call function with an array containing bomb position - bangArray
         so far, so good, tnt boxes are back, but are now actual components called TnT. Each component has x,y,text, key props.
         Collision detection now doesnt work.
 
+        fixed collision detection
+        tickdown works ok
+        if bomb not placed near another tnt - works
+
+        if bomb IS placed near tnt, doesnt work,
+        fails on the map (line 224)... so we're altering the array during the explosion process.. start there..
+
         
         
 

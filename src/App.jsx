@@ -23,7 +23,7 @@ const App=()=>{
   let [count,setCount]=useState(5)
   const [bombSet,setBombSet]=useState(false);
   const [stop,setStop]=useState(false)
-  const [score,setScore]=useState(0)
+  let [score,setScore]=useState(0)
   const inputRef=useRef(null) // used to set focus on player at start
   useEffect(() => {
     inputRef.current.focus();

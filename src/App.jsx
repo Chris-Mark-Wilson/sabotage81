@@ -188,7 +188,7 @@ return
             setBoxes(()=>{
               console.log(index)
               console.log(boxes[index])
-              boxes[index][2]="💥"
+             
              // something odd going on now
             })
           }
@@ -198,6 +198,7 @@ return
       })
     })
 
+//////// remove box from array //////////////////
     testArray.forEach(position=>{
           boxes.forEach((box,index)=>{  //test for uxb and remove
                 if(box[0]===position[0] && box[1]===position[1]){
@@ -218,7 +219,7 @@ return
 }
 
 //////////////////////////////////////
-// this function isnt actually using state or setState but still removes the boxes? what is going on?
+//called by setBoxes()
 const removeBox=(index)=>{
   let stash=[]
  

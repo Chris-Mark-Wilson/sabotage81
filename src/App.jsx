@@ -184,13 +184,12 @@ return
           const bang=(element,index)=>{
             element.style.textContent="💥"
             console.log(element.style.textContent,element.style.gridColumn,element.style.gridRow)
-            ///error --> at this point the box at 'index' has already been deleted from the array.. it logs these AFTER the explosions, in fact AFTER the recursive function has finished... so theres something async I havent accounted for..
-            //this setBoxes below thinks 'index' is the boxes array?
-            setBoxes((index)=>{
-              // console.log(index)
-              // console.log(boxes[index])
-              // boxes[index][2]="💥"
-              return boxes;
+          
+            setBoxes(()=>{
+              console.log(index)
+              console.log(boxes[index])
+              boxes[index][2]="💥"
+             // something odd going on now
             })
           }
           bang(element,index)

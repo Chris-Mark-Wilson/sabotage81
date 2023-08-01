@@ -102,7 +102,7 @@ const tickdown=()=>{
 const boomTime=(bangArray)=>{
  
   ///recursive base case
-  if(bangArray.length===0){
+  if(bangArray.length===0){//bang array.length===0 or stop
     setBombSet(false);
 console.log("Boom!")
 console.log("score=",score)
@@ -173,6 +173,7 @@ return
                   bangArray.push(position);
                  setBoxes(removeBox(index))
                 //  setBoxes(boxes)
+                if(bangArray.length>50)setStop(true);
                 }
           })
     })
@@ -180,7 +181,6 @@ return
     bangArray.shift();  //remove this position 
     
 
-    if(bangArray.length>50)setStop(true);
   }
     
     boomTime(bangArray) // recursive call
@@ -196,7 +196,13 @@ const removeBox=(index)=>{
      // remove the front of the 'queue' and 'stash'
     stash.push(shifted)
   }
-  boxes.shift() //remove the box to blow
+  const bang=(boxes)=>{
+    console.log(boxes[0].props ,"<-- box in remove box function")
+//  boxes[0].props.text="💥"
+
+  }
+  setTimeout(bang(boxes),50)
+   boxes.shift() //rmove the box to blow
   setScore(score+=1)
   for(let i=stash.length-1;i>=0;i--){
     boxes.unshift(stash[i])

@@ -147,6 +147,12 @@ call function with an array containing bomb position - bangArray
         ok, commented out the explosion function,
         adjusted the box detection function to use box.props.x and box.props.y
         and now recursion works again to delete boxes..        
+
+        cant set props, can access the tnt component..
+        maybe should replace tnt component with another component like an explosion
+        then delete THAT component after running recursive function a second time....
+        
+
         
 
 

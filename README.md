@@ -132,7 +132,10 @@ call function with an array containing bomb position - bangArray
         when we map over the array we just return the component at the index of the map... rather than creating a div at that point and giving it the coordinates and text held in state..
         similar, but crucially different... now the entire component is held in state..
         see what that does...
-        
+
+        started new git branch - "component"
+        so far, so good, tnt boxes are back, but are now actual components called TnT. Each component has x,y,text, key props.
+        Collision detection now doesnt work.
 
         
         

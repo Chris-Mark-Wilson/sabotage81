@@ -1,48 +1,29 @@
-import { useId, useState } from 'react'
-import { useRef,useEffect,createElement } from 'react'
-import { createRoot } from 'react-dom/client';
+import {useState } from 'react'
+import { useRef,useEffect} from 'react'
 import './App.css'
-import { render } from 'react-dom'
+import checkGridElement from './utils/checkGridElement'
+import getRnd from './utils/getRnd'
+import createBoxArray from './utils/createBoxArray';
 
-const getRnd=()=>{
-  return Math.floor(Math.random()*31)
- }
 
-const checkGridElement=(x,y,boxes)=>{
-    for(let i=0;i<boxes.length;i++){
-      if(boxes[i][0]===x && boxes[i][1]===y) return true
-    }
-     return false;
-}
-const createBoxArray=(max)=>{ 
-  let boxes=[]
- 
-  for(let i=0;i<max;i++){
-    let x=Math.floor(Math.random()*31)
-    let y=Math.floor(Math.random()*31)
-  //check for duplication/overlay 
-  boxes.push([x,y,"tnt"])
-  for (let o=0;o<boxes.length-1;o++){
-      if(boxes[o][0]===x && boxes[o][1]===y){
-        boxes.pop()
-        i--;
-       }
-     }
-   }
-   return boxes;
-}
-/////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 const App=()=>{
-  let [myX,setMyX]=useState(getRnd())
-  let [myY,setMyY]=useState(getRnd())
-  let [guardX,setGuardX]=useState(getRnd())
-  let [guardY,setGuardY]=useState(getRnd())
-  let [bombX,setBombX]=useState(myX)
-  let [bombY,setBombY]=useState(myY)
+  const [myX,setMyX]=useState(getRnd())
+   const [myY,setMyY]=useState(getRnd())
+  const [guardX,setGuardX]=useState(getRnd())
+  const [guardY,setGuardY]=useState(getRnd())
+  const [bombX,setBombX]=useState(myX)
+  const [bombY,setBombY]=useState(myY)
   let [count,setCount]=useState(5)
-  let [bombSet,setBombSet]=useState(false);
-  let [stop,setStop]=useState(false)
-  let [score,setScore]=useState(0)
+  const [bombSet,setBombSet]=useState(false);
+  const [stop,setStop]=useState(false)
+  const [score,setScore]=useState(0)
   const inputRef=useRef(null) // used to set focus on player at start
   useEffect(() => {
     inputRef.current.focus();
@@ -52,63 +33,64 @@ const App=()=>{
   let [boxes,setBoxes]=useState(createBoxArray(300))
 
 ////////////////////////////////////////////////////
-  const handleKeyDown=(e)=>{
-          if(e.key==="q"){
-          const boxAbove=checkGridElement(myX,myY-1,boxes)
-          if(!boxAbove){
-          if(myY>0) {
-            setMyY(myY-1)
-              if(!bombSet){
-                setBombY(myY-1)
-                setBombX(myX)
-              }
-          }
-          }
-        }
-        if(e.key==="a"){
-          const boxBelow=checkGridElement(myX,myY+1,boxes)
-          if(!boxBelow){
-          if(myY<30) {
-            setMyY(myY+1)
-              if(!bombSet){
-                setBombY(myY+1)
-                setBombX(myX)
-              }
-          }
-          }
-        }
-        if(e.key==="p"){
-          const boxRight=checkGridElement(myX+1,myY,boxes)
-          if(!boxRight){
-          if(myX<30) {
-            setMyX(myX+1)
-              if(!bombSet){
-                setBombX(myX+1)
-                setBombY(myY)
-              }
-          }
-          }
-        }
-        if(e.key==="o"){
-          const boxLeft=checkGridElement(myX-1,myY,boxes)
-          if(!boxLeft){
-          if(myX>0) {
-            setMyX(myX-1)
-            if(!bombSet){
-              setBombX(myX-1)
-              setBombY(myY)
-            }
-          }
-          }
-        }
-        if(e.key===" "){
-          console.group("Ticking....")
-            setBombSet(true);
-          setCountdown()
-        }
+ 
+///////////////////////////////////////////////////////////////////
+const handleKeyDown=(e)=>{
+  if(e.key==="q"){
+    const boxAbove=checkGridElement(myX,myY-1,boxes)
+       if(!boxAbove){
+  if(myY>0) {
+    setMyY(myY-1)
+      if(!bombSet){
+        setBombY(myY-1)
+        setBombX(myX)
+      }
+  }
+  }
+}
+if(e.key==="a"){
+  const boxBelow=checkGridElement(myX,myY+1,boxes)
+  if(!boxBelow){
+  if(myY<30) {
+    setMyY(myY+1)
+      if(!bombSet){
+        setBombY(myY+1)
+        setBombX(myX)
+      }
+    }
+  }
+}
+if(e.key==="p"){
+  const boxRight=checkGridElement(myX+1,myY,boxes)
+  if(!boxRight){
+  if(myX<30) {
+    setMyX(myX+1)
+      if(!bombSet){
+        setBombX(myX+1)
+        setBombY(myY)
+      }
+  }
+}
+}
+if(e.key==="o"){
+  const boxLeft=checkGridElement(myX-1,myY,boxes)
+  if(!boxLeft){
+  if(myX>0) {
+    setMyX(myX-1)
+    if(!bombSet){
+      setBombX(myX-1)
+      setBombY(myY)
+    }
+  }
+  }
+}
+if(e.key===" "){
+  console.group("Ticking....")
+    setBombSet(true);
+  setCountdown()
+}
 }
 
-///////////////////////////////////////////////////////////////////
 const setCountdown=()=>{
   if(count>=1) setTimeout(tickdown,1000)
 }
@@ -122,9 +104,6 @@ const tickdown=()=>{
     setCountdown()
 }
 
-const stopCount=()=>{
-  setBombSet(false);
-}
 
 ////////////////BAAAAAANNNNNGGGG//////////////////////////////
 
@@ -187,7 +166,7 @@ return
           
             setBoxes(()=>{
               console.log(index)
-              console.log(boxes[index])
+            
              
              // something odd going on now
             })
@@ -243,7 +222,7 @@ const removeBox=(index)=>{
       
       <div id="main">
     {boxes.map((box,index)=>{
-      return <div className="tnt" id="tnt" style={{gridColumn:box[0],gridRow:box[1]}} key={index}>{box[2]}</div>
+      return box;
     })}
     <div id="bomb" style={{gridColumn:bombX,gridRow:bombY,     }}>5</div>
     <div ref= {inputRef} id="me" tabIndex={0} onKeyDown={handleKeyDown} style={{gridColumn:myX,gridRow:myY}}>S</div>
@@ -253,5 +232,4 @@ const removeBox=(index)=>{
     </>
   )
 }
-
 export default App

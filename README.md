@@ -122,6 +122,18 @@ call function with an array containing bomb position - bangArray
         not the actual elements themselves so that when I change or try to change the appearace it doesnt work... but how come I can change the bomb countdown then?
         what If I hold the text of each tnt div in state in the same array that holds its grid co-ordinates? shouldnt react then rerender each div that changes its text?
         that didnt work either....
+
+        right. plan.
+
+        instead of creating a div where the only thing in state is its grid position and innerhtml, create a new component that is a div.. call it Tnt..
+        when building the array, grab a Tnt, give it a grid position as before, an inner html, as before but the array now will consist of Tnt components...
+        that way its the Component itself we are playing with when we alter its state so therefore react should render it (them) whenever we alter its (their) properties, such as innerhtml... like turning it from a tnt box into an explosion emoji..
+        
+        when we map over the array we just return the component at the index of the map... rather than creating a div at that point and giving it the coordinates and text held in state..
+        similar, but crucially different... now the entire component is held in state..
+        see what that does...
+        
+
         
         
 

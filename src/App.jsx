@@ -4,6 +4,7 @@ import './App.css'
 import checkGridElement from './utils/checkGridElement'
 import getRnd from './utils/getRnd'
 import createBoxArray from './utils/createBoxArray';
+import Exp from './components/Exp'
 
 const App=()=>{
   const [myX,setMyX]=useState(getRnd())
@@ -23,6 +24,9 @@ const App=()=>{
 
   // state for array of uxb boxes
   let [boxes,setBoxes]=useState(createBoxArray(300))
+  useEffect(()=>{
+    setBoxes(boxes)
+  },[score])
 
 ////////////////////////////////////////////////////
  
@@ -89,7 +93,10 @@ const setCountdown=()=>{
 
 const tickdown=()=>{
   
-    if(count===1)boomTime([[bombX,bombY]]);
+    if(count===1){
+     
+      boomTime([[bombX,bombY]])
+    };
     count--;
     const bomb=document.getElementById("bomb")
     bomb.textContent=count;
@@ -100,9 +107,13 @@ const tickdown=()=>{
 ////////////////BAAAAAANNNNNGGGG//////////////////////////////
 
 const boomTime=(bangArray)=>{
+
  
   ///recursive base case
   if(bangArray.length===0){//bang array.length===0 or stop
+    boxes.forEach(box=>{
+      console.log(box.props.text,box.props.x,box.props.y)
+     })
     setBombSet(false);
 console.log("Boom!")
 console.log("score=",score)
@@ -160,15 +171,13 @@ return
     //          // something odd going on now
     //         })
     //       }
-    //       bang(element,index)
-          
-    //     }
-    //   })
+    //       bang(element,index) })
     // })
 
 //////// remove box from array //////////////////
     testArray.forEach(position=>{
           boxes.forEach((box,index)=>{  //test for uxb and remove
+            
                 if(box.props.x===position[0] && box.props.y===position[1]){
                   bangArray.push(position);
                  setBoxes(removeBox(index))
@@ -188,6 +197,8 @@ return
 
 //////////////////////////////////////
 //called by setBoxes()
+/*so what this is SUPPOSED to do is take off the front of the array up to the index of the box we need to blow up, then replace it with a completely new element i.e. <Exp/>
+but for some weird reason it doesnt work?*/
 const removeBox=(index)=>{
   let stash=[]
  
@@ -197,18 +208,20 @@ const removeBox=(index)=>{
     stash.push(shifted)
   }
   const bang=(boxes)=>{
-    console.log(boxes[0].props ,"<-- box in remove box function")
+    
 //  boxes[0].props.text="💥"
 
   }
   setTimeout(bang(boxes),50)
-   boxes.shift() //rmove the box to blow
+
+   boxes.shift() //remove the box to blow
+   boxes.unshift(<Exp key={index} x={boxes[0].props.x} y={boxes[0].props.y} text={"💥"}/>)//replace with <Exp/>
   setScore(score+=1)
   for(let i=stash.length-1;i>=0;i--){
     boxes.unshift(stash[i])
   }
- 
-  return boxes
+ // and return the entire array to the setBoxes function from where it was called..
+  return [...boxes]
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -216,11 +229,15 @@ const removeBox=(index)=>{
     <>
       
       <div id="main">
+
     {boxes.map((box,index)=>{
       return box;
     })}
+
     <div id="bomb" style={{gridColumn:bombX,gridRow:bombY,     }}>5</div>
+
     <div ref= {inputRef} id="me" tabIndex={0} onKeyDown={handleKeyDown} style={{gridColumn:myX,gridRow:myY}}>S</div>
+
     <div id="guard"  style={{gridColumn:guardX,gridRow:guardY}}>G</div>
     
        </div>

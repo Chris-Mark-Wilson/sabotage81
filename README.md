@@ -151,6 +151,11 @@ call function with an array containing bomb position - bangArray
         cant set props, can access the tnt component..
         maybe should replace tnt component with another component like an explosion
         then delete THAT component after running recursive function a second time....
+
+      
+        ookkkkkaayyyy...
+        so new component... done..
+        it looks like whats happening is its 
         
 
         

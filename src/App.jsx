@@ -171,32 +171,55 @@ return
 
     //// explosion graphic generation
 
-    const elementArray=Array.from(document.getElementsByClassName("tnt"))
-    testArray.forEach(position=>{ // position is an array [x,y]
-      elementArray.forEach((element,index)=>{
-        let y=+element.style.gridArea.split("/")[0]
-       let x=+element.style.gridArea.split("/")[1]
-        //grid area is [y,x]... weird but hey ho...
-        //prolly the 'mericans again...
-       // we now have the gridref of the tnt element
-        if(x===position[0] && y===position[1]){
-          //we have a match!
-          const bang=(element,index)=>{
-            element.style.textContent="💥"
-            console.log(element.style.textContent,element.style.gridColumn,element.style.gridRow)
+    // const elementArray=Array.from(document.getElementsByClassName("tnt"))
+    // testArray.forEach(position=>{ // position is an array [x,y]
+    //   elementArray.forEach((element,index)=>{
+    //     let y=+element.style.gridArea.split("/")[0]
+    //    let x=+element.style.gridArea.split("/")[1]
+    //     //grid area is [y,x]... weird but hey ho...
+    //     //prolly the 'mericans again...
+    //    // we now have the gridref of the tnt element
+    //     if(x===position[0] && y===position[1]){
+    //       //we have a match!
+    //       const bang=(element,index)=>{
+    //         element.style.textContent="💥"
+    //         console.log(element.style.textContent,element.style.gridColumn,element.style.gridRow)
           
-            setBoxes(()=>{
-              console.log(index)
-              console.log(boxes[index])
+    //         setBoxes(()=>{
+    //           console.log(index)
+    //           console.log(boxes[index])
              
-             // something odd going on now
-            })
-          }
-          bang(element,index)
+    //          // something odd going on now
+    //         })
+    //       }
+    //       bang(element,index)
           
-        }
-      })
-    })
+    //     }
+    //   })
+    // })
+    // ... (existing code)
+  // explosion graphic generation
+  const elementArray = Array.from(document.getElementsByClassName("tnt"));
+  testArray.forEach((position) => {
+    elementArray.forEach((element, index) => {
+      let y = +element.style.gridArea.split("/")[0];
+      let x = +element.style.gridArea.split("/")[1];
+      if (x === position[0] && y === position[1]) {
+        const bang = (element, index) => {
+          element.textContent = "💥"; // Update the box content to show an explosion emoji
+          element.style.color = "red"; // Set the box color to red to represent an explosion
+          console.log(element.textContent, element.style.gridColumn, element.style.gridRow);
+          // Remove the box element after a short delay to show the explosion effect
+          setTimeout(() => {
+            element.remove();
+          }, 2000); // Adjust the delay as needed to control the explosion effect
+        };
+        bang(element, index);
+      }
+    });
+  });
+  // ... (rest of the existing code)
+
 
 //////// remove box from array //////////////////
     testArray.forEach(position=>{

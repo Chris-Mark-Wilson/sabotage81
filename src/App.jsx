@@ -210,9 +210,9 @@ return
           element.style.color = "red"; // Set the box color to red to represent an explosion
           console.log(element.textContent, element.style.gridColumn, element.style.gridRow);
           // Remove the box element after a short delay to show the explosion effect
-          setTimeout(() => {
-            element.remove();
-          }, 2000); // Adjust the delay as needed to control the explosion effect
+          // setTimeout(() => {
+          //   element.remove();
+          // }, 2000); // Adjust the delay as needed to control the explosion effect
         };
         bang(element, index);
       }

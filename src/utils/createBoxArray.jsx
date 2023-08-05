@@ -1,19 +1,20 @@
-import TnT from '../components/TnT'
+import Tnt from '../components/TnT'
 const createBoxArray=(max)=>{ 
     let boxes=[]
    
     for(let i=0;i<max;i++){
-      let x=Math.floor(Math.random()*31)
-      let y=Math.floor(Math.random()*31)
+      
     //check for duplication/overlay 
-    boxes.push( <TnT key={i} x={x} y={y} text={"tnt"}/>)
+    boxes.push( <Tnt index={i} key={i}/>)
     for (let o=0;o<boxes.length-1;o++){
-        if(boxes[o][0]===x && boxes[o][1]===y){
-          boxes.pop()
-          i--;
-         }
+     
+        // if(boxes[o]===x && boxes[o]===y){
+        //   boxes.pop()
+        //   i--;
+        //  }
        }
      }
+    
      return boxes;
   }
   

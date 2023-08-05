@@ -1,92 +1,19 @@
 import {useState } from 'react'
-import { useRef,useEffect} from 'react'
 import './App.css'
-import checkGridElement from './utils/checkGridElement'
-import getRnd from './utils/getRnd'
-import createBoxArray from './utils/createBoxArray';
-import Exp from './components/Exp'
+import Sabotage from './components/sabotage'
+import Exp from './components/exp'
 
 const App=()=>{
-  const [myX,setMyX]=useState(getRnd())
-   const [myY,setMyY]=useState(getRnd())
-  const [guardX,setGuardX]=useState(getRnd())
-  const [guardY,setGuardY]=useState(getRnd())
-  const [bombX,setBombX]=useState(myX)
-  const [bombY,setBombY]=useState(myY)
+  
+  
+ 
   let [count,setCount]=useState(5)
   const [bombSet,setBombSet]=useState(false);
   const [stop,setStop]=useState(false)
   let [score,setScore]=useState(0)
-  const inputRef=useRef(null) // used to set focus on player at start
-  useEffect(() => {
-    inputRef.current.focus();
-}, []);
-
-  // state for array of uxb boxes
-  let [boxes,setBoxes]=useState(createBoxArray(300))
-  useEffect(()=>{
-    setBoxes(boxes)
-  },[score])
-
-////////////////////////////////////////////////////
  
-///////////////////////////////////////////////////////////////////
-const handleKeyDown=(e)=>{
-  if(e.key==="q"){
-    const boxAbove=checkGridElement(myX,myY-1,boxes)
-       if(!boxAbove){
-  if(myY>0) {
-    setMyY(myY-1)
-      if(!bombSet){
-        setBombY(myY-1)
-        setBombX(myX)
-      }
-  }
-  }
-}
-if(e.key==="a"){
-  const boxBelow=checkGridElement(myX,myY+1,boxes)
-  if(!boxBelow){
-  if(myY<30) {
-    setMyY(myY+1)
-      if(!bombSet){
-        setBombY(myY+1)
-        setBombX(myX)
-      }
-    }
-  }
-}
-if(e.key==="p"){
-  const boxRight=checkGridElement(myX+1,myY,boxes)
-  if(!boxRight){
-  if(myX<30) {
-    setMyX(myX+1)
-      if(!bombSet){
-        setBombX(myX+1)
-        setBombY(myY)
-      }
-  }
-}
-}
-if(e.key==="o"){
-  const boxLeft=checkGridElement(myX-1,myY,boxes)
-  if(!boxLeft){
-  if(myX>0) {
-    setMyX(myX-1)
-    if(!bombSet){
-      setBombX(myX-1)
-      setBombY(myY)
-    }
-  }
-  }
-}
-if(e.key===" "){
-  console.group("Ticking....")
-    setBombSet(true);
-  setCountdown()
-}
-}
 
+ 
 const setCountdown=()=>{
   if(count>=1) setTimeout(tickdown,1000)
 }
@@ -228,19 +155,12 @@ const removeBox=(index)=>{
   return (
     <>
       
-      <div id="main">
+    <Sabotage score={score}setScore={setScore}/>
 
-    {boxes.map((box,index)=>{
-      return box;
-    })}
-
-    <div id="bomb" style={{gridColumn:bombX,gridRow:bombY,     }}>5</div>
-
-    <div ref= {inputRef} id="me" tabIndex={0} onKeyDown={handleKeyDown} style={{gridColumn:myX,gridRow:myY}}>S</div>
-
-    <div id="guard"  style={{gridColumn:guardX,gridRow:guardY}}>G</div>
+   
+   
     
-       </div>
+      
     </>
   )
 }

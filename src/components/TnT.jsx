@@ -15,7 +15,7 @@ const Tnt=({index,key})=>{
   const [y,setY]=useState(getRnd())
   const[text,setText]=useState("tnt")
 
-  
+  const blurb=1;
     return(
   <div className="tnt"  key ={key} style={{gridColumn:x,gridRow:y}}>{text}</div>
     )

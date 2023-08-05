@@ -154,8 +154,12 @@ call function with an array containing bomb position - bangArray
 
       
         ookkkkkaayyyy...
-        so new component... done..
-        it looks like whats happening is its 
+        so, spoke to Ali and agreed to 'reactify' the game properly as I was mixing up manipulating the dom directly whilst still trying to use react..
+        so Abstracted out everything bar the explosion function at the minute and just need to work out how to give each tnt a unique ket seeing as now each one is its own component in its own right...
+        fix collision detection next job without looking in the dom..
+
+        collision detection sorted by reading the DOM, check all elements in the boxes array..
+        
         
 
         

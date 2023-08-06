@@ -4,38 +4,51 @@
   padding: 2rem;
   text-align: center;
 }
-#main{
+.main{
   height:90vh;
   display:grid;
-  grid-template-columns: repeat(30, 3vh [col-start]);
+  grid-template-columns: repeat(30, 3vh[column-start]);
   grid-template-rows: repeat(30, 3vh [row-start]);
   background-color: aliceblue;
   border:10px solid red;
 }
-#bomb{
+.bomb:before{
   border-radius:50%;
   background-color: rgb(1, 1, 1);
+ 
+  color:antiquewhite;
   font-size: larger;
+}
+.cell {
+    background-color: antiquewhite;
+}
+.me{
+  background-color: rgb(211, 55, 55);
+  font-size: large;
+  text-align: center;
+padding:1px 0 0 0;
+  border-radius: 50%;
+  color:black;
 }
 .tnt{
-  background-color: rgb(62, 56, 56);
-  font-size: small;
+  background-color: rgb(28, 24, 24);
+  font-size: large;
+  text-align: center;
+ 
   border-radius: 5px;
-margin:1px;
-padding:2px;
+color:rgb(226, 216, 205);
+
 }
-#me{
-  background-color: brown;
-  font-size: larger;
-  border-radius: 5px;
-  margin:1px;
-}
-#guard{
+.guard{
   background-color: blue;
-  font-size: larger;
-  border-radius: 5px;
-  margin:1px;
+  font-size: large;
+  border-radius: 50%;
+padding:15%;
+
 }
+
+
+
 @media screen and (max-width:425px) {
   #main{
     margin:0 auto;

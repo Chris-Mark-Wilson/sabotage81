@@ -28,14 +28,14 @@ const Sabotage = ({score,setScore}) =>{
   }, []);
     const maxTnt=300;
     let [boxes,setBoxes]=useState(createBoxArray(maxTnt))
-      useEffect(()=>{
-          setBoxes(boxes)
-        },[score])
+      // useEffect(()=>{
+      //     setBoxes(boxes)
+      //   },[score])
 
 
     return (
         <div id="main">
-        {boxes.map((box,index)=>{
+        {boxes.map((box)=>{
               return box;
     })}
         <Bomb bombX={bombX} bombY={bombY} bombText={bombText}/>

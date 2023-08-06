@@ -1,11 +1,11 @@
 import getRnd from "../utils/getRnd"
 import { useState } from "react"
 
-const Tnt=({index,key})=>{
+const Tnt=({index})=>{
 //index passed in from createBoxArray() on startup
 
 
-  const blowup=()=>{
+ const blowup=()=>{
     // pass score in to play with it;
     // needs full array(boxes)
     //
@@ -17,7 +17,7 @@ const Tnt=({index,key})=>{
 
   const blurb=1;
     return(
-  <div className="tnt"  key ={key} style={{gridColumn:x,gridRow:y}}>{text}</div>
+  <div className="tnt"  key ={index} style={{gridColumn:x,gridRow:y}}>{text}</div>
     )
   }
   export default Tnt

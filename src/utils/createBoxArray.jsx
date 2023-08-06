@@ -1,21 +1,17 @@
-import Tnt from '../components/TnT'
-const createBoxArray=(max)=>{ 
-    let boxes=[]
+import getRnd from "./getRnd"
+const createBoxArray=(setBoxes,max)=>{ 
+    let newBoxes=[]
    
     for(let i=0;i<max;i++){
-      
-    //check for duplication/overlay 
-    boxes.push( <Tnt index={i} key={i}/>)
-    for (let o=0;o<boxes.length-1;o++){
-     
-        // if(boxes[o]===x && boxes[o]===y){
-        //   boxes.pop()
-        //   i--;
-        //  }
-       }
+    let x=getRnd()
+    let y=getRnd()
+        if(newBoxes.some(box =>box.x===x && box.y===y)){
+          i--;
+         }else{
+          newBoxes.push({x,y})
+         }
      }
-    
-     return boxes;
+     setBoxes(newBoxes);
   }
   
 export default createBoxArray

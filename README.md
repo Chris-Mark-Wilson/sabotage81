@@ -155,11 +155,37 @@ call function with an array containing bomb position - bangArray
       
         ookkkkkaayyyy...
         so, spoke to Ali and agreed to 'reactify' the game properly as I was mixing up manipulating the dom directly whilst still trying to use react..
-        so Abstracted out everything bar the explosion function at the minute and just need to work out how to give each tnt a unique ket seeing as now each one is its own component in its own right...
+        so Abstracted out everything bar the explosion function at the minute and just need to work out how to give each tnt a unique key seeing as now each one is its own component in its own right...
         fix collision detection next job without looking in the dom..
 
         collision detection sorted by reading the DOM, check all elements in the boxes array..
-        
+
+        ok.. round 46 3/4..
+        was struglling to access the state when the state lived with the component and its x,y pos in the grid was PART of the component (i.e. me)
+
+        so, I asked chat gpt to write me a "sabotage game based on the zx81 version"
+
+        took a few prompts but eventually i coughed up something that didnt work, at all, but after going over the code it had written I got the gist of what it was trying to do...
+
+        turns out I may have been going about it the wrong way..
+        Ive copied its "idea" which is...
+        define an array of tnt box positions and hold it in state..
+        define my pos and the guard pos, hold those in state..
+
+        heres the clever bit (I thought is was anyway, was the trickiest bit to wrap my head around anyway...)
+
+        what it did was define an empty array on the fly of 30 elements, map over those passing the indices into the function as 'x'..
+        then for each 'x' define another empty array of 30 elements and map over those with the indices as 'y'..
+        still in the second map create a <div>
+        the clever bit was using a nested ternary to decide whether I had the the same x,y as the map, if so set the particlular divs className to "me", if the x,y is the same as tnt, set its classname to tnt, then bomb, then finally guard..
+        its a clever little function, ill give it that...not quite understanding how the css works so ill have to ask Ali whats goin on here cos its 'cell me" or "cell tnt" or "cell guard"...
+
+        the rest of what it created is just again, an event listener, the ability to move around (didnt get this far with the gpt version, as I said it doesnt work but I can see why, its got its knickers in a bit of a twist but I can use its ideas...)
+        its had a go at making a lil chain reaction which looks pretty trick too..
+        that gpt repo is here, commented by me...
+        https://github.com/Chris-Mark-Wilson/sabotageGPTeffort.git
+        so basically its pointed me in the right direction as how to 'reactify' my app...
+
         
 
         

@@ -1,4 +1,4 @@
- const checkGridElement=(x,y,boxes)=>{
+ const checkGridElement=(x,y)=>{
    let flag=false
   const tntArray=Array.from(document.getElementsByClassName("tnt"))
 

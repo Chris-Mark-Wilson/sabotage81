@@ -15,29 +15,46 @@ const App=()=>{
   const [boxes,setBoxes]=useState([])
   const [bombPos,setBombPos]=useState({})
 
-  useEffect(() => {// just runs this once on page load
-    createBoxArray(setBoxes,maxBoxes);
-  }, []);
+  useEffect(()=>{
+
+    setBoxes( createBoxArray(maxBoxes))
+  },[])
+
+
+  useEffect( () => {// just runs this once on page load
+  let count=0;
+      let x=0;
+      let y=0;
+      do{
+        count++;
+      x=getRnd();
+      y=getRnd();
+      console.log(count,"<number of tries to get a unique position for player")
+   
+    }while(boxes.some(box=>{// this isnt even iterating through boxes on first render???
+     
+      return x===box.x && y===box.y}))// <<<THIS is not working??? it doesnt know what boxes is, so will always return false..
+    setMyPos({x:x,y:y})// question is WHY doesnt it know what boxes is? or more to the point it doesnt know what box.x is, it knows boxes is an array, but it thinks its empty at thi point.
+    console.log(x,y,",x,y postion to set myPos")
+    console.log(myPos.x,myPos.y,",myPos inside of use effect, AFTER being set")
+  // THIS FUNCTION is not doing what its supposed to do because it doesnt know what boxes[any].x or boxes[any].y are.. comes back undefined??
+  //what is going on??
+
+    // sets me and guard checking for overlay with a tnt, doesnt seem to work 100% of the time, sometimes we get a clash with my position being overlaid by a tnt..
+    do{
+           x=getRnd();
+           y=getRnd();
+          }while(boxes.some(box=>x===box.x && y===box.y))
+          setGuardPos({x,y})
+  }, [boxes]);// right.. I fucking fixed it by setting the dependeny to boxes so when useEffect createBoxes()  fires it runs this use effect.. fucking react man..
 
   useEffect(()=>{
       inputRef.current.focus();
   }, [])
   
-    useEffect(()=>{
-      do{
-      let x=getRnd();
-      let y=getRnd();
-      setMyPos({x:x,y:y})
-    }while(boxes.some(box=>myPos.x===box.x && myPos.y===box.y))
-    // sets me and guard checking for overlay with a tnt, doesnt seem to work 100% of the time, sometimes we get a clash with my position being overlaid by a tnt..
-    do{
-          let x=getRnd();
-          let y=getRnd();
-          setGuardPos({x:x,y:y})
-        }while(boxes.some(box=>guardPos.x===box.x&&guardPos.y===box.y))
-        setBombPos({x:myPos.x,y:myPos.y})
-      },[])
-///////////////////////////////////////////////////////
+    
+      ///////////////////////////////////////////////////////
+      // setBombPos({x:myPos.x,y:myPos.y})
 
 const handleKeyDown=(e)=>{
   movePlayer(setMyPos,boxes,myPos,e)

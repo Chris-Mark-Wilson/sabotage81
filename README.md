@@ -186,6 +186,7 @@ call function with an array containing bomb position - bangArray
         https://github.com/Chris-Mark-Wilson/sabotageGPTeffort.git
         so basically its pointed me in the right direction as how to 'reactify' my app...
 
+        back now in the same place with the same problems.. the gpt version didnt really help much at all, if at all.. just using the .some() array function to find duplicates
         
 
         

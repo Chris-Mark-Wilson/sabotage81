@@ -1,4 +1,4 @@
 const getRnd=()=>{
-    return Math.floor(Math.random()*31)
+    return Math.ceil(Math.random()*30)
    }
    export default getRnd

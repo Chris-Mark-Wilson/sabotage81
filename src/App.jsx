@@ -5,17 +5,21 @@ import getRnd from "./utils/getRnd";
 import { useRef } from "react";
 import movePlayer from "./utils/movePlayer";
 import placeBomb from "./utils/placeBomb";
+import getDetonationQueue from "./utils/getDetonationQueue";
 
 const App = () => {
+  const maxBoxes = 300; // how many initial tnt boxes
+  const timer=3;
+  const limit=50;
   const inputRef = useRef(null);
   const [myPos, setMyPos] = useState({});
   const [guardPos, setGuardPos] = useState({});
-  const maxBoxes = 300; // how many initial tnt boxes
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(timer);
   const [bombText, setBombText] = useState({ text: "", colour: "white" });
   const [bombSet, setBombSet] = useState(false);
   const [boxes, setBoxes] = useState([]);
   const [bombPos, setBombPos] = useState({});
+  const [detQueue,setDetQueue]=useState([])
 
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
@@ -60,27 +64,34 @@ const App = () => {
   const handleKeyDown = (e) => {
     if (e.key != " ") movePlayer(setMyPos, boxes, myPos, e);
     if (e.key === " ") {
-      placeBomb(e, myPos, boxes);
+      placeBomb(myPos, boxes);
       setBombSet(true);
       setBombPos(myPos);
       setBombText({ text: count, colour: "black" });
       console.log("bombset");
     }
   };
-  //////////////////////////////////////////////////////////
+  /////////////////////////////// SET BOMB ///////////////////////////
   useEffect(() => {
     if (bombSet) {
       setBombText({ text: count, colour: "black" });
       setTimeout(() => {
         setCount(count - 1);
-        if (count === 0) {
-          // boomTime([[bombPos.x,bombPos.y]])
+        if (count === 0) { 
+       
+          //sends bombPos as index 1 in detonationQueue
+          let detonationQueue=[bombPos]
+          detonationQueue=getDetonationQueue(detonationQueue,limit)
+          console.log(detonationQueue,"queue in app")
           setBombSet(false);
+          setCount(timer) //initial countdown value
+          setBombPos({x:myPos.x,y:myPos.y}) //gives bomb back to player
+          setBombText({ text: "", colour: "white" }) //hides bomb
         }
       }, 1000);
     }
   }, [count, bombSet]);
-
+////////////////////////////////////////////////////////////
   return (
     <div className="game">
       <div className="main">

@@ -1,7 +1,7 @@
 
 
-const placeBomb = (e,myPos,boxes) => {
-  if (e.key === " ") {
+const placeBomb = (myPos,boxes) => {
+ 
     console.log(myPos.x, myPos.y, "me");
     boxes.forEach((box) => {
       if (
@@ -13,9 +13,5 @@ const placeBomb = (e,myPos,boxes) => {
         console.log(box.x, box.y, "<box");
       }
     });
-    // console.log("Ticking....")
-    //
- 
-  }
 }
 export default placeBomb

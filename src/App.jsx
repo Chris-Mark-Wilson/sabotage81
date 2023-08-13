@@ -21,6 +21,7 @@ const App = () => {
   const [bombPos, setBombPos] = useState({});
   const [detQueue, setDetQueue] = useState([]);
   const [explosions, setExplosions] = useState([]);
+  const [ignition, setIgnition] = useState(false);
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
   }, []);
@@ -65,7 +66,7 @@ const App = () => {
     if (e.key != " ") movePlayer(setMyPos, boxes, myPos, e);
     if (e.key === " ") {
       placeBomb(myPos, boxes);
-      setBombSet(true);
+      setBombSet(true); // document.getElementById('audio').play()
       setBombPos(myPos);
       setBombText({ text: count, colour: "black" });
       console.log("bombset");
@@ -82,11 +83,14 @@ const App = () => {
           let detonationQueue = [bombPos];
           detonationQueue = getDetonationQueue(detonationQueue, limit);
           console.log(detonationQueue, "queue in app");
-          setExplosions(detonationQueue)
-
-
-
+          setExplosions(detonationQueue);
+          document.getElementById("audio").play();
+          setIgnition(true)
+          console.log("ignition")
           setBombSet(false); // ends functionality, returns to game
+
+          // document.getElementById('audio').play()
+
           setCount(timer); //initial countdown value
           setBombPos({ x: myPos.x, y: myPos.y }); //gives bomb back to player
           setBombText({ text: "", colour: "white" }); //hides bomb
@@ -94,6 +98,16 @@ const App = () => {
       }, 1000);
     }
   }, [count, bombSet]);
+
+  useEffect(() => {
+    if(ignition){
+    setTimeout(() => {
+      setExplosions([]);
+      setIgnition(false)
+      console.log("clear explosions");
+    }, 3000);
+  }
+  }, [ignition]);
   ////////////////////////////////////////////////////////////
   return (
     <>
@@ -122,7 +136,6 @@ const App = () => {
           >
             {bombText.text}
           </div>
-
           <div
             ref={inputRef}
             className="me"
@@ -132,24 +145,31 @@ const App = () => {
           >
             😎
           </div>
+          slow-spring-board.mp3
           <div
             className="guard"
             style={{ gridColumn: guardPos.x, gridRow: guardPos.y }}
           >
             👺
           </div>
-          {explosions.map((explosion,index) => {
-            
-           return(
-                <div
-                  className="explosion"
-                  key={index}
-                  style={{ gridColumn: explosion.x, gridRow: explosion.y }}
-                >
-                  "💥"
-                </div>
-              );
-        })}
+          {explosions.map((explosion, index) => {
+            return (
+              <div
+                className="explosion"
+                key={index}
+                style={{ gridColumn: explosion.x, gridRow: explosion.y }}
+              >
+                "💥"
+              </div>
+            );
+          })}
+          <audio
+            id="audio"
+            src={"../src/assets/hq-explosion-6288.mp3"}
+            style={{ colour: "black" }}
+          >
+            what
+          </audio>
         </div>
         {/* end main */}
       </div>
@@ -158,3 +178,6 @@ const App = () => {
   );
 };
 export default App;
+{
+  /* <source src="../src/assets/hq-explosion-6288.mp3" type="audio/mp3"></source></audio> */
+}

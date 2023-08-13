@@ -9,8 +9,8 @@ import getDetonationQueue from "./utils/getDetonationQueue";
 
 const App = () => {
   const maxBoxes = 300; // how many initial tnt boxes
-  const timer=3;
-  const limit=50;
+  const timer = 3;
+  const limit = 50;
   const inputRef = useRef(null);
   const [myPos, setMyPos] = useState({});
   const [guardPos, setGuardPos] = useState({});
@@ -19,8 +19,8 @@ const App = () => {
   const [bombSet, setBombSet] = useState(false);
   const [boxes, setBoxes] = useState([]);
   const [bombPos, setBombPos] = useState({});
-  const [detQueue,setDetQueue]=useState([])
-
+  const [detQueue, setDetQueue] = useState([]);
+  const [explosions, setExplosions] = useState([]);
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
   }, []);
@@ -77,65 +77,84 @@ const App = () => {
       setBombText({ text: count, colour: "black" });
       setTimeout(() => {
         setCount(count - 1);
-        if (count === 0) { 
-       
+        if (count === 0) {
           //sends bombPos as index 1 in detonationQueue
-          let detonationQueue=[bombPos]
-          detonationQueue=getDetonationQueue(detonationQueue,limit)
-          console.log(detonationQueue,"queue in app")
-          setBombSet(false);
-          setCount(timer) //initial countdown value
-          setBombPos({x:myPos.x,y:myPos.y}) //gives bomb back to player
-          setBombText({ text: "", colour: "white" }) //hides bomb
+          let detonationQueue = [bombPos];
+          detonationQueue = getDetonationQueue(detonationQueue, limit);
+          console.log(detonationQueue, "queue in app");
+          setExplosions(detonationQueue)
+
+
+
+          setBombSet(false); // ends functionality, returns to game
+          setCount(timer); //initial countdown value
+          setBombPos({ x: myPos.x, y: myPos.y }); //gives bomb back to player
+          setBombText({ text: "", colour: "white" }); //hides bomb
         }
       }, 1000);
     }
   }, [count, bombSet]);
-////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
   return (
-    <div className="game">
-      <div className="main">
-        {boxes.map((box, index) => {
-          return (
-            <div
-              className="tnt"
-              key={index}
-              style={{ gridColumn: box.x, gridRow: box.y }}
-            >
-              tnt
-            </div>
-          );
+    <>
+      <div className="game">
+        <div className="main">
+          {boxes.map((box, index) => {
+            return (
+              <div
+                className="tnt"
+                key={index}
+                style={{ gridColumn: box.x, gridRow: box.y }}
+              >
+                tnt
+              </div>
+            );
+          })}
+          <div
+            className="bomb"
+            id="bomb"
+            style={{
+              gridColumn: bombPos.x,
+              gridRow: bombPos.y,
+              visibility: false,
+              backgroundColor: bombText.colour,
+            }}
+          >
+            {bombText.text}
+          </div>
+
+          <div
+            ref={inputRef}
+            className="me"
+            tabIndex={0}
+            onKeyDown={handleKeyDown}
+            style={{ gridColumn: myPos.x, gridRow: myPos.y }}
+          >
+            😎
+          </div>
+          <div
+            className="guard"
+            style={{ gridColumn: guardPos.x, gridRow: guardPos.y }}
+          >
+            👺
+          </div>
+          {explosions.map((explosion,index) => {
+            
+           return(
+                <div
+                  className="explosion"
+                  key={index}
+                  style={{ gridColumn: explosion.x, gridRow: explosion.y }}
+                >
+                  "💥"
+                </div>
+              );
         })}
-        <div
-          className="bomb"
-          id="bomb"
-          style={{
-            gridColumn: bombPos.x,
-            gridRow: bombPos.y,
-            visibility: false,
-            backgroundColor: bombText.colour,
-          }}
-        >
-          {bombText.text}
         </div>
-        .
-        <div
-          ref={inputRef}
-          className="me"
-          tabIndex={0}
-          onKeyDown={handleKeyDown}
-          style={{ gridColumn: myPos.x, gridRow: myPos.y }}
-        >
-       😎
-        </div>
-        <div
-          className="guard"
-          style={{ gridColumn: guardPos.x, gridRow: guardPos.y }}
-        >
-          👺
-        </div>
+        {/* end main */}
       </div>
-    </div>
+      {/* end game */}
+    </>
   );
 };
 export default App;

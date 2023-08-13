@@ -41,10 +41,12 @@ color:rgb(226, 216, 205);
 }
 .guard{
 
-  font-size:large;
+  font-size:large;position:absolute;
 margin:-3px;
-
-
+}
+.explosion{
+  margin:-120% -450%;
+  font-size: 300%;
 }
 
 

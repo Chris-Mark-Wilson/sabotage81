@@ -10,7 +10,7 @@
   grid-template-columns: repeat(30, 3vh[column-start]);
   grid-template-rows: repeat(30, 3vh [row-start]);
   background-color: aliceblue;
-  border:10px solid red;
+  border:10px solid rgb(144, 83, 83);
 }
 .bomb{
   border-radius:50%;

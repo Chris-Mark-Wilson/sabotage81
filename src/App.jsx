@@ -171,6 +171,8 @@ const App = () => {
             what
           </audio>
         </div>
+
+        <iframe src="https://open.spotify.com/embed/album/3hiuMiEEzxkQbq6t8xdh9a?utm_source=generator" style={{borderRadius:"12px", width:"100%" ,height:"352" ,allow:"autoplay"}}></iframe>
         {/* end main */}
       </div>
       {/* end game */}

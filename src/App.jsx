@@ -6,6 +6,8 @@ import { useRef } from "react";
 import movePlayer from "./utils/movePlayer";
 import placeBomb from "./utils/placeBomb";
 import getDetonationQueue from "./utils/getDetonationQueue";
+import getRemainingBoxes from "./utils/getRemainingBoxes";
+
 
 const App = () => {
   const maxBoxes = 300; // how many initial tnt boxes
@@ -22,17 +24,19 @@ const App = () => {
   const [detQueue, setDetQueue] = useState([]);
   const [explosions, setExplosions] = useState([]);
   const [ignition, setIgnition] = useState(false);
+  const[gameOver,setGameOver]=useState(true)
+  const[score,setScore]=useState(0)
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
   }, []);
 
   useEffect(() => {
     // just runs this once on page load
-    let count = 0;
+  if(gameOver){
     let x = 0;
     let y = 0;
     do {
-      count++;
+     
       x = getRnd();
       y = getRnd();
     } while (
@@ -52,7 +56,9 @@ const App = () => {
       x != myPos.x &&
       y != myPos.y
     );
-    setGuardPos({ x, y }); // random, not over a box or on me... can be adjusted to make him spawn further away if required
+    setGuardPos({ x, y }) // random, not over a box or on me... can be adjusted to make him spawn further away if required
+    setGameOver(false)
+  }
   }, [boxes]); // right..  fixed it by setting the dependeny to boxes so when useEffect createBoxes()  fires it runs this use effect.. effin react man jeez..
 
   useEffect(() => {
@@ -82,29 +88,27 @@ const App = () => {
           //sends bombPos as index 1 in detonationQueue
           let detonationQueue = [bombPos];
           detonationQueue = getDetonationQueue(detonationQueue, limit);
-          console.log(detonationQueue, "queue in app");
-          setExplosions(detonationQueue);
-          document.getElementById("audio").play();
-          setIgnition(true)
-          console.log("ignition")
+          setExplosions(detonationQueue);// sets visual explosion on screen
+          document.getElementById("audio").play(); // play sound effect
+          setIgnition(true); // sets ignition flag to fire ignition useEffect
           setBombSet(false); // ends functionality, returns to game
-
-          // document.getElementById('audio').play()
-
           setCount(timer); //initial countdown value
           setBombPos({ x: myPos.x, y: myPos.y }); //gives bomb back to player
           setBombText({ text: "", colour: "white" }); //hides bomb
         }
-      }, 1000);
+      }, 1000);// 1 second countdown
     }
   }, [count, bombSet]);
 
   useEffect(() => {
     if(ignition){
     setTimeout(() => {
+      setScore(score+explosions.length)
+      const remainingBoxes=getRemainingBoxes(explosions,boxes)
+      setBoxes(remainingBoxes)
       setExplosions([]);
       setIgnition(false)
-      console.log("clear explosions");
+      console.log(score," <--score");
     }, 3000);
   }
   }, [ignition]);
@@ -145,7 +149,6 @@ const App = () => {
           >
             😎
           </div>
-          slow-spring-board.mp3
           <div
             className="guard"
             style={{ gridColumn: guardPos.x, gridRow: guardPos.y }}
@@ -163,14 +166,13 @@ const App = () => {
               </div>
             );
           })}
+        </div>
           <audio
             id="audio"
             src={"../src/assets/hq-explosion-6288.mp3"}
             style={{ colour: "black" }}
           >
-            what
           </audio>
-        </div>
 
         <iframe src="https://open.spotify.com/embed/album/3hiuMiEEzxkQbq6t8xdh9a?utm_source=generator" style={{borderRadius:"12px", width:"100%" ,height:"352" ,allow:"autoplay"}}></iframe>
         {/* end main */}

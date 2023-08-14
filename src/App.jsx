@@ -21,7 +21,6 @@ const App = () => {
   const [bombSet, setBombSet] = useState(false);
   const [boxes, setBoxes] = useState([]);
   const [bombPos, setBombPos] = useState({});
-  const [detQueue, setDetQueue] = useState([]);
   const [explosions, setExplosions] = useState([]);
   const [ignition, setIgnition] = useState(false);
   const[gameOver,setGameOver]=useState(true)
@@ -52,11 +51,12 @@ const App = () => {
       x = getRnd();
       y = getRnd();
     } while (
-      boxes.some((box) => x === box.x && y === box.y) &&
-      x != myPos.x &&
-      y != myPos.y
+      boxes.some((box) => x === box.x && y === box.y) ||
+      x === myPos.x &&
+      y === myPos.y
     );
-    setGuardPos({ x, y }) // random, not over a box or on me... can be adjusted to make him spawn further away if required
+    console.log(x,y)
+    setGuardPos({ x:x, y:y }) // random, not over a box or on me... can be adjusted to make him spawn further away if required
     setGameOver(false)
   }
   }, [boxes]); // right..  fixed it by setting the dependeny to boxes so when useEffect createBoxes()  fires it runs this use effect.. effin react man jeez..
@@ -69,8 +69,8 @@ const App = () => {
   // setBombPos({x:myPos.x,y:myPos.y})
 
   const handleKeyDown = (e) => {
-    if (e.key != " ") movePlayer(setMyPos, boxes, myPos, e);
-    if (e.key === " ") {
+    if (e.key != "m") movePlayer(setMyPos, boxes, myPos, e);
+    if (e.key === "m") {
       placeBomb(myPos, boxes);
       setBombSet(true); // document.getElementById('audio').play()
       setBombPos(myPos);
@@ -116,6 +116,7 @@ const App = () => {
   return (
     <>
       <div className="game">
+        Score:{score} Sabotage
         <div className="main">
           {boxes.map((box, index) => {
             return (
@@ -174,7 +175,6 @@ const App = () => {
           >
           </audio>
 
-        <iframe src="https://open.spotify.com/embed/album/3hiuMiEEzxkQbq6t8xdh9a?utm_source=generator" style={{borderRadius:"12px", width:"100%" ,height:"352" ,allow:"autoplay"}}></iframe>
         {/* end main */}
       </div>
       {/* end game */}
@@ -182,6 +182,3 @@ const App = () => {
   );
 };
 export default App;
-{
-  /* <source src="../src/assets/hq-explosion-6288.mp3" type="audio/mp3"></source></audio> */
-}

@@ -1,10 +1,6 @@
 import getRnd from "./getRnd"
 const createBoxArray=(max)=>{ 
- 
-  
-  
   let newBoxes=[]
-   
     for(let i=0;i<max;i++){
       let x=0;
       let y=0;
@@ -16,10 +12,6 @@ const createBoxArray=(max)=>{
       newBoxes.push({x,y})
     }    
    return newBoxes;
-  
-  
-
-
 }
   
 export default createBoxArray

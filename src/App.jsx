@@ -17,13 +17,14 @@ const App = () => {
   const [myPos, setMyPos] = useState({});
   const [guardPos, setGuardPos] = useState({});
   const [count, setCount] = useState(timer);
-  const [bombText, setBombText] = useState({ text: "", colour: "white" });
+  const [bombText, setBombText] = useState({ text: "", colour: " rgb(184, 185, 141)" });
   const [bombSet, setBombSet] = useState(false);
   const [boxes, setBoxes] = useState([]);
   const [bombPos, setBombPos] = useState({});
   const [explosions, setExplosions] = useState([]);
   const [ignition, setIgnition] = useState(false);
   const[gameOver,setGameOver]=useState(true)
+  const[lives,setLives]=useState(3)
   const[score,setScore]=useState(0)
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
@@ -35,7 +36,6 @@ const App = () => {
     let x = 0;
     let y = 0;
     do {
-     
       x = getRnd();
       y = getRnd();
     } while (
@@ -88,13 +88,17 @@ const App = () => {
           //sends bombPos as index 1 in detonationQueue
           let detonationQueue = [bombPos];
           detonationQueue = getDetonationQueue(detonationQueue, limit);
+          console.log(detonationQueue,"queue")
+          detonationQueue.forEach((positionObject,index)=>{
+            positionObject.id=index+1;
+          })
           setExplosions(detonationQueue);// sets visual explosion on screen
           document.getElementById("audio").play(); // play sound effect
           setIgnition(true); // sets ignition flag to fire ignition useEffect
           setBombSet(false); // ends functionality, returns to game
           setCount(timer); //initial countdown value
           setBombPos({ x: myPos.x, y: myPos.y }); //gives bomb back to player
-          setBombText({ text: "", colour: "white" }); //hides bomb
+          setBombText({ text: "", colour:   "rgb(184, 185, 141) "}); //hides bomb
         }
       }, 1000);// 1 second countdown
     }
@@ -115,10 +119,16 @@ const App = () => {
   ////////////////////////////////////////////////////////////
   return (
     <>
-      <div className="game">
-        Score:{score} Sabotage
-        <div className="main">
-          {boxes.map((box, index) => {
+      <section className="game">
+        <header className="header">
+        <span className="score">Score:  {score*10}</span>
+        <span className="title">
+         --Sabotage--
+         </span>
+         <span className="lives">Lives: {lives===3?"😎😎😎":lives===2?"😎😎":"😎"}</span>
+        </header>
+        <main className="main">
+          {boxes.map(box => {
             return (
               <div
                 className="tnt"
@@ -160,23 +170,22 @@ const App = () => {
             return (
               <div
                 className="explosion"
-                key={index}
+                key={explosion.id}
                 style={{ gridColumn: explosion.x, gridRow: explosion.y }}
               >
-                "💥"
+                💥
               </div>
             );
           })}
-        </div>
+        </main>
           <audio
             id="audio"
             src={"../src/assets/hq-explosion-6288.mp3"}
-            style={{ colour: "black" }}
           >
           </audio>
 
         {/* end main */}
-      </div>
+      </section>
       {/* end game */}
     </>
   );

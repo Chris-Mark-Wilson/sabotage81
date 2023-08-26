@@ -9,7 +9,7 @@ const createBoxArray=(max)=>{
       y=getRnd()
       }
       while(newBoxes.some(box=>box.x===x && box.y===y))
-      newBoxes.push({x,y})
+      newBoxes.push({id:i,x,y})
     }    
    return newBoxes;
 }

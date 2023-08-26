@@ -39,24 +39,24 @@ const App = () => {
       x = getRnd();
       y = getRnd();
     } while (
-      boxes.some((box) => {
-        return x === box.x && y === box.y;
-      })
+      boxes.some(box=> 
+         x === box.x && y === box.y
+      )
     );
-    setMyPos({ x: x, y: y });
-    setBombPos({ x: x, y: y }); // carry the bomb with me until bombSet is true
+    setMyPos({ x, y });
+    setBombPos({ x, y }); // carry the bomb with me until bombSet is true
 
     // sets me and guard checking for overlay with a tnt, doesnt seem to work 100% of the time, sometimes we get a clash with my position being overlaid by a tnt..
     do {
       x = getRnd();
       y = getRnd();
     } while (
-      boxes.some((box) => x === box.x && y === box.y) ||
-      x === myPos.x &&
-      y === myPos.y
-    );
-    console.log(x,y)
-    setGuardPos({ x:x, y:y }) // random, not over a box or on me... can be adjusted to make him spawn further away if required
+      boxes.some(box =>(x === box.x && y === box.y) ||
+      (x === myPos.x &&
+      y === myPos.y)
+    ));
+    console.log(x,y,"Guard pos")
+    setGuardPos({ x,y }) // random, not over a box or on me... can be adjusted to make him spawn further away if required
     setGameOver(false)
   }
   }, [boxes]); // right..  fixed it by setting the dependeny to boxes so when useEffect createBoxes()  fires it runs this use effect.. effin react man jeez..
@@ -69,8 +69,8 @@ const App = () => {
   // setBombPos({x:myPos.x,y:myPos.y})
 
   const handleKeyDown = (e) => {
-    if (e.key != "m") movePlayer(setMyPos, boxes, myPos, e);
-    if (e.key === "m") {
+    if (e.key != "l") movePlayer(setMyPos, boxes, myPos, e);
+    if (e.key === "l") {
       placeBomb(myPos, boxes);
       setBombSet(true); // document.getElementById('audio').play()
       setBombPos(myPos);
@@ -122,7 +122,7 @@ const App = () => {
             return (
               <div
                 className="tnt"
-                key={index}
+                key={box.id}
                 style={{ gridColumn: box.x, gridRow: box.y }}
               >
                 tnt

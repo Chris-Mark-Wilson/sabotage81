@@ -10,6 +10,6 @@ on change -
     const remaining=explosions.filter(exp=>exp.x!=position.x&&exp.y!=position.y)
     setExplosions[...remaining]
         },250)
-
-
     },[explosions])
+
+    

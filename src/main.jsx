@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.Suspense>
+  <React.StrictMode>
     <App />
-  </React.Suspense>,
+  </React.StrictMode>,
 )

@@ -1,57 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rubik+Iso&display=swap");
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
-#main{
-  height:90vh;
-  display:grid;
-  grid-template-columns: repeat(30, 3vh [col-start]);
-  grid-template-rows: repeat(30, 3vh [row-start]);
-  background-color: aliceblue;
-  border:10px solid red;
+.game {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-#bomb{
-  border-radius:50%;
+.header {
+  box-sizing: border-box;
+  width: 100%;
+  height: 80px;
+  border: 10px double red;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto 2% auto;
+  justify-content: space-around;
+  align-items: center;
+  padding: 3% 0 4% 0;
+}
+.score {
+  font-family: "Permanent Marker", cursive;
+  font-size: 20px;
+  font-weight: bolder;
+  color: magenta;
+}
+
+.title {
+  font-family: "Rubik Iso", cursive;
+  font-size: 250%;
+  font-weight: bolder;
+  color: rgb(226, 44, 96);
+}
+.lives {
+  font-family: "Permanent Marker", cursive;
+  font-size: 20px;
+  font-weight: bolder;
+  color: magenta;
+}
+.main {
+  box-sizing: border-box;
+  width: 100%;
+  height: 90%;
+  display: grid;
+  grid-template-columns: repeat(30, 3.33%[column-start]);
+  grid-template-rows: repeat(30, 3.33% [row-start]);
+  background-color: rgb(184, 185, 141);
+  border: 10px double red;
+  border-radius: 10pxk;
+  padding: 2px 5px 2px 3px;
+}
+.bomb {
+  border-radius: 50%;
   background-color: rgb(1, 1, 1);
-  font-size: larger;
+
+  color: rgb(184, 185, 141);
+  font-size: 1.2em;
 }
-.tnt{
-  background-color: rgb(62, 56, 56);
-  font-size: small;
+.cell {
+  background-color: rgb(184, 185, 141);
+}
+.me {
+  background-color: rgb(184, 185, 141);
+  font-size: 1.5em;
+  text-align: center;
+  margin: -4px;
+  border-radius: 50%;
+  color: black;
+  outline: none; /*removes on focus ring */
+}
+.tnt {
+  background-color: rgb(28, 24, 24);
+  font-size: 1em;
+  text-align: center;
+
   border-radius: 5px;
-margin:1px;
-padding:2px;
+  color: rgb(184, 185, 141);
 }
-#me{
-  background-color: brown;
-  font-size: larger;
+.guard {
+  font-size: 1.5em;
+  margin: -0.2em auto 0 -0.1em;
+}
+.explosion {
+  margin: -12em -2em;
+  font-size: 1em;
+}
+.fireball {
+
   border-radius: 5px;
-  margin:1px;
+  margin: -1.5em 0 0 0em;
+  line-height: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  font-size: 100%;
 }
-#guard{
-  background-color: blue;
-  font-size: larger;
-  border-radius: 5px;
-  margin:1px;
+.fireball section {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
 }
-@media screen and (max-width:425px) {
-  #main{
-    margin:0 auto;
-    padding:0;
-    width:90vw;
-    height:90vw;
-  display:grid;
-    grid-template-columns: repeat(30, 3vw [col-start]);
-  grid-template-rows: repeat(30, 3vw [row-start]);
+.fireball section p {
+  margin: 0.6em auto 0 auto;
 }
-}
-@media screen and (max-height: 800px){
-  #bomb,#guard,#me{
-    font-size:small ;
+
+@media screen and (max-width: 425px) {
+  #main {
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: repeat(30, 3% [col-start]);
+    grid-template-rows: repeat(30, 3% [row-start]);
   }
-  .tnt{
+  .title {
+    font-size: 120%;
+    font-weight: bolder;
+  }
+  .score,
+  .lives {
+    font-size: 100%;
+  }
+  .bomb,
+  .guard,
+  .me {
+    font-size: 1em;
+  }
+  .tnt {
+    font-size: xx-small;
+    padding: 0 0 1% 0;
+    border-radius: 1px;
+  }
+}
+@media screen and (max-height: 800px) {
+  #bomb,
+  #guard,
+  #me {
+    font-size: 1.2em;
+  }
+  .tnt {
     font-size: x-small;
   }
 }

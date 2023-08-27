@@ -137,18 +137,7 @@ const App = () => {
       }
     }
   }, [ignition, explosions]);
-  // useEffect(() => {
-  //   if (ignition) {
-  //     setTimeout(() => {
-  //       setScore(score + explosions.length);
-  //       const remainingBoxes = getRemainingBoxes(explosions, boxes);
-  //       setBoxes(remainingBoxes);
-  //       setExplosions([]);
-  //       setIgnition(false);
-  //       console.log(score, " <--score");
-  //     }, 3000);
-  //   }
-  // }, [ignition,explosions]);
+
   ////////////////////////////////////////////////////////////
   return (
     <>

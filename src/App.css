@@ -66,14 +66,14 @@
   background-color: rgb(1, 1, 1);
  
   color: rgb(184, 185, 141);
-  font-size: 120%;
+  font-size: 1.2em;
 }
 .cell {
     background-color:  rgb(184, 185, 141);
 }
 .me{
 background-color:  rgb(184, 185, 141);
-  font-size:150%;
+  font-size:1.5em;
   text-align: center;
 margin:-4px;
   border-radius: 50%;
@@ -81,7 +81,7 @@ margin:-4px;
 }
 .tnt{
   background-color: rgb(28, 24, 24);
-  font-size: large;
+  font-size:1em;
   text-align: center;
  
   border-radius: 5px;
@@ -90,13 +90,13 @@ color :rgb(184, 185, 141);
 }
 .guard{
 
-  font-size:150%;
-  margin:-20% auto 0 auto;
+  font-size:1.5em;
+  margin:-0.2em auto 0 -0.1em;
 
 }
 .explosion{
-  margin:-120% -200%;
-  font-size: 300%;
+  margin:-12.em -2em;
+  font-size: 1em;
 }
 
 
@@ -118,8 +118,8 @@ color :rgb(184, 185, 141);
 .score,.lives{
   font-size: 100%;
 }
-#bomb,#guard,#me{
-  font-size:xx-small ;
+.bomb,.guard,.me{
+  font-size:1em;
 }
 .tnt{
   font-size: xx-small;
@@ -129,7 +129,7 @@ color :rgb(184, 185, 141);
 }
 @media screen and (max-height: 800px){
   #bomb,#guard,#me{
-    font-size:small ;
+    font-size:1.2em ;
   }
   .tnt{
     font-size: x-small;

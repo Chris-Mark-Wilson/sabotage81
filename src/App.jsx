@@ -26,9 +26,20 @@ const App = () => {
   const[gameOver,setGameOver]=useState(true)
   const[lives,setLives]=useState(3)
   const[score,setScore]=useState(0)
+  const[fireBalltext,setFireballText]=useState("")
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
   }, []);
+
+  ////set up fireball
+  useEffect(()=>{
+    setFireballText("💥")
+
+    return(()=>{
+      setFireballText("")
+    })
+   
+  },[explosions])
 
   useEffect(() => {
     // just runs this once on page load

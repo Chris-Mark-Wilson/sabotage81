@@ -54,22 +54,26 @@
   grid-template-rows: repeat(30, 3.33% [row-start]);
   background-color: rgb(184, 185, 141);
   border: 10px double red;
-  border-radius: 10pxk;
+  border-radius: 10px;
   padding: 2px 5px 2px 3px;
 }
 .bomb {
+  display:flex;
   border-radius: 50%;
   background-color: rgb(1, 1, 1);
-
+text-align: center;
+margin:-0.3em 0 0 0;
+padding: 0;
+justify-content: center;
   color: rgb(184, 185, 141);
-  font-size: 1.2em;
+  font-size: 0.8em;
 }
 .cell {
   background-color: rgb(184, 185, 141);
 }
 .me {
   background-color: rgb(184, 185, 141);
-  font-size: 1.5em;
+  font-size: 1fr;
   text-align: center;
   margin: -4px;
   border-radius: 50%;
@@ -78,19 +82,19 @@
 }
 .tnt {
   background-color: rgb(28, 24, 24);
-  font-size: 1em;
+  font-size: 1fr;
   text-align: center;
 
   border-radius: 5px;
   color: rgb(184, 185, 141);
 }
 .guard {
-  font-size: 1.5em;
+  font-size: 1fr;
   margin: -0.2em auto 0 -0.1em;
 }
 .explosion {
   margin: -12em -2em;
-  font-size: 1em;
+  font-size: 1fr;
 }
 .fireball {
 
@@ -135,7 +139,7 @@
   .bomb,
   .guard,
   .me {
-    font-size: 1em;
+    font-size: 1fr;
   }
   .tnt {
     font-size: xx-small;
@@ -147,7 +151,7 @@
   #bomb,
   #guard,
   #me {
-    font-size: 1.2em;
+    font-size: 1frfr;
   }
   .tnt {
     font-size: x-small;

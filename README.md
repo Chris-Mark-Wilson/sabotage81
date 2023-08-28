@@ -25,7 +25,9 @@ keys :
 
  Like I said, try not to get caught up in the blast, Paddy...
 
- Good Luck!
+ Good Luck!  
+
+ Play the original [here](http://www.zx81stuff.org.uk/zx81/jtyone.html?track=Sabotage.tzx.zip@0&title=Sabotage&scale=2&speed=4)
 
 
 

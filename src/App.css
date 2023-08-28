@@ -6,7 +6,7 @@
   padding: 2rem;
   text-align: center;
 }
-.game {
+.container {
   box-sizing: border-box;
   width: 100%;
   display: flex;

@@ -1,7 +1,5 @@
-const getRemainingBoxes=(explosions,boxes)=>{
-  
-return boxes.filter(box=>!explosions.some(explosion=>box.x===explosion.x&&box.y===explosion.y))
-
+const getRemainingBoxes=(explosion,boxes)=>{
+return boxes.filter(box=>!(box.x===explosion.x&&box.y===explosion.y))
 }
 
 export default getRemainingBoxes;

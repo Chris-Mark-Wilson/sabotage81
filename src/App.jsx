@@ -5,7 +5,7 @@ import getRnd from "./utils/getRnd";
 import { useRef } from "react";
 import movePlayer from "./utils/movePlayer";
 import getDetonationQueue from "./utils/getDetonationQueue";
-import getRemainingBoxes from "./utils/getRemainingBoxes.jsx"
+import getRemainingBoxes from "./utils/getRemainingBoxes.jsx";
 
 const App = () => {
   /////STATIC VARIABLES //////////////////////
@@ -13,15 +13,16 @@ const App = () => {
   const timer = 3;
   const limit = 50;
   const inputRef = useRef(null);
-  const playerGraphic="😎"
-  const guardGraphic="👺"
-  const explosionEffect="src/assets/hq-explosion-6288.mp3"
-  const startGameEffect="src/assets/wrong-place-129242.mp3"
+  const playerGraphic = "😎";
+  const guardGraphic = "👺";
+  const explosionGraphic="💥"
+  const explosionEffect = "src/assets/hq-explosion-6288.mp3";
+  const startGameEffect = "src/assets/wrong-place-129242.mp3";
   /////////////////////////////////////////////////
   ///////////START STATE//////////////////////
   ///////////////////////////////////////////////
-  const[pause,setPause]=useState(false)
-  const[headerText,setHeaderText]=useState("--Start Game--")
+  const [pause, setPause] = useState(false);
+  const [headerText, setHeaderText] = useState("--Start Game--");
   const [myPos, setMyPos] = useState({});
   const [guardPos, setGuardPos] = useState({});
   const [count, setCount] = useState(timer);
@@ -37,18 +38,18 @@ const App = () => {
   const [gameOver, setGameOver] = useState(true);
   const [lives, setLives] = useState(3);
   const [score, setScore] = useState(0);
-  const [exp, setExp] = useState(" "); //💥
-  const [player, setPlayer] =(playerGraphic);
-  const [guard, setGuard] = (guardGraphic);
-///////////////////////////////////////////////////
-/////SET UP TNT BOXES //////////////////////
+  const [exp, setExp] = useState(" "); //explosion graphic
+  const [player, setPlayer] = playerGraphic;
+  const [guard, setGuard] = guardGraphic;
+  ///////////////////////////////////////////////////
+  /////SET UP TNT BOXES //////////////////////
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
   }, []);
-////////////////////////////////////////////////////
-////POSITION PLAYER AND GUARD///////////
+  ////////////////////////////////////////////////////
+  ////POSITION PLAYER AND GUARD///////////
   useEffect(() => {
-     if (gameOver) {
+    if (gameOver) {
       let x = 0;
       let y = 0;
       do {
@@ -56,8 +57,8 @@ const App = () => {
         y = getRnd();
       } while (boxes.some((box) => x === box.x && y === box.y));
       setMyPos({ x, y });
-      setBombPos({ x, y }); 
-          do {
+      setBombPos({ x, y });
+      do {
         x = getRnd();
         y = getRnd();
       } while (
@@ -68,120 +69,120 @@ const App = () => {
       );
       setGuardPos({ x, y });
     }
-  }, [gameOver]); 
+  }, [gameOver]);
   ///////////////////////////////////////////////////////////////
   //////SET FOCUS ON PLAYER//////////////////////////////
+  /////////////////////////////////////////////////////////////
   useEffect(() => {
     inputRef.current.focus();
-  }, [gameOver,pause]);
+  }, [gameOver, pause]);
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////// SET BOMB //////////////////////
+  ///////////////////////////////////////////////////////////////////
   useEffect(() => {
-    if(!pause){
-    if (bombSet) {
-      setBombText({ text: count, colour: "black" });
-      setTimeout(() => {
-        setCount(count - 1);
-        if (count === 0) {
-          //sends bombPos as index 1 in detonationQueue
-          let detonationQueue = [bombPos];
-          detonationQueue = getDetonationQueue(detonationQueue, limit);
-          console.log(detonationQueue, "queue");
-          // detonationQueue.forEach((positionObject, index) => {
-          //   positionObject.id = index + 1;
-          // });
-          setExplosions((explosions) => {
-            return [...detonationQueue];
-          }); // sets visual explosion on screen
-          // play sound effect
-          setIgnition(true); // sets ignition flag to fire ignition useEffect
-          setBombSet(false); // ends functionality, returns to game
-          setCount(timer); //initial countdown value
-          setBombPos({ x: myPos.x, y: myPos.y }); //gives bomb back to player
-          setBombText({ text: "", colour: "rgb(184, 185, 141) " });
-          //hides bomb
-        }
-      }, 1000); // 1 second countdown
-    }
-  }
-  }, [count, bombSet, explosions,pause]);
-/////////////////////////////////////////////////////////////
-/////RUN EXPLOSION EFFECTS/////////////////////////
-/////////////////////////////////////////////////////////////
-  useEffect(() => {
-    if(!pause){
-    if (ignition) {
-      if (explosions.length > 0) {
-        document.getElementById("expEffect").load();
-        document.getElementById("expEffect").play();
+    if (!pause) {
+      if (bombSet) {
+        setBombText({ text: count, colour: "black" });
         setTimeout(() => {
-          setExp("💥");
-          setScore((score)=>{
-            return score+1;
-          });
-    
-          const newExps = [...explosions];
-          if (newExps.length > 0) {
-            newExps.shift();
+          setCount(count - 1);
+          if (count === 0) {
+            //sends bombPos as index 1 in detonationQueue
+            let detonationQueue = [bombPos];
+            detonationQueue = getDetonationQueue(detonationQueue, limit);
+            console.log(detonationQueue, "queue");
+            // detonationQueue.forEach((positionObject, index) => {
+            //   positionObject.id = index + 1;
+            // });
+            setExplosions((explosions) => {
+              return [...detonationQueue];
+            }); // sets visual explosion on screen
+            // play sound effect
+            setIgnition(true); // sets ignition flag to fire ignition useEffect
+            setBombSet(false); // ends functionality, returns to game
+            setCount(timer); //initial countdown value
+            setBombPos({ x: myPos.x, y: myPos.y }); //gives bomb back to player
+            setBombText({ text: "", colour: "rgb(184, 185, 141) " });
+            //hides bomb
           }
-      
-          setExplosions(() => [...newExps]);
-          const remainingBoxes=getRemainingBoxes(explosions,boxes)
-          setBoxes(remainingBoxes)
-        }, 100);
-      } else {
-        setIgnition(false);
-        setExp(" ");
+        }, 1000); // 1 second countdown
       }
     }
-  }
-  }, [ignition, explosions,pause]);
-    ///////////////////////////////////////////////////////
+  }, [count, bombSet, explosions, pause]);
+  /////////////////////////////////////////////////////////////
+  /////RUN EXPLOSION EFFECTS/////////////////////////
+  /////////////////////////////////////////////////////////////
+  useEffect(() => {
+    if (!pause) {
+      if (ignition) {
+        if (explosions.length > 0) {
+          setTimeout(() => {
+            document.getElementById("expEffect").load();
+            document.getElementById("expEffect").play();
+          }, 10);
+          setTimeout(() => {
+            setExp(explosionGraphic);
+            setScore((score) => score + 1);
+
+            const newExps = [...explosions];
+            if (newExps.length > 0) {
+              newExps.shift();
+            }
+            //// removes one box at a time ///////
+            setExplosions(() => [...newExps]);
+            const remainingBoxes = getRemainingBoxes(explosions[0], boxes);
+            setBoxes(remainingBoxes);
+          }, 100);
+        } else {
+          setIgnition(false);
+          setExp(" ");
+        }
+      }
+    }
+  }, [ignition, explosions, pause]);
+  ///////////////////////////////////////////////////////
   ////////// HANDLE KEY PRESS//////////////////////
-    ///////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////
   const handleKeyDown = (e) => {
-    if(e.key===" ") {
-      document.getElementById("startGameEffect").play()
+    if (e.key === " ") {
+      document.getElementById("startGameEffect").play();
       handleStartGame();
     }
-    if(!gameOver && !pause){
-      document.getElementById("startGameEffect").play()
-    if (e.key != "l") movePlayer(setMyPos, boxes, myPos, e);
-    if (e.key === "l") {
- 
-      setBombSet(true); // document.getElementById('audio').play()
-      setBombPos(myPos);
-      setBombText({ text: count, colour: "black" });
-  
+    if (!gameOver && !pause) {
+      document.getElementById("startGameEffect").play();
+      if (e.key != "l") movePlayer(setMyPos, boxes, myPos, e);
+      if (e.key === "l") {
+        setBombSet(true); // document.getElementById('audio').play()
+        setBombPos(myPos);
+        setBombText({ text: count, colour: "black" });
+      }
     }
-  }
   };
   //////////////////////////////////////////////////////////////
-//////////////HANDLE HEADER CLICK//////////////////////
-    //////////////////////////////////////////////////////////////
-const handleStartGame=(e)=>{
-  if(gameOver){
-  setHeaderText("--Sabotage--")
-  document.getElementById("startGameEffect").play();
-  setGameOver(false)
-  return;
-  }
-  if(!pause){
-    setHeaderText("--Continue--")
-    document.getElementById("startGameEffect").pause();
-    setPause(true)
-  }else{
-    setHeaderText("--Sabotage--")
-    setPause(false)
-    document.getElementById("startGameEffect").play()
-  }
-}
+  //////////////HANDLE HEADER CLICK//////////////////////
+  //////////////////////////////////////////////////////////////
+  const handleStartGame = (e) => {
+    if (gameOver) {
+      setHeaderText("--Sabotage--");
+      document.getElementById("startGameEffect").play();
+      setGameOver(false);
+      return;
+    }
+    if (!pause) {
+      setHeaderText("--Continue--");
+      document.getElementById("startGameEffect").pause();
+      setPause(true);
+    } else {
+      setHeaderText("--Sabotage--");
+      setPause(false);
+      document.getElementById("startGameEffect").play();
+    }
+  };
   ////////////////////////////////////////////////////////////
   ////////RETURN PLAYING AREA/APP///////////////////
   ///////////////////////////////////////////////////////////
   return (
     <>
-      <section className="game">
+      <section className="container">
         <header className="header" onClick={handleStartGame}>
           <span className="score">Score: {score * 10}</span>
           <span className="title">{headerText}-</span>
@@ -232,8 +233,8 @@ const handleStartGame=(e)=>{
           <section
             className="fireball"
             style={{
-              gridRowStart: explosions[0]?explosions[0].y : 10,
-              gridColumnStart: explosions[0]?explosions[0].x - 1: 10
+              gridRowStart: explosions[0] ? explosions[0].y : 10,
+              gridColumnStart: explosions[0] ? explosions[0].x - 1 : 10,
               // gridRowEnd: explosions[0]?explosions[0].y  : 10,
               // gridColumnEnd: explosions[0]?explosions[0].x  :10,
             }}
@@ -255,18 +256,12 @@ const handleStartGame=(e)=>{
             </section>
           </section>
         </main>
-        <audio
-          id="expEffect"
-          src={explosionEffect}
-        ></audio>
-           <audio
-          id="startGameEffect"
-          src={startGameEffect}
-        ></audio>
+        <audio id="expEffect" src={explosionEffect}></audio>
+        <audio id="startGameEffect" src={startGameEffect}></audio>
 
         {/* end main */}
       </section>
-      {/* end game */}
+      {/* end container*/}
     </>
   );
 };

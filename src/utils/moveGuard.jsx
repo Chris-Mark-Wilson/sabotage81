@@ -75,8 +75,8 @@ const moveGuard = ({
 
   let earshot = false;
   if (
-    guardPos.x - myPos.x <= earshotDistance &&
-    guardPos.x - myPos.x <= earshotDistance
+    Math.abs(guardPos.x - myPos.x) <= earshotDistance &&
+    Math.abs(guardPos.y - myPos.y) <= earshotDistance
   )
     earshot = true;
   //within earshot or not?

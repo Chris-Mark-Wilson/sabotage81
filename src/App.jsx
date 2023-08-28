@@ -6,6 +6,7 @@ import movePlayer from "./utils/movePlayer";
 import getDetonationQueue from "./utils/getDetonationQueue";
 import getRemainingBoxes from "./utils/getRemainingBoxes.jsx";
 import moveGuard from "./utils/moveGuard";
+import checkBlastArea from "./utils/checkBlastArea";
 
 const App = () => {
   /////STATIC VARIABLES //////////////////////
@@ -15,12 +16,14 @@ const App = () => {
   const inputRef = useRef(null);
   const playerGraphic = "😎";
   const guardGraphic = "👮‍♂️";
-  const explosionGraphic="💥"
+  const explosionGraphic = "💥";
   const explosionEffect = "src/assets/hq-explosion-6288.mp3";
   const startGameEffect = "src/assets/wrong-place-129242.mp3";
-  const guardIntelligence=1;
-  const godSpeed=200;//speed of guard movement
-  const earshotDistance=8;// hearing distance of guard
+  const guardDie = "src/assets/pretty-sure-i-just-died-103109.mp3";
+  const playerDie = "src/assets/manx27s-cry-122258.mp3";
+  const guardIntelligence = 1;
+  const godSpeed = 100; //speed of guard movement
+  const earshotDistance = 8; // hearing distance of guard
   /////////////////////////////////////////////////
   ///////////START STATE//////////////////////
   ///////////////////////////////////////////////
@@ -44,9 +47,11 @@ const App = () => {
   const [exp, setExp] = useState(" "); //explosion graphic
   const [player, setPlayer] = playerGraphic;
   const [guard, setGuard] = guardGraphic;
-  const[gameTimer,setGameTimer]=useState(0)
-  const[waypoint,setWaypoint]=useState({x:getRnd(),y:getRnd()})
- 
+  const [gameTimer, setGameTimer] = useState(0);
+  const [waypoint, setWaypoint] = useState({ x: getRnd(), y: getRnd() });
+  const [guardCaught, setGuardCaught] = useState(false);
+  const [playerCaught, setPLayerCaught] = useState(false);
+
   ///////////////////////////////////////////////////
   /////SET UP TNT BOXES //////////////////////
   //////////////////////////////////////////////////
@@ -55,7 +60,7 @@ const App = () => {
   }, []);
   ////////////////////////////////////////////////////
   ////POSITION PLAYER AND GUARD///////////
-/////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
   useEffect(() => {
     if (gameOver) {
       let x = 0;
@@ -133,7 +138,16 @@ const App = () => {
 
             const newExps = [...explosions];
             if (newExps.length > 0) {
-              newExps.shift();
+              const blastCentre = newExps.shift();
+              //test caught in blast
+              if (checkBlastArea(blastCentre, myPos, guardPos) === "guard") {
+                console.log("Got the guard!");
+                setGuardCaught(true);
+              }
+              if (checkBlastArea(blastCentre, myPos, guardPos) === "player") {
+                console.log("You are toast...");
+                setPLayerCaught(true);
+              }
             }
             //// removes one box at a time ///////
             setExplosions(() => [...newExps]);
@@ -147,27 +161,54 @@ const App = () => {
       }
     }
   }, [ignition, explosions, pause]);
- ////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
+  ////// CAUGHT IN BLAST ////////////////////////
+  ///////////////////////////////////////////////////
+  useEffect(() => {
+    if (guardCaught) {
+      document.getElementById("guardDie").play();
+      setScore(score + 100);
+      setHeaderText("--GOT THE GUARD!--");
+      setTimeout(() => {
+        setHeaderText("--Sabotage--");
+        setGuardCaught(false);
+      }, 3000);
+      setGuardPos((guardPos) => {
+        return { x: getRnd(), y: getRnd() };
+      });
+    }
+  }, [guardCaught]);
+  ////////////////////////////////////////////////////////
   ////// INC TIMER ////////////////////////////////
-////////////////////////////////////////////////////////
-useEffect(()=>{
-  if(gameTimer>99){
-    setGameTimer(0)
-  }else
-  setTimeout(()=>{ setGameTimer(gameTimer+1)
-  },godSpeed)
- // move guard depends on the speed of this timer....
-},[guardPos,gameTimer])
+  ////////////////////////////////////////////////////////
+  useEffect(() => {
+    if (gameTimer > 99) {
+      setGameTimer(0);
+    } else
+      setTimeout(() => {
+        setGameTimer(gameTimer + 1);
+      }, godSpeed);
+    // move guard depends on the speed of this timer....
+  }, [guardPos, gameTimer]);
 
   ////////////////////////////////////////////////////////
   ////// MOVE GUARD ////////////////////////////////
-////////////////////////////////////////////////////////
-const guardParams={waypoint:waypoint,setWaypoint:setWaypoint,earshotDistance:earshotDistance,boxes:boxes,myPos:myPos,guardPos:guardPos,setGuardPos:setGuardPos,guardIntelligence:guardIntelligence}
-useEffect(()=>{
-  if(!pause&&!gameOver){
-    moveGuard(guardParams)
-  }
-},[gameTimer,pause,gameOver])
+  ////////////////////////////////////////////////////////
+  const guardParams = {
+    waypoint: waypoint,
+    setWaypoint: setWaypoint,
+    earshotDistance: earshotDistance,
+    boxes: boxes,
+    myPos: myPos,
+    guardPos: guardPos,
+    setGuardPos: setGuardPos,
+    guardIntelligence: guardIntelligence,
+  };
+  useEffect(() => {
+    if (!pause && !gameOver && !guardCaught) {
+      moveGuard(guardParams);
+    }
+  }, [gameTimer, pause, gameOver, guardCaught]);
   ///////////////////////////////////////////////////////
   ////////// HANDLE KEY PRESS ////////////////////
   //////////////////////////////////////////////////////
@@ -206,7 +247,7 @@ useEffect(()=>{
       document.getElementById("startGameEffect").play();
     }
   };
-    ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
   ////////RETURN PLAYING AREA/APP///////////////////
   ///////////////////////////////////////////////////////////
   return (
@@ -287,6 +328,8 @@ useEffect(()=>{
         </main>
         <audio id="expEffect" src={explosionEffect}></audio>
         <audio id="startGameEffect" src={startGameEffect}></audio>
+        <audio id="guardDie" src={guardDie}></audio>
+        <audio id="playerDie" src={playerDie}></audio>
 
         {/* end main */}
       </section>

@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import createBoxArray from "./utils/createBoxArray";
 import getRnd from "./utils/getRnd";
-import { useRef } from "react";
 import movePlayer from "./utils/movePlayer";
 import getDetonationQueue from "./utils/getDetonationQueue";
 import getRemainingBoxes from "./utils/getRemainingBoxes.jsx";
+import moveGuard from "./utils/moveGuard";
 
 const App = () => {
   /////STATIC VARIABLES //////////////////////
@@ -14,10 +14,13 @@ const App = () => {
   const limit = 50;
   const inputRef = useRef(null);
   const playerGraphic = "😎";
-  const guardGraphic = "👺";
+  const guardGraphic = "👮‍♂️";
   const explosionGraphic="💥"
   const explosionEffect = "src/assets/hq-explosion-6288.mp3";
   const startGameEffect = "src/assets/wrong-place-129242.mp3";
+  const guardIntelligence=1;
+  const godSpeed=200;//speed of guard movement
+  const earshotDistance=8;// hearing distance of guard
   /////////////////////////////////////////////////
   ///////////START STATE//////////////////////
   ///////////////////////////////////////////////
@@ -41,13 +44,18 @@ const App = () => {
   const [exp, setExp] = useState(" "); //explosion graphic
   const [player, setPlayer] = playerGraphic;
   const [guard, setGuard] = guardGraphic;
+  const[gameTimer,setGameTimer]=useState(0)
+  const[waypoint,setWaypoint]=useState({x:getRnd(),y:getRnd()})
+ 
   ///////////////////////////////////////////////////
   /////SET UP TNT BOXES //////////////////////
+  //////////////////////////////////////////////////
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
   }, []);
   ////////////////////////////////////////////////////
   ////POSITION PLAYER AND GUARD///////////
+/////////////////////////////////////////////////////
   useEffect(() => {
     if (gameOver) {
       let x = 0;
@@ -139,9 +147,30 @@ const App = () => {
       }
     }
   }, [ignition, explosions, pause]);
+ ////////////////////////////////////////////////////////
+  ////// INC TIMER ////////////////////////////////
+////////////////////////////////////////////////////////
+useEffect(()=>{
+  if(gameTimer>99){
+    setGameTimer(0)
+  }else
+  setTimeout(()=>{ setGameTimer(gameTimer+1)
+  },godSpeed)
+ // move guard depends on the speed of this timer....
+},[guardPos,gameTimer])
+
+  ////////////////////////////////////////////////////////
+  ////// MOVE GUARD ////////////////////////////////
+////////////////////////////////////////////////////////
+const guardParams={waypoint:waypoint,setWaypoint:setWaypoint,earshotDistance:earshotDistance,boxes:boxes,myPos:myPos,guardPos:guardPos,setGuardPos:setGuardPos,guardIntelligence:guardIntelligence}
+useEffect(()=>{
+  if(!pause&&!gameOver){
+    moveGuard(guardParams)
+  }
+},[gameTimer,pause,gameOver])
   ///////////////////////////////////////////////////////
-  ////////// HANDLE KEY PRESS//////////////////////
-  ///////////////////////////////////////////////////////
+  ////////// HANDLE KEY PRESS ////////////////////
+  //////////////////////////////////////////////////////
   const handleKeyDown = (e) => {
     if (e.key === " ") {
       document.getElementById("startGameEffect").play();
@@ -177,7 +206,7 @@ const App = () => {
       document.getElementById("startGameEffect").play();
     }
   };
-  ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
   ////////RETURN PLAYING AREA/APP///////////////////
   ///////////////////////////////////////////////////////////
   return (

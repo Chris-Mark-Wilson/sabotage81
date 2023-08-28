@@ -16,6 +16,11 @@
 
 ## high score table backend
 
+godspeed is game timer tickover speed
+the faster it ticks, the faster the guard moves
+the move guard function is dependent on the godTimer state and the godSpeed const is the timer wait length
+
+
 
 
     

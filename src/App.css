@@ -58,13 +58,13 @@
   padding: 2px 5px 2px 3px;
 }
 .bomb {
-  display:flex;
+  display: flex;
   border-radius: 50%;
   background-color: rgb(1, 1, 1);
-text-align: center;
-margin:-0.3em 0 0 0;
-padding: 0;
-justify-content: center;
+  text-align: center;
+  margin: -0.3em 0 0 0;
+  padding: 0;
+  justify-content: center;
   color: rgb(184, 185, 141);
   font-size: 0.8em;
 }
@@ -72,10 +72,11 @@ justify-content: center;
   background-color: rgb(184, 185, 141);
 }
 .me {
+  display: flex;
   background-color: rgb(184, 185, 141);
   font-size: 1fr;
-  text-align: center;
-  margin: -4px;
+  align-self: center;
+  justify-self: center;
   border-radius: 50%;
   color: black;
   outline: none; /*removes on focus ring */
@@ -84,20 +85,20 @@ justify-content: center;
   background-color: rgb(28, 24, 24);
   font-size: 1fr;
   text-align: center;
-
   border-radius: 5px;
   color: rgb(184, 185, 141);
 }
 .guard {
+  display: flex;
+  align-self: center;
+  justify-self: center;
   font-size: 1fr;
-  margin: -0.2em auto 0 -0.1em;
 }
 .explosion {
   margin: -12em -2em;
   font-size: 1fr;
 }
 .fireball {
-
   border-radius: 5px;
   margin: -1.5em 0 0 0em;
   line-height: 0;
@@ -139,7 +140,7 @@ justify-content: center;
   .bomb,
   .guard,
   .me {
-    font-size: 1fr;
+    font-size: x-small;
   }
   .tnt {
     font-size: xx-small;
@@ -151,7 +152,7 @@ justify-content: center;
   #bomb,
   #guard,
   #me {
-    font-size: 1frfr;
+    font-size: 1fr;
   }
   .tnt {
     font-size: x-small;

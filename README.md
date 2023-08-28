@@ -1,6 +1,6 @@
 ## Sabotage 81
 
-A javascript / react port from the original zx81 game by [Don Priestley](https://en.wikipedia.org/wiki/Don_Priestley#:~:text=Don%20Priestley%20(born%201940)%20is,computers%20between%201982%20and%201989.)  
+A javascript / react port from the original [zx81](https://en.wikipedia.org/wiki/ZX81) game by [Don Priestley](https://en.wikipedia.org/wiki/Don_Priestley#:~:text=Don%20Priestley%20(born%201940)%20is,computers%20between%201982%20and%201989.)  
 
 keys :
 

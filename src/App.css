@@ -48,7 +48,7 @@
 .main {
   box-sizing: border-box;
   width: 100%;
-  height: 90%;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(30, 3.33%[column-start]);
   grid-template-rows: repeat(30, 3.33% [row-start]);
@@ -94,10 +94,7 @@
   justify-self: center;
   font-size: 1fr;
 }
-.explosion {
-  margin: -12em -2em;
-  font-size: 1fr;
-}
+/*  */
 .fireball {
   border-radius: 5px;
   margin: -1.5em 0 0 0em;
@@ -107,7 +104,7 @@
   flex-direction: row;
   flex-wrap: wrap;
 
-  font-size: 100%;
+  /* font-size: 100%; */
 }
 .fireball section {
   width: 100%;

@@ -4,15 +4,24 @@ import createBoxArray from "./utils/createBoxArray";
 import getRnd from "./utils/getRnd";
 import { useRef } from "react";
 import movePlayer from "./utils/movePlayer";
-import placeBomb from "./utils/placeBomb";
 import getDetonationQueue from "./utils/getDetonationQueue";
 import getRemainingBoxes from "./utils/getRemainingBoxes.jsx"
 
 const App = () => {
+  /////STATIC VARIABLES //////////////////////
   const maxBoxes = 300; // how many initial tnt boxes
   const timer = 3;
   const limit = 50;
   const inputRef = useRef(null);
+  const playerGraphic="😎"
+  const guardGraphic="👺"
+  const explosionEffect="src/assets/hq-explosion-6288.mp3"
+  const startGameEffect="src/assets/wrong-place-129242.mp3"
+  /////////////////////////////////////////////////
+  ///////////START STATE//////////////////////
+  ///////////////////////////////////////////////
+  const[pause,setPause]=useState(false)
+  const[headerText,setHeaderText]=useState("--Start Game--")
   const [myPos, setMyPos] = useState({});
   const [guardPos, setGuardPos] = useState({});
   const [count, setCount] = useState(timer);
@@ -23,24 +32,23 @@ const App = () => {
   const [bombSet, setBombSet] = useState(false);
   const [boxes, setBoxes] = useState([]);
   const [bombPos, setBombPos] = useState({});
-  const [explosions, setExplosions] = useState([{ x: 10, y: 10 }]);
+  const [explosions, setExplosions] = useState([]);
   const [ignition, setIgnition] = useState(false);
   const [gameOver, setGameOver] = useState(true);
   const [lives, setLives] = useState(3);
   const [score, setScore] = useState(0);
-  const [exp, setExp] = useState(""); //💥
-  const [player, setPlayer] = "😎";
-  const [guard, setGuard] = "👺";
-
+  const [exp, setExp] = useState(" "); //💥
+  const [player, setPlayer] =(playerGraphic);
+  const [guard, setGuard] = (guardGraphic);
+///////////////////////////////////////////////////
+/////SET UP TNT BOXES //////////////////////
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
   }, []);
-
-  ////set up fireball
-
+////////////////////////////////////////////////////
+////POSITION PLAYER AND GUARD///////////
   useEffect(() => {
-    // just runs this once on page load
-    if (gameOver) {
+     if (gameOver) {
       let x = 0;
       let y = 0;
       do {
@@ -48,10 +56,8 @@ const App = () => {
         y = getRnd();
       } while (boxes.some((box) => x === box.x && y === box.y));
       setMyPos({ x, y });
-      setBombPos({ x, y }); // carry the bomb with me until bombSet is true
-
-      // sets me and guard checking for overlay with a tnt, doesnt seem to work 100% of the time, sometimes we get a clash with my position being overlaid by a tnt..
-      do {
+      setBombPos({ x, y }); 
+          do {
         x = getRnd();
         y = getRnd();
       } while (
@@ -60,31 +66,18 @@ const App = () => {
             (x === box.x && y === box.y) || (x === myPos.x && y === myPos.y)
         )
       );
-      console.log(x, y, "Guard pos");
-      setGuardPos({ x, y }); // random, not over a box or on me... can be adjusted to make him spawn further away if required
-      setGameOver(false);
+      setGuardPos({ x, y });
     }
-  }, [boxes]); // right..  fixed it by setting the dependeny to boxes so when useEffect createBoxes()  fires it runs this use effect.. effin react man jeez..
-
+  }, [gameOver]); 
+  ///////////////////////////////////////////////////////////////
+  //////SET FOCUS ON PLAYER//////////////////////////////
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
-
-  ///////////////////////////////////////////////////////
-  // setBombPos({x:myPos.x,y:myPos.y})
-
-  const handleKeyDown = (e) => {
-    if (e.key != "l") movePlayer(setMyPos, boxes, myPos, e);
-    if (e.key === "l") {
-      placeBomb(myPos, boxes);
-      setBombSet(true); // document.getElementById('audio').play()
-      setBombPos(myPos);
-      setBombText({ text: count, colour: "black" });
-      console.log("bombset");
-    }
-  };
-  /////////////////////////////// SET BOMB ///////////////////////////
+  }, [gameOver,pause]);
+  ///////////////////////////////////////////////////////////////////
+  /////////////////////////////// SET BOMB //////////////////////
   useEffect(() => {
+    if(!pause){
     if (bombSet) {
       setBombText({ text: count, colour: "black" });
       setTimeout(() => {
@@ -110,41 +103,88 @@ const App = () => {
         }
       }, 1000); // 1 second countdown
     }
-  }, [count, bombSet, explosions]);
-
+  }
+  }, [count, bombSet, explosions,pause]);
+/////////////////////////////////////////////////////////////
+/////RUN EXPLOSION EFFECTS/////////////////////////
+/////////////////////////////////////////////////////////////
   useEffect(() => {
+    if(!pause){
     if (ignition) {
-      if (explosions.length > 1) {
+      if (explosions.length > 0) {
+        document.getElementById("expEffect").load();
+        document.getElementById("expEffect").play();
         setTimeout(() => {
           setExp("💥");
-          document.getElementById("audio").play();
-          setScore(score + 10);
-          console.log(explosions, "exps before set");
+          setScore((score)=>{
+            return score+1;
+          });
+    
           const newExps = [...explosions];
-          if (newExps.length > 1) {
+          if (newExps.length > 0) {
             newExps.shift();
           }
       
           setExplosions(() => [...newExps]);
           const remainingBoxes=getRemainingBoxes(explosions,boxes)
           setBoxes(remainingBoxes)
-        
         }, 100);
       } else {
         setIgnition(false);
-        setExp("");
-    
+        setExp(" ");
       }
     }
-  }, [ignition, explosions]);
-
+  }
+  }, [ignition, explosions,pause]);
+    ///////////////////////////////////////////////////////
+  ////////// HANDLE KEY PRESS//////////////////////
+    ///////////////////////////////////////////////////////
+  const handleKeyDown = (e) => {
+    if(e.key===" ") {
+      document.getElementById("startGameEffect").play()
+      handleStartGame();
+    }
+    if(!gameOver && !pause){
+      document.getElementById("startGameEffect").play()
+    if (e.key != "l") movePlayer(setMyPos, boxes, myPos, e);
+    if (e.key === "l") {
+ 
+      setBombSet(true); // document.getElementById('audio').play()
+      setBombPos(myPos);
+      setBombText({ text: count, colour: "black" });
+  
+    }
+  }
+  };
+  //////////////////////////////////////////////////////////////
+//////////////HANDLE HEADER CLICK//////////////////////
+    //////////////////////////////////////////////////////////////
+const handleStartGame=(e)=>{
+  if(gameOver){
+  setHeaderText("--Sabotage--")
+  document.getElementById("startGameEffect").play();
+  setGameOver(false)
+  return;
+  }
+  if(!pause){
+    setHeaderText("--Continue--")
+    document.getElementById("startGameEffect").pause();
+    setPause(true)
+  }else{
+    setHeaderText("--Sabotage--")
+    setPause(false)
+    document.getElementById("startGameEffect").play()
+  }
+}
   ////////////////////////////////////////////////////////////
+  ////////RETURN PLAYING AREA/APP///////////////////
+  ///////////////////////////////////////////////////////////
   return (
     <>
       <section className="game">
-        <header className="header">
+        <header className="header" onClick={handleStartGame}>
           <span className="score">Score: {score * 10}</span>
-          <span className="title">--Sabotage--</span>
+          <span className="title">{headerText}-</span>
           <span className="lives">
             Lives: {lives === 3 ? "😎😎😎" : lives === 2 ? "😎😎" : "😎"}
           </span>
@@ -192,10 +232,10 @@ const App = () => {
           <section
             className="fireball"
             style={{
-              gridRowStart: explosions[0].y,
-              gridColumnStart: explosions[0].x - 1,
-              gridRowEnd: explosions[0].y + 2,
-              gridColumnEnd: explosions[0].x + 2,
+              gridRowStart: explosions[0]?explosions[0].y : 10,
+              gridColumnStart: explosions[0]?explosions[0].x - 1: 10
+              // gridRowEnd: explosions[0]?explosions[0].y  : 10,
+              // gridColumnEnd: explosions[0]?explosions[0].x  :10,
             }}
           >
             <section>
@@ -216,8 +256,12 @@ const App = () => {
           </section>
         </main>
         <audio
-          id="audio"
-          src={"src/assets/Rifle-Burst-Fire-A-www.fesliyanstudios.com.mp3"}
+          id="expEffect"
+          src={explosionEffect}
+        ></audio>
+           <audio
+          id="startGameEffect"
+          src={startGameEffect}
         ></audio>
 
         {/* end main */}

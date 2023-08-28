@@ -27,7 +27,8 @@ keys :
 
  Good Luck!  
 
- Play the original [here](http://www.zx81stuff.org.uk/zx81/jtyone.html?track=Sabotage.tzx.zip@0&title=Sabotage&scale=2&speed=4)
+ Play the original [here](http://www.zx81stuff.org.uk/zx81/jtyone.html?track=Sabotage.tzx.zip@0&title=Sabotage&scale=2&speed=4)  
+ (original keys are w-up, s-down, h-left, j-right and e to place the bomb)
 
 
 

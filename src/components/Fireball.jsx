@@ -4,9 +4,10 @@ import checkBlastArea from "../utils/checkBlastArea"
 import { useEffect } from "react"
 import getRemainingBoxes from "../utils/getRemainingBoxes"
 import { settings } from "../settings"
+import getRnd from "../utils/getRnd"
 
 export const Fireball=()=>{
-    const{explosions,setExplosions,exp,pause,ignition,setExp,setScore,setGuardCaught,setPlayerCaught,setBoxes,setIgnition,myPos,guardPos,boxes}=useContext(GameContext)
+    const{explosions,setExplosions,exp,pause,ignition,setExp,setScore,guardCaught,setGuardCaught,playerCaught,setPlayerCaught,setBoxes,setIgnition,myPos,setGuardPos,guardPos,boxes,score,setHeaderText,lives,setLives,setGameOver}=useContext(GameContext)
     const {explosionGraphic}=settings
 
     useEffect(() => {
@@ -47,6 +48,33 @@ export const Fireball=()=>{
         }
       }, [ignition, explosions, pause]);
 
+      useEffect(() => {
+        if (guardCaught) {
+          document.getElementById("guardDie").play();
+          setScore(score + 100);
+          setHeaderText("--GOT THE GUARD!--");
+          setTimeout(() => {
+            setHeaderText("--Sabotage--");
+            setGuardCaught(false);
+          }, 3000);
+          setGuardPos((guardPos) => {
+            return { x: getRnd(), y: getRnd() };
+          });
+        }
+      }, [guardCaught]);
+
+      useEffect(()=>{
+if(playerCaught){
+    document.getElementById("playerDie").play();
+    setLives(lives-1);
+    if(lives===0)setGameOver(true)
+    setHeaderText("--You Are TOAST!--");
+    setTimeout(() => {
+      setHeaderText("--Sabotage--");
+      setPlayerCaught(false);
+    }, 3000);
+}
+      },[playerCaught])
 
 
 

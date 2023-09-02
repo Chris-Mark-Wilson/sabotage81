@@ -3,7 +3,7 @@ import { GameContext } from "../gameContext"
 
 
 export const Header=()=>{
-    const{score,headerText,setHeaderText,gameOver,pause,setGameOver,lives}=useContext(GameContext)
+    const{score,headerText,setHeaderText,gameOver,pause,setPause,setGameOver,lives}=useContext(GameContext)
 
     const handleStartGame = (e) => {
         if (gameOver) {

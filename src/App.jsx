@@ -2,93 +2,78 @@ import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import createBoxArray from "./utils/createBoxArray";
 import getRnd from "./utils/getRnd";
-import movePlayer from "./utils/movePlayer";
+
 import getDetonationQueue from "./utils/getDetonationQueue";
 import getRemainingBoxes from "./utils/getRemainingBoxes.jsx";
 import moveGuard from "./utils/moveGuard";
 import checkBlastArea from "./utils/checkBlastArea";
+import Guard from "./components/Guard.jsx";
+import { settings } from "./settings";
+import { Bomb } from "./components/Bomb";
+import { Player } from "./components/Player";
+import { GameContext } from "./gameContext";
+import { useContext } from "react";
+import { Box } from "./components/Box";
 
 const App = () => {
   /////STATIC VARIABLES //////////////////////
-  const maxBoxes = 300; // how many initial tnt boxes
-  const timer = 3;
-  const limit = 50;
-  const inputRef = useRef(null);
-  const playerGraphic = "😎";
-  const guardGraphic = "👮‍♂️";
-  const explosionGraphic = "💥";
-  const explosionEffect = "src/assets/hq-explosion-6288.mp3";
-  const startGameEffect = "src/assets/wrong-place-129242.mp3";
-  const guardDie = "src/assets/pretty-sure-i-just-died-103109.mp3";
-  const playerDie = "src/assets/manx27s-cry-122258.mp3";
-  const guardIntelligence = 1;
-  const godSpeed = 100; //speed of guard movement
-  const earshotDistance = 8; // hearing distance of guard
-  /////////////////////////////////////////////////
-  ///////////START STATE//////////////////////
-  ///////////////////////////////////////////////
-  const [pause, setPause] = useState(false);
-  const [headerText, setHeaderText] = useState("--Start Game--");
-  const [myPos, setMyPos] = useState({});
-  const [guardPos, setGuardPos] = useState({});
-  const [count, setCount] = useState(timer);
-  const [bombText, setBombText] = useState({
-    text: "",
-    colour: " rgb(184, 185, 141)",
-  });
-  const [bombSet, setBombSet] = useState(false);
-  const [boxes, setBoxes] = useState([]);
-  const [bombPos, setBombPos] = useState({});
-  const [explosions, setExplosions] = useState([]);
-  const [ignition, setIgnition] = useState(false);
-  const [gameOver, setGameOver] = useState(true);
-  const [lives, setLives] = useState(3);
-  const [score, setScore] = useState(0);
-  const [exp, setExp] = useState(" "); //explosion graphic
-  const [player, setPlayer] = playerGraphic;
-  const [guard, setGuard] = guardGraphic;
-  const [gameTimer, setGameTimer] = useState(0);
-  const [waypoint, setWaypoint] = useState({ x: getRnd(), y: getRnd() });
-  const [guardCaught, setGuardCaught] = useState(false);
-  const [playerCaught, setPLayerCaught] = useState(false);
+  const {
+    maxBoxes,
+    timer,
+    limit,
+    playerGraphic,
+    guardGraphic,
+    explosionGraphic,
+    explosionEffect,
+    startGameEffect,
+    guardDie,
+    playerDie,
+    guardIntelligence,
+    godSpeed,
+    earshotDistance,
+  } = settings;
 
+  const {
+    setBombPos,
+    setGuardPos,
+    count,
+    bombSet,
+    explosions,
+    ignition,
+    guardCaught,
+    guardPos,
+    gameTimer,
+    waypoint,
+    setWaypoint,
+    boxes,
+    myPos,
+    score,
+    headerText,
+    lives,
+    bombPos,
+    bombText,
+    exp,
+    gameOver,
+    pause,
+    setBoxes,
+    setHeaderText,
+    setGameTimer,
+    setGameOver,
+    setBombText,
+  } = useContext(GameContext);
+
+  //////SET FOCUS ON PLAYER//////////////////////////////
+  const inputRef = useRef(null);
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [gameOver, pause]);
   ///////////////////////////////////////////////////
   /////SET UP TNT BOXES //////////////////////
   //////////////////////////////////////////////////
   useEffect(() => {
     setBoxes(createBoxArray(maxBoxes));
   }, []);
-  ////////////////////////////////////////////////////
-  ////POSITION PLAYER AND GUARD///////////
-  /////////////////////////////////////////////////////
-  useEffect(() => {
-    if (gameOver) {
-      let x = 0;
-      let y = 0;
-      do {
-        x = getRnd();
-        y = getRnd();
-      } while (boxes.some((box) => x === box.x && y === box.y));
-      setMyPos({ x, y });
-      setBombPos({ x, y });
-      do {
-        x = getRnd();
-        y = getRnd();
-      } while (
-        boxes.some(
-          (box) =>
-            (x === box.x && y === box.y) || (x === myPos.x && y === myPos.y)
-        )
-      );
-      setGuardPos({ x, y });
-    }
-  }, [gameOver]);
-  ///////////////////////////////////////////////////////////////
-  //////SET FOCUS ON PLAYER//////////////////////////////
-  /////////////////////////////////////////////////////////////
-  useEffect(() => {
-    inputRef.current.focus();
-  }, [gameOver, pause]);
+
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////// SET BOMB //////////////////////
   ///////////////////////////////////////////////////////////////////
@@ -212,21 +197,7 @@ const App = () => {
   ///////////////////////////////////////////////////////
   ////////// HANDLE KEY PRESS ////////////////////
   //////////////////////////////////////////////////////
-  const handleKeyDown = (e) => {
-    if (e.key === " ") {
-      document.getElementById("startGameEffect").play();
-      handleStartGame();
-    }
-    if (!gameOver && !pause) {
-      document.getElementById("startGameEffect").play();
-      if (e.key != "l") movePlayer(setMyPos, boxes, myPos, e);
-      if (e.key === "l") {
-        setBombSet(true); // document.getElementById('audio').play()
-        setBombPos(myPos);
-        setBombText({ text: count, colour: "black" });
-      }
-    }
-  };
+
   //////////////////////////////////////////////////////////////
   //////////////HANDLE HEADER CLICK//////////////////////
   //////////////////////////////////////////////////////////////
@@ -262,43 +233,13 @@ const App = () => {
         </header>
         <main className="main">
           {boxes.map((box) => {
-            return (
-              <div
-                className="tnt"
-                key={box.id}
-                style={{ gridColumn: box.x, gridRow: box.y }}
-              >
-                tnt
-              </div>
-            );
+            return <Box box={box}/>;
           })}
-          <div
-            className="bomb"
-            id="bomb"
-            style={{
-              gridColumn: bombPos.x,
-              gridRow: bombPos.y,
-              visibility: false,
-              backgroundColor: bombText.colour,
-            }}
-          >
-            {bombText.text}
-          </div>
-          <div
-            ref={inputRef}
-            className="me"
-            tabIndex={0}
-            onKeyDown={handleKeyDown}
-            style={{ gridColumn: myPos.x, gridRow: myPos.y }}
-          >
-            {player}
-          </div>
-          <div
-            className="guard"
-            style={{ gridColumn: guardPos.x, gridRow: guardPos.y }}
-          >
-            {guard}
-          </div>
+
+          <Bomb bombPos={bombPos} bombText={bombText} />
+          <Player inputRef={inputRef} />
+
+          <Guard />
 
           <section
             className="fireball"

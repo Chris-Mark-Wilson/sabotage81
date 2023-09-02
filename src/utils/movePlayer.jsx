@@ -1,4 +1,5 @@
 const movePlayer = (setMyPos, boxes, myPos, e) => {
+
   if (e.key === "k") {
     if (
       myPos.y > 0 &&

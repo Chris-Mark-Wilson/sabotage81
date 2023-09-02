@@ -2,11 +2,42 @@ import getRnd from "../utils/getRnd";
 import { useContext } from "react";
 import { GameContext } from "../gameContext";
 import { useEffect } from "react";
+import moveGuard from "../utils/moveGuard";
 
+export const Guard=()=>{
+  const{guard,guardPos,setGuardPos,boxes,gameOver,waypoint,setWaypoint,earshotDistance,myPos,guardIntelligence,gameTimer,pause,guardCaught,score,setScore,setHeaderText,setGuardCaught}=useContext(GameContext)
 
-const Guard=()=>{
-  const{guard,guardPos,setGuardPos,boxes,gameOver}=useContext(GameContext)
-  
+  const guardParams = {
+    waypoint: waypoint,
+    setWaypoint: setWaypoint,
+    earshotDistance: earshotDistance,
+    boxes: boxes,
+    myPos: myPos,
+    guardPos: guardPos,
+    setGuardPos: setGuardPos,
+    guardIntelligence: guardIntelligence,
+  };
+  useEffect(() => {
+    if (!pause && !gameOver && !guardCaught) {
+      moveGuard(guardParams);
+    }
+  }, [gameTimer, pause, gameOver, guardCaught]);
+
+  useEffect(() => {
+    if (guardCaught) {
+      document.getElementById("guardDie").play();
+      setScore(score + 100);
+      setHeaderText("--GOT THE GUARD!--");
+      setTimeout(() => {
+        setHeaderText("--Sabotage--");
+        setGuardCaught(false);
+      }, 3000);
+      setGuardPos((guardPos) => {
+        return { x: getRnd(), y: getRnd() };
+      });
+    }
+  }, [guardCaught]);
+
   useEffect(()=>{
     if(gameOver){
       let x=0;
@@ -33,4 +64,3 @@ const Guard=()=>{
   </div>
     )
 } 
-export default Guard

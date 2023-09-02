@@ -7,9 +7,8 @@ import { useEffect } from "react";
  
 export const Player=({inputRef})=>{
 
-    const {pause,gameOver,player,setBombPos,setBombSet,setBombText,setMyPos,boxes,myPos}=useContext(GameContext)
+    const {pause,gameOver,player,setBombPos,setBombSet,setBombText,setMyPos,boxes,myPos,count}=useContext(GameContext)
     const handleKeyDown = (e) => {
-
         if (e.key === " ") {
           document.getElementById("startGameEffect").play();
           handleStartGame();
@@ -20,7 +19,7 @@ export const Player=({inputRef})=>{
           if (e.key === "l") {
             setBombSet(true); // document.getElementById('audio').play()
             setBombPos(myPos);
-            setBombText({ text: count, colour: "black" });  const [guard, setGuard] = guardGraphic;
+            setBombText({ text: count, colour: "black" });  
           }
         }
       };

@@ -11,5 +11,5 @@ export const settings={
      playerDie : "src/assets/manx27s-cry-122258.mp3",
      guardIntelligence : 1,
      godSpeed : 100,
-     earshotDistance : 8
+     earshotDistance : 4
 }

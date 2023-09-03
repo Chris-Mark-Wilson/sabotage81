@@ -1,4 +1,4 @@
-import getRnd from "../utils/getRnd";
+import { settings } from "../settings";
 import { useContext } from "react";
 import { GameContext } from "../gameContext";
 import { useEffect } from "react";
@@ -6,7 +6,8 @@ import moveGuard from "../utils/moveGuard";
 import { getUniquePosition } from "../utils/getUniquePosition";
 
 export const Guard=()=>{
-  const{guard,guardPos,setGuardPos,boxes,gameOver,waypoint,setWaypoint,earshotDistance,myPos,guardIntelligence,gameTimer,pause,guardCaught}=useContext(GameContext)
+  const{guard,guardPos,setGuardPos,boxes,gameOver,waypoint,setWaypoint,myPos,guardIntelligence,gameTimer,pause,guardCaught}=useContext(GameContext)
+  const {earshotDistance}=settings
 
   const guardParams = {
     waypoint: waypoint,

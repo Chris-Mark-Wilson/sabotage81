@@ -33,7 +33,7 @@ export const Player=({inputRef})=>{
         setMyPos(newPos);
         setBombPos(newPos);
     }
-},[gameOver,boxes])
+},[gameOver,boxes])//needs boxes to be set
 
 
     return (

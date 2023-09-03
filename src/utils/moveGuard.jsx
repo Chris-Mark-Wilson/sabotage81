@@ -1,126 +1,124 @@
 import getRnd from "./getRnd";
+import { settings } from "../settings";
 
-const canMoveUp = ({boxes, guardPos, setGuardPos}) => {
+const canMoveUp = ({ boxes, guard_id }) => {
   if (
-    guardPos.y > 0 &&
+    guard_id.y > 0 &&
     !boxes.some((box) => {
-      return box.x === guardPos.x && box.y === guardPos.y - 1;
+      return box.x === guard_id.x && box.y === guard_id.y - 1;
     })
   ) {
-    setGuardPos({ x: guardPos.x, y: guardPos.y - 1 });
-    return true;
-  } else return false;
+    return { x: guard_id.x, y: guard_id.y - 1 };
+  } else return undefined;
 };
 
-const canMoveDown = ({boxes, guardPos, setGuardPos}) => {
+const canMoveDown = ({ boxes, guard_id }) => {
   if (
-    guardPos.y < 30 &&
+    guard_id.y < 30 &&
     !boxes.some((box) => {
-      return box.x === guardPos.x && box.y === guardPos.y + 1;
+      return box.x === guard_id.x && box.y === guard_id.y + 1;
     })
   ) {
-    setGuardPos({ x: guardPos.x, y: guardPos.y + 1 });
-    return true;
-  } else return false;
+    return { x: guard_id.x, y: guard_id.y + 1 };
+  } else return undefined;
 };
 
-const canMoveLeft = ({boxes, guardPos, setGuardPos}) => {
+const canMoveLeft = ({ boxes, guard_id }) => {
   if (
-    guardPos.x > 0 &&
+    guard_id.x > 0 &&
     !boxes.some((box) => {
-      return box.x === guardPos.x - 1 && box.y === guardPos.y;
+      return box.x === guard_id.x - 1 && box.y === guard_id.y;
     })
   ) {
-    setGuardPos({ x: guardPos.x - 1, y: guardPos.y });
-    return true;
-  } else return false;
+    return { x: guard_id.x - 1, y: guard_id.y };
+  } else return undefined;
 };
 
-const canMoveRight = ({boxes, guardPos, setGuardPos}) => {
+const canMoveRight = ({ boxes, guard_id }) => {
   if (
-    guardPos.x < 30 &&
+    guard_id.x < 30 &&
     !boxes.some((box) => {
-      return box.x === guardPos.x + 1 && box.y === guardPos.y;
+      return box.x === guard_id.x + 1 && box.y === guard_id.y;
     })
   ) {
-    setGuardPos({ x: guardPos.x + 1, y: guardPos.y });
-    return true;
-  } else return false;
+    return { x: guard_id.x + 1, y: guard_id.y };
+  } else return undefined;
 };
 
-const getNewWaypoint=(setWaypoint)=>{
-    setWaypoint((waypoint)=>{
-        const newWaypoint=waypoint;
-        newWaypoint.x=getRnd();
-        newWaypoint.y=getRnd();
-        return newWaypoint
-       })
-}
+const getNewWaypoint = (setGuardPos, guard_id) => {
+  setGuardPos((guards) => {
+    const newWaypoint = [...guards];
+    newWaypoint.splice(guard_id.id, 1, {
+      id: guard_id.id,
+      x: guard_id.x,
+      y: guard_id.y,
+      xx: getRnd(),
+      yy: getRnd(),
+    });
+    return newWaypoint;
+  });
+};
 
 //////////MAIN FUNCTION///////////////
 
-const moveGuard = ({
-  waypoint,
-  setWaypoint,
-  earshotDistance,
-  boxes,
-  myPos,
-  guardPos,
-  setGuardPos,
-  intelligence}
-) => {
+const moveGuard = ({ setGuardPos, boxes, myPos, guard_id }) => {
+  const { earshotDistance } = settings;
   // AI here //
   //move up,down,left or right returns true if ok, or false if blocked
   // waypoint - random point for guard to head towards;
 
   let earshot = false;
   if (
-    Math.abs(guardPos.x - myPos.x) <= earshotDistance &&
-    Math.abs(guardPos.y - myPos.y) <= earshotDistance
-  ){
-  earshot = true;
+    Math.abs(guard_id.x - myPos.x) <= earshotDistance &&
+    Math.abs(guard_id.y - myPos.y) <= earshotDistance
+  ) {
+    earshot = true;
   }
-  if(guardPos.x===waypoint.x&&guardPos.y===waypoint.y){
-    getNewWaypoint(setWaypoint)
-  }//stops guard freezing
+  if (guard_id.x === guard_id.xx && guard_id.y === guard_id.yy) {
+    getNewWaypoint(setGuardPos, guard_id);
+  } //stops guard freezing
   //within earshot or not?
   let target = {}; // point for guard to had towards
-  earshot ? (target = myPos) : (target = waypoint);
+  earshot ? (target = myPos) : (target = { x: guard_id.xx, y: guard_id.yy });
   // if close head towards player, or waypoint if not..
-const params={boxes:boxes,guardPos:guardPos,setGuardPos:setGuardPos}
 
-  if(guardPos.x>target.x){
-    if(canMoveLeft(params)){
-        return
-    }else{
-       getNewWaypoint(setWaypoint)
+  const params = { boxes: boxes, guard_id: guard_id };
+
+  if (guard_id.x > target.x) {
+    const move = canMoveLeft(params);
+    if (move) {
+      return move;
+    } else {
+      getNewWaypoint(setGuardPos, guard_id);
     }
   }
 
-  if(guardPos.x<target.x){
-    if(canMoveRight(params)){
-        return
-    }else{
-       getNewWaypoint(setWaypoint)
+  if (guard_id.x < target.x) {
+  const move = canMoveRight(params);
+    if (move) {
+      return move;
+    } else {
+      getNewWaypoint(setGuardPos, guard_id);
     }
-  }
+ }
 
-  if(guardPos.y<target.y){
-    if(canMoveDown(params)){
-        return
-    }else{
-     getNewWaypoint(setWaypoint)
+  if (guard_id.y < target.y) {
+    const move = canMoveDown(params);
+    if (move) {
+      return move;
+    } else {
+      getNewWaypoint(setGuardPos, guard_id);
     }
-  }
+}
 
-  if(guardPos.y>target.y){
-    if(canMoveUp(params)){
-        return
-    }else{
-     getNewWaypoint(setWaypoint)
+  if (guard_id.y > target.y) {
+    const move = canMoveUp(params);
+    if (move) {
+      return move;
+    } else {
+      getNewWaypoint(setGuardPos, guard_id);
     }
-  }
-
-
+}
+return guard_id; // if all else fails and the guard is trapped
 };
 export default moveGuard;

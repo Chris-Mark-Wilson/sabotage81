@@ -43,7 +43,12 @@ export const GameBoard=()=>{
         })}
         <Bomb bombPos={bombPos} bombText={bombText} />
         <Player inputRef={inputRef} />
-        <Guard />
+        {guardPos.map(guard_id=>{
+                return(
+                   < Guard key={guard_id.id} guard_id={guard_id}/>
+                )
+        })}
+        {/* <Guard /> */}
         <Fireball />
       </main>
     )

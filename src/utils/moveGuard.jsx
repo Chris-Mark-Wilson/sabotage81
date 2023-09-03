@@ -77,8 +77,12 @@ const moveGuard = ({
   if (
     Math.abs(guardPos.x - myPos.x) <= earshotDistance &&
     Math.abs(guardPos.y - myPos.y) <= earshotDistance
-  )
-    earshot = true;
+  ){
+  earshot = true;
+  }
+  if(guardPos.x===waypoint.x&&guardPos.y===waypoint.y){
+    getNewWaypoint(setWaypoint)
+  }//stops guard freezing
   //within earshot or not?
   let target = {}; // point for guard to had towards
   earshot ? (target = myPos) : (target = waypoint);

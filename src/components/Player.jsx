@@ -4,20 +4,23 @@ import { GameContext } from "../gameContext";
 import getRnd from "../utils/getRnd";
 import { useEffect } from "react";
 
+
  
 export const Player=({inputRef})=>{
 
-    const {pause,gameOver,player,setBombPos,setBombSet,setBombText,setMyPos,boxes,myPos,count}=useContext(GameContext)
+    const {pause,gameOver,player,setBombPos,setBombSet,setBombText,setMyPos,boxes,myPos,count,gameTune}=useContext(GameContext)
     const handleKeyDown = (e) => {
         if (e.key === " ") {
-          document.getElementById("startGameEffect").play();
+      
+        gameTune.current.play()
           handleStartGame();
         }
         if (!gameOver && !pause) {
-          document.getElementById("startGameEffect").play();
+    
+        gameTune.current.play();
           if (e.key != "l") movePlayer(setMyPos, boxes, myPos, e);
           if (e.key === "l") {
-            setBombSet(true); // document.getElementById('audio').play()
+            setBombSet(true); 
             setBombPos(myPos);
             setBombText({ text: count, colour: "black" });  
           }

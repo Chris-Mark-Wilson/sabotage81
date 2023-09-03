@@ -2,10 +2,16 @@ import { createContext } from "react";
 import { settings } from "./settings";
 import { useState } from "react";
 import getRnd from "./utils/getRnd";
+import { useRef } from "react"
 
 export const GameContext=createContext()
 
 export const GameProvider=({children})=>{
+  const explosionSound=useRef();
+  const gameTune=useRef();
+  const guardDeadEffect=useRef();
+
+  const playerDeadEffect=useRef();
     const {timer,playerGraphic,guardGraphic}=settings;
 
   const [pause, setPause] = useState(false);
@@ -55,7 +61,11 @@ const[guard,setGuard]=useState(guardGraphic)
             gameTimer,setGameTimer,
            waypoint,setWaypoint,
            guardCaught,setGuardCaught,
-           playerCaught,setPlayerCaught 
+           playerCaught,setPlayerCaught,
+           explosionSound,
+           gameTune,
+           guardDeadEffect,
+           playerDeadEffect
         }}>
             {children}
         </GameContext.Provider>

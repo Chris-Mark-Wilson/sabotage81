@@ -2,24 +2,30 @@ import { useContext } from "react"
 import { GameContext } from "../gameContext"
 
 
+
 export const Header=()=>{
-    const{score,headerText,setHeaderText,gameOver,pause,setPause,setGameOver,lives}=useContext(GameContext)
+    const{score,headerText,setHeaderText,gameOver,pause,setPause,setGameOver,lives,gameTune}=useContext
+    (GameContext)
 
     const handleStartGame = (e) => {
         if (gameOver) {
           setHeaderText("--Sabotage--");
-          document.getElementById("startGameEffect").play();
+       
+        console.dir(gameTune)
+        gameTune.current.play()
           setGameOver(false);
           return;
         }
         if (!pause) {
           setHeaderText("--Continue--");
-          document.getElementById("startGameEffect").pause();
+ 
+        gameTune.current.pause()
           setPause(true);
         } else {
           setHeaderText("--Sabotage--");
           setPause(false);
-          document.getElementById("startGameEffect").play();
+   
+        gameTune.current.play()
         }
       };
 

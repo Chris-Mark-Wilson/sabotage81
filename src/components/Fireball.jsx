@@ -7,7 +7,7 @@ import { settings } from "../settings"
 import getRnd from "../utils/getRnd"
 
 export const Fireball=()=>{
-    const{explosions,setExplosions,exp,pause,ignition,setExp,setScore,guardCaught,setGuardCaught,playerCaught,setPlayerCaught,setBoxes,setIgnition,myPos,setGuardPos,guardPos,boxes,score,setHeaderText,lives,setLives,setGameOver}=useContext(GameContext)
+    const{explosions,setExplosions,exp,pause,ignition,setExp,setScore,guardCaught,setGuardCaught,playerCaught,setPlayerCaught,setBoxes,setIgnition,myPos,setGuardPos,guardPos,boxes,score,setHeaderText,lives,setLives,setGameOver,explosionSound,guardDeadEffect,playerDeadEffect}=useContext(GameContext)
     const {explosionGraphic}=settings
 
     useEffect(() => {
@@ -15,8 +15,8 @@ export const Fireball=()=>{
           if (ignition) {
             if (explosions.length > 0) {
               setTimeout(() => {
-                document.getElementById("expEffect").load();
-                document.getElementById("expEffect").play();
+                explosionSound.current.load();
+                explosionSound.current.play();
               }, 10);
               setTimeout(() => {
                 setExp(explosionGraphic);
@@ -50,7 +50,7 @@ export const Fireball=()=>{
 
       useEffect(() => {
         if (guardCaught) {
-          document.getElementById("guardDie").play();
+        guardDeadEffect.current.play()
           setScore(score + 100);
           setHeaderText("--GOT THE GUARD!--");
           setTimeout(() => {
@@ -65,7 +65,7 @@ export const Fireball=()=>{
 
       useEffect(()=>{
 if(playerCaught){
-    document.getElementById("playerDie").play();
+    playerDeadEffect.current.play()
     setLives(lives-1);
     if(lives===0)setGameOver(true)
     setHeaderText("--You Are TOAST!--");
@@ -84,9 +84,7 @@ if(playerCaught){
         style={{
           gridRowStart: explosions[0] ? explosions[0].y : 10,
           gridColumnStart: explosions[0] ? explosions[0].x - 1 : 10,
-          // gridRowEnd: explosions[0]?explosions[0].y  : 10,
-          // gridColumnEnd: explosions[0]?explosions[0].x  :10,
-        }}
+           }}
       >
         <section>
           <p>{exp}</p>

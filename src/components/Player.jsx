@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { GameContext } from "../gameContext";
 import getRnd from "../utils/getRnd";
 import { useEffect } from "react";
+import { getUniquePosition } from "../utils/getUniquePosition";
 
 
  
@@ -28,16 +29,11 @@ export const Player=({inputRef})=>{
       };
       useEffect(()=>{
       if (gameOver) {
-        let x = 0;
-        let y = 0;
-        do {
-          x = getRnd();
-          y = getRnd();
-        } while (boxes.some((box) => x === box.x && y === box.y));
-        setMyPos({ x, y });
-        setBombPos({ x, y });
+      const newPos=getUniquePosition(boxes,myPos)
+        setMyPos(newPos);
+        setBombPos(newPos);
     }
-},[gameOver])
+},[gameOver,boxes])
 
 
     return (

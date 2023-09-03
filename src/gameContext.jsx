@@ -7,12 +7,12 @@ import { useRef } from "react"
 export const GameContext=createContext()
 
 export const GameProvider=({children})=>{
+
   const explosionSound=useRef();
   const gameTune=useRef();
   const guardDeadEffect=useRef();
-
   const playerDeadEffect=useRef();
-    const {timer,playerGraphic,guardGraphic}=settings;
+  const {timer,playerGraphic,guardGraphic}=settings;
 
   const [pause, setPause] = useState(false);
   const [headerText, setHeaderText] = useState("--Start Game--");

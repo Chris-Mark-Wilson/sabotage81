@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { GameContext } from "../gameContext";
 import { useEffect } from "react";
 import moveGuard from "../utils/moveGuard";
+import { getUniquePosition } from "../utils/getUniquePosition";
 
 export const Guard=()=>{
   const{guard,guardPos,setGuardPos,boxes,gameOver,waypoint,setWaypoint,earshotDistance,myPos,guardIntelligence,gameTimer,pause,guardCaught}=useContext(GameContext)
@@ -27,20 +28,11 @@ export const Guard=()=>{
 
   useEffect(()=>{
     if(gameOver){
-      let x=0;
-      let y=0;
-      do {
-        x = getRnd();
-        y = getRnd();
-      } while (
-        boxes.some(
-          (box) =>
-            (x === box.x && y === box.y) || (x === myPos.x && y === myPos.y)
-        )
-      );
-      setGuardPos({ x, y });
+      const newPos=getUniquePosition(boxes,myPos)
+      setGuardPos(newPos);
+ 
     }
-  },[gameOver])
+  },[gameOver,boxes])//needs boxes to be set
 
     return   (
     <div

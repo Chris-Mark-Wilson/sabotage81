@@ -22,6 +22,7 @@ export const GameBoard=()=>{
 
     useEffect(() => {
         setBoxes(createBoxArray(maxBoxes));
+    
       }, []);
 
   useEffect(() => {

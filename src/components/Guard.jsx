@@ -6,11 +6,11 @@ import moveGuard from "../utils/moveGuard";
 import { getUniquePosition } from "../utils/getUniquePosition";
 
 export const Guard=({guard_id})=>{
-  const{guard,guardPos,setGuardPos,boxes,gameOver,waypoint,setWaypoint,myPos,gameTimer,pause,guardCaught}=useContext(GameContext)
-  const {earshotDistance}=settings
+  const{guardPos,setGuardPos,boxes,gameOver,myPos,gameTimer,pause,guardCaught,guard}=useContext(GameContext)
+
 
   const guardParams = {
-  setGuardPos:setGuardPos,
+
     boxes: boxes,
     myPos: myPos,
     guard_id: guard_id,
@@ -20,15 +20,16 @@ export const Guard=({guard_id})=>{
     if (!pause && !gameOver && !guardCaught) {
  
     const newPos=moveGuard(guardParams);
-    console.log(newPos)
+
     setGuardPos(array=>{
       const newArray=[...array]
       newArray.splice(guard_id.id,1,
         {id:guard_id.id,
           x:newPos.x,
           y:newPos.y,
-          xx:guard_id.xx,
-          yy:guard_id.yy})
+          xx:newPos.xx,
+          yy:newPos.yy})
+         
       return newArray
     })
 

@@ -45,23 +45,19 @@ const canMoveRight = ({ boxes, guard_id }) => {
   } else return undefined;
 };
 
-const getNewWaypoint = (setGuardPos, guard_id) => {
-  setGuardPos((guards) => {
-    const newWaypoint = [...guards];
-    newWaypoint.splice(guard_id.id, 1, {
-      id: guard_id.id,
-      x: guard_id.x,
-      y: guard_id.y,
-      xx: getRnd(),
-      yy: getRnd(),
-    });
-    return newWaypoint;
-  });
+const getNewWaypoint = ( guard_id) => {
+ 
+      guard_id.xx= getRnd()
+      guard_id.yy= getRnd()
+      return guard_id;
+
+
 };
 
 //////////MAIN FUNCTION///////////////
 
-const moveGuard = ({ setGuardPos, boxes, myPos, guard_id }) => {
+const moveGuard = ({ boxes, myPos, guard_id }) => {
+
   const { earshotDistance } = settings;
   // AI here //
   //move up,down,left or right returns true if ok, or false if blocked
@@ -75,8 +71,8 @@ const moveGuard = ({ setGuardPos, boxes, myPos, guard_id }) => {
     earshot = true;
   }
   if (guard_id.x === guard_id.xx && guard_id.y === guard_id.yy) {
-    getNewWaypoint(setGuardPos, guard_id);
-  } //stops guard freezing
+    guard_id=getNewWaypoint(guard_id);
+  } 
   //within earshot or not?
   let target = {}; // point for guard to had towards
   earshot ? (target = myPos) : (target = { x: guard_id.xx, y: guard_id.yy });
@@ -87,38 +83,44 @@ const moveGuard = ({ setGuardPos, boxes, myPos, guard_id }) => {
   if (guard_id.x > target.x) {
     const move = canMoveLeft(params);
     if (move) {
-      return move;
+      return {x:move.x,y:move.y,xx:guard_id.xx,yy:guard_id.yy};
     } else {
-      getNewWaypoint(setGuardPos, guard_id);
+      getNewWaypoint(guard_id);
+      (target = { x: guard_id.xx, y: guard_id.yy })
     }
   }
 
   if (guard_id.x < target.x) {
   const move = canMoveRight(params);
     if (move) {
-      return move;
+      return {x:move.x,y:move.y,xx:guard_id.xx,yy:guard_id.yy};
     } else {
-      getNewWaypoint(setGuardPos, guard_id);
+      getNewWaypoint(guard_id);
+      (target = { x: guard_id.xx, y: guard_id.yy })
     }
  }
 
   if (guard_id.y < target.y) {
     const move = canMoveDown(params);
     if (move) {
-      return move;
+      return {x:move.x,y:move.y,xx:guard_id.xx,yy:guard_id.yy};
     } else {
-      getNewWaypoint(setGuardPos, guard_id);
+      getNewWaypoint(guard_id);
+      (target = { x: guard_id.xx, y: guard_id.yy })
     }
 }
 
   if (guard_id.y > target.y) {
     const move = canMoveUp(params);
     if (move) {
-      return move;
+      return {x:move.x,y:move.y,xx:guard_id.xx,yy:guard_id.yy};
     } else {
-      getNewWaypoint(setGuardPos, guard_id);
+      getNewWaypoint(guard_id);
+      (target = { x: guard_id.xx, y: guard_id.yy })
     }
 }
-return guard_id; // if all else fails and the guard is trapped
+
+return guard_id;
+//all else fails and the guard is trapped
 };
 export default moveGuard;

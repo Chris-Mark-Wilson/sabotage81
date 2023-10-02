@@ -10,6 +10,7 @@ export const settings={
      guardDie :"src/assets/pretty-sure-i-just-died-103109.mp3",
      playerDie : "src/assets/manx27s-cry-122258.mp3",
      guardIntelligence : 1,
-     godSpeed : 100,
-     earshotDistance : 4
+     godSpeed : 200,
+     earshotDistance : 4,
+     difficulty:20
 }

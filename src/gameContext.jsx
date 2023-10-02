@@ -3,6 +3,7 @@ import { settings } from "./settings";
 import { useState } from "react";
 import getRnd from "./utils/getRnd";
 import { useRef } from "react"
+import { useEffect } from "react";
 
 export const GameContext=createContext()
 
@@ -12,12 +13,12 @@ export const GameProvider=({children})=>{
   const gameTune=useRef();
   const guardDeadEffect=useRef();
   const playerDeadEffect=useRef();
-  const {timer,playerGraphic,guardGraphic}=settings;
+  const {timer,playerGraphic,guardGraphic,difficulty}=settings;
 
   const [pause, setPause] = useState(false);
   const [headerText, setHeaderText] = useState("--Start Game--");
   const [myPos, setMyPos] = useState({});
-  const [guardPos, setGuardPos] = useState({});
+  const [guardPos, setGuardPos] = useState([]);
   const [count, setCount] = useState(timer);
   const [bombText, setBombText] = useState({
     text: "",
@@ -38,6 +39,17 @@ const[guard,setGuard]=useState(guardGraphic)
   const [waypoint, setWaypoint] = useState({ x: getRnd(), y: getRnd() });
   const [guardCaught, setGuardCaught] = useState(false);
   const [playerCaught, setPlayerCaught] = useState(false);
+useEffect(()=>{
+
+  let guardArray=[]
+  for( let i=0;i<=difficulty;i++){
+    guardArray.push({id:i,x:0,y:0,xx:getRnd(),yy:getRnd()})
+  }
+  setGuardPos(guardArray)
+
+
+},[])
+
 
     return(
         <GameContext.Provider value={{

@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import getRemainingBoxes from "../utils/getRemainingBoxes"
 import { settings } from "../settings"
 import getRnd from "../utils/getRnd"
+import { getUniquePosition } from "../utils/getUniquePosition"
 
 export const Fireball=()=>{
     const{explosions,setExplosions,exp,pause,ignition,setExp,setScore,guardCaught,setGuardCaught,playerCaught,setPlayerCaught,setBoxes,setIgnition,myPos,setGuardPos,guardPos,boxes,score,setHeaderText,lives,setLives,setGameOver,explosionSound,guardDeadEffect,playerDeadEffect}=useContext(GameContext)
@@ -58,7 +59,7 @@ export const Fireball=()=>{
             setGuardCaught(false);
           }, 3000);
           setGuardPos((guardPos) => {
-            return { x: getRnd(), y: getRnd() };
+            return getUniquePosition(boxes,myPos)
           });
         }
       }, [guardCaught]);

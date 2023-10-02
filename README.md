@@ -14,7 +14,7 @@ keys :
   pause/start game .... space
 
  The object of the game is to cause absolute mayhem in an enemy munitions dump.  
- The only issue is that its patrolled by a guard, ***(who will shoot you on sight... line of sight that is..    not yet implemented)***  
+ The only issue is that its patrolled by a guard, ***(who will shoot you on sight... line of sight that is..    not yet implemented although the game is not yet finished, there is some playability)***  
 
  You have a sack full of explosive charges at your disposal, but no weapon, not yet at least... maybe if you manage to takeout the guard with your shenanigans you might be able to get your hands on his...
 

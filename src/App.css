@@ -65,7 +65,7 @@
   border-radius: 50%;
   background-color: rgb(1, 1, 1);
   text-align: center;
-
+font-size: 2vh;
 
   justify-content: center;
   color: rgb(184, 185, 141);
@@ -79,7 +79,7 @@
   height:3vh;
   /* display: flex; */
   background-color: rgb(184, 185, 141);
-font-size: 25px;
+font-size: 2.5vh;
 
   /* align-self: center;
   justify-self: center; */
@@ -99,7 +99,7 @@ margin:2px;
 .guard {
   width:3vh;
   height:3vh;
-  font-size: 25px;
+  font-size: 2.5vh;
   display: flex;
   align-self: center;
   justify-self: center;
@@ -108,7 +108,7 @@ margin:2px;
 .exp{
   width:3vh;
   height:3vh;
-  font-size: 25px;
+  font-size: 2.55vh;
   display: flex;
   align-self: center;
   justify-self: center;

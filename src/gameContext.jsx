@@ -36,14 +36,14 @@ export const GameProvider=({children})=>{
   const [player, setPlayer] = useState(playerGraphic);
 const[guard,setGuard]=useState(guardGraphic)
   const [gameTimer, setGameTimer] = useState(0);
-  const [waypoint, setWaypoint] = useState({ x: getRnd(), y: getRnd() });
+  const [waypoint, setWaypoint] = useState({ x: getRnd(settings.boardWidth), y: getRnd(settings.boardHeight) });
   const [guardCaught, setGuardCaught] = useState(false);
   const [playerCaught, setPlayerCaught] = useState(false);
 useEffect(()=>{
 
   let guardArray=[]
   for( let i=0;i<=difficulty;i++){
-    guardArray.push({id:i,x:0,y:0,xx:getRnd(),yy:getRnd()})
+    guardArray.push({id:i,x:0,y:0,xx:getRnd(settings.boardWidth),yy:getRnd(settings.boardHeight)})
   }
   setGuardPos(guardArray)
 

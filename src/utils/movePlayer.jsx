@@ -1,3 +1,5 @@
+import { settings } from "../settings";
+
 const movePlayer = (setMyPos, boxes, myPos, e) => {
 
   if (e.key === "k") {
@@ -13,7 +15,7 @@ const movePlayer = (setMyPos, boxes, myPos, e) => {
 
   if (e.key === "m") {
     if (
-      myPos.y < 30 &&
+      myPos.y < settings.boardHeight &&
       !boxes.some((box) => {
         return box.x === myPos.x && box.y === myPos.y + 1;
       })
@@ -24,7 +26,7 @@ const movePlayer = (setMyPos, boxes, myPos, e) => {
 
   if (e.key === "x") {
     if (
-      myPos.x < 30 &&
+      myPos.x < settings.boardWidth &&
       !boxes.some((box) => {
         return box.x === myPos.x + 1 && box.y === myPos.y;
       })

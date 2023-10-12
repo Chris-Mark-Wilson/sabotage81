@@ -1,3 +1,5 @@
+import { settings } from "../settings";
+
 import getRnd from "./getRnd"
 const createBoxArray=(max)=>{ 
   let newBoxes=[]
@@ -5,8 +7,8 @@ const createBoxArray=(max)=>{
       let x=0;
       let y=0;
       do{
-      x=getRnd()
-      y=getRnd()
+      x=getRnd(settings.boardWidth)
+      y=getRnd(settings.boardHeight)
       }
       while(newBoxes.some(box=>box.x===x && box.y===y))
       newBoxes.push({id:i,x,y})

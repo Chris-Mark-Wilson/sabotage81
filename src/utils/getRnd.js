@@ -1,4 +1,4 @@
-const getRnd=()=>{
-    return Math.ceil(Math.random()*30)
+const getRnd=(num)=>{
+    return Math.ceil(Math.random()*num)
    }
    export default getRnd

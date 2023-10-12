@@ -1,7 +1,7 @@
 import movePlayer from "../utils/movePlayer";
 import { useContext } from "react";
 import { GameContext } from "../gameContext";
-import getRnd from "../utils/getRnd";
+
 import { useEffect } from "react";
 import { getUniquePosition } from "../utils/getUniquePosition";
 
@@ -11,11 +11,11 @@ export const Player=({inputRef})=>{
 
     const {pause,gameOver,player,setBombPos,setBombSet,setBombText,setMyPos,boxes,myPos,count,gameTune}=useContext(GameContext)
     const handleKeyDown = (e) => {
-        if (e.key === " ") {
+        // if (e.key === " ") {
       
-        gameTune.current.play()
-          handleStartGame();
-        }
+        // gameTune.current.play()
+        //   handleStartGame();
+        // }
         if (!gameOver && !pause) {
     
         gameTune.current.play();

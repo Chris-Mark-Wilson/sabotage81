@@ -103,23 +103,23 @@ if(playerCaught){
       //   </section>
       // </section>
       <>
-      <div style={{gridRow:explosions[0]&&y>1&&explosions[0].y-1,gridColumn:explosions[0]&&x>1&&explosions[0].x-1}}>{exp}</div>
+      <div style={{gridRow:explosions[0]&&explosions[0].y>1&&explosions[0].y-1,gridColumn:explosions[0]&&explosions[0].x>1&&explosions[0].x-1}}>{exp}</div>
 
-      <div style={{gridRow:explosions[0]&&y>1&&explosions[0].y-1,gridColumn:explosions[0]&&explosions[0].x}}>{exp}</div>
+      <div style={{gridRow:explosions[0]&&explosions[0].y>1&&explosions[0].y-1,gridColumn:explosions[0]&&explosions[0].x}}>{exp}</div>
 
-      <div style={{gridRow:explosions[0]&&y<settings.boardWidth&&explosions[0].y-1,gridColumn:explosions[0]&&explosions[0].x+1}}>{exp}</div>
+      <div style={{gridRow:explosions[0]&&explosions[0].y<settings.boardWidth&&explosions[0].y-1,gridColumn:explosions[0]&&explosions[0].x+1}}>{exp}</div>
 
-      <div style={{gridRow:explosions[0]&&explosions[0].y,gridColumn:explosions[0]&&x>1&&explosions[0].x-1}}>{exp}</div>
+      <div style={{gridRow:explosions[0]&&explosions[0].y,gridColumn:explosions[0]&&explosions[0].x>1&&explosions[0].x-1}}>{exp}</div>
 
       <div style={{gridRow:explosions[0]&&explosions[0].y,gridColumn:explosions[0]&&explosions[0].x}}>{exp}</div>
 
-      <div style={{gridRow:explosions[0]&&explosions[0].y,gridColumn:explosions[0]&&x<settings.boardWidth&&explosions[0].x+1}}>{exp}</div>
+      <div style={{gridRow:explosions[0]&&explosions[0].y,gridColumn:explosions[0]&&explosions[0].x<settings.boardWidth&&explosions[0].x+1}}>{exp}</div>
 
-      <div style={{gridRow:explosions[0]&&y<settings.boardHeight&&explosions[0].y+1,gridColumn:explosions[0]&&x>1&&explosions[0].x-1}}>{exp}</div>
+      <div style={{gridRow:explosions[0]&&explosions[0].y<settings.boardHeight&&explosions[0].y+1,gridColumn:explosions[0]&&explosions[0].x>1&&explosions[0].x-1}}>{exp}</div>
 
-      <div style={{gridRow:explosions[0]&&y<settings.boardHeight&&explosions[0].y+1,gridColumn:explosions[0]&&explosions[0].x}}>{exp}</div>
+      <div style={{gridRow:explosions[0]&&explosions[0].y<settings.boardHeight&&explosions[0].y+1,gridColumn:explosions[0]&&explosions[0].x}}>{exp}</div>
 
-      <div style={{gridRow:explosions[0]&&y<settings.boardHeight&&explosions[0].y+1,gridColumn:explosions[0]&&x<boardWidth&&explosions[0].x+1}}>{exp}</div>
+      <div style={{gridRow:explosions[0]&&explosions[0].y<settings.boardHeight&&explosions[0].y+1,gridColumn:explosions[0]&&explosions[0].x<settings.boardWidth&&explosions[0].x+1}}>{exp}</div>
      
       </>
     )

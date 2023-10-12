@@ -105,29 +105,14 @@ margin:2px;
   justify-self: center;
   
 }
-/* p{  
-display:block;} */
-/*  */
-/* .fireball {
-  border-radius: 5px;
-  margin: -1.5em 0 0 0em;
-  line-height: 0;
+.exp{
+  width:30px;
+  height:30px;
+  font-size: 25px;
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  
+  align-self: center;
+  justify-self: center;
 }
-.fireball section {
-  width: 100%;
-  height: 30%;
-  display: flex;
-  flex-direction: row;
-}
-.fireball section p {
-  margin: 0.6em auto 0 auto;
-} */
 
 @media screen and (max-width: 425px) {
   #main {

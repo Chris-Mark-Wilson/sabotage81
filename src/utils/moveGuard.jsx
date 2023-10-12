@@ -14,7 +14,7 @@ const canMoveUp = ({ boxes, guard_id }) => {
 
 const canMoveDown = ({ boxes, guard_id }) => {
   if (
-    guard_id.y < 30 &&
+    guard_id.y < settings.boardHeight &&
     !boxes.some((box) => {
       return box.x === guard_id.x && box.y === guard_id.y + 1;
     })
@@ -36,7 +36,7 @@ const canMoveLeft = ({ boxes, guard_id }) => {
 
 const canMoveRight = ({ boxes, guard_id }) => {
   if (
-    guard_id.x < 30 &&
+    guard_id.x < settings.boardWidth &&
     !boxes.some((box) => {
       return box.x === guard_id.x + 1 && box.y === guard_id.y;
     })
@@ -47,8 +47,8 @@ const canMoveRight = ({ boxes, guard_id }) => {
 
 const getNewWaypoint = ( guard_id) => {
  
-      guard_id.xx= getRnd()
-      guard_id.yy= getRnd()
+      guard_id.xx= getRnd(settings.boardWidth)
+      guard_id.yy= getRnd(settings.boardHeight)
       return guard_id;
 
 

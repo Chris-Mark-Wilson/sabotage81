@@ -4,7 +4,6 @@ import checkBlastArea from "../utils/checkBlastArea"
 import { useEffect } from "react"
 import getRemainingBoxes from "../utils/getRemainingBoxes"
 import { settings } from "../settings"
-import getRnd from "../utils/getRnd"
 import { getUniquePosition } from "../utils/getUniquePosition"
 
 export const Fireball=()=>{
@@ -80,28 +79,48 @@ if(playerCaught){
 
 
     return (
-        <section
-        className="fireball"
-        style={{
-          gridRowStart: explosions[0] ? explosions[0].y : 10,
-          gridColumnStart: explosions[0] ? explosions[0].x - 1 : 10,
-           }}
-      >
-        <section>
-          <p>{exp}</p>
-          <p>{exp}</p>
-          <p>{exp}</p>
-        </section>
-        <section>
-          <p>{exp}</p>
-          <p>{exp}</p>
-          <p>{exp}</p>
-        </section>
-        <section>
-          <p>{exp}</p>
-          <p>{exp}</p>
-          <p>{exp}</p>
-        </section>
-      </section>
+      //   <section
+      //   className="fireball"
+      //   style={{
+      //     gridRowStart: explosions[0] ? explosions[0].y : 10,
+      //     gridColumnStart: explosions[0] ? explosions[0].x - 1 : 10,
+      //      }}
+      // >
+      //   <section>
+      //     <p>{exp}</p>
+      //     <p>{exp}</p>
+      //     <p>{exp}</p>
+      //   </section>
+      //   <section>
+      //     <p>{exp}</p>
+      //     <p>{exp}</p>
+      //     <p>{exp}</p>
+      //   </section>
+      //   <section>
+      //     <p>{exp}</p>
+      //     <p>{exp}</p>
+      //     <p>{exp}</p>
+      //   </section>
+      // </section>
+      <>
+      <div style={{gridRow:explosions[0]&&explosions[0].y-1,gridColumn:explosions[0]&&explosions[0].x-1}}>{exp}</div>
+
+      <div style={{gridRow:explosions[0]&&explosions[0].y-1,gridColumn:explosions[0]&&explosions[0].x}}>{exp}</div>
+
+      <div style={{gridRow:explosions[0]&&explosions[0].y-1,gridColumn:explosions[0]&&explosions[0].x+1}}>{exp}</div>
+
+      <div style={{gridRow:explosions[0]&&explosions[0].y,gridColumn:explosions[0]&&explosions[0].x-1}}>{exp}</div>
+
+      <div style={{gridRow:explosions[0]&&explosions[0].y,gridColumn:explosions[0]&&explosions[0].x}}>{exp}</div>
+
+      <div style={{gridRow:explosions[0]&&explosions[0].y,gridColumn:explosions[0]&&explosions[0].x+1}}>{exp}</div>
+
+      <div style={{gridRow:explosions[0]?explosions[0].y+1:10,gridColumn:explosions[0]?explosions[0].x-1:10}}>{exp}</div>
+
+      <div style={{gridRow:explosions[0]?explosions[0].y+1:10,gridColumn:explosions[0]?explosions[0].x:10}}>{exp}</div>
+
+      <div style={{gridRow:explosions[0]?explosions[0].y+1:10,gridColumn:explosions[0]?explosions[0].x+1:10}}>{exp}</div>
+     
+      </>
     )
 }

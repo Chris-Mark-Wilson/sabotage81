@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border:1px solid green;
+
 }
 .header {
   box-sizing: border-box;
@@ -59,8 +59,8 @@
   padding: 2px 5px 2px 3px;
 }
 .bomb {
-  width:30px;
-  height:30px;
+  width:3vh;
+  height:3vh;
   display: flex;
   border-radius: 50%;
   background-color: rgb(1, 1, 1);
@@ -75,8 +75,8 @@
   background-color: rgb(184, 185, 141);
 }
 .me {
-  width:30px;
-  height:30px;
+  width:3vh;
+  height:3vh;
   /* display: flex; */
   background-color: rgb(184, 185, 141);
 font-size: 25px;
@@ -88,8 +88,8 @@ font-size: 25px;
   outline: none; /*removes on focus ring */
 }
 .tnt {
-  width:28px;
-  height:28px;
+  width:3vh;
+  height:3vh;
   background-color: rgb(28, 24, 24);
 margin:2px;
   text-align: center;
@@ -97,8 +97,8 @@ margin:2px;
   color: rgb(184, 185, 141);
 }
 .guard {
-  width:30px;
-  height:30px;
+  width:3vh;
+  height:3vh;
   font-size: 25px;
   display: flex;
   align-self: center;
@@ -106,8 +106,8 @@ margin:2px;
   
 }
 .exp{
-  width:30px;
-  height:30px;
+  width:3vh;
+  height:3vh;
   font-size: 25px;
   display: flex;
   align-self: center;

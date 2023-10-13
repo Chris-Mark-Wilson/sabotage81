@@ -96,6 +96,15 @@ margin:2px;
   border-radius: 5px;
   color: rgb(184, 185, 141);
 }
+.empty{
+  width:3vh;
+  height:3vh;
+  
+margin:2px;
+  text-align: center;
+  border-radius: 5px;
+  color: rgb(184, 185, 141);
+}
 .guard {
   width:3vh;
   height:3vh;

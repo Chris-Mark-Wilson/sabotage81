@@ -79,29 +79,7 @@ if(playerCaught){
 
 
     return (
-      //   <section
-      //   className="fireball"
-      //   style={{
-      //     gridRowStart: explosions[0] ? explosions[0].y : 10,
-      //     gridColumnStart: explosions[0] ? explosions[0].x - 1 : 10,
-      //      }}
-      // >
-      //   <section>
-      //     <p>{exp}</p>
-      //     <p>{exp}</p>
-      //     <p>{exp}</p>
-      //   </section>
-      //   <section>
-      //     <p>{exp}</p>
-      //     <p>{exp}</p>
-      //     <p>{exp}</p>
-      //   </section>
-      //   <section>
-      //     <p>{exp}</p>
-      //     <p>{exp}</p>
-      //     <p>{exp}</p>
-      //   </section>
-      // </section>
+
       <>
       <div className="exp" style={{gridRow:explosions[0]&&explosions[0].y>1&&explosions[0].y-1,gridColumn:explosions[0]&&explosions[0].x>1&&explosions[0].x-1}}>{exp}</div>
 

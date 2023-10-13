@@ -12,7 +12,17 @@ import { useEffect } from "react";
 
 
 export const GameBoard=()=>{
-    
+  const{boardWidth,boardHeight}=settings;
+    const emptyBoard=[]
+    for(let x=1;x<=boardWidth;x++){
+      for(let y=1;y<boardHeight;y++){
+        emptyBoard.push({
+          x:x,
+          y:y
+        })
+      }
+    }
+    const emptySpace=" ";
     const {maxBoxes,godSpeed,gameOver,pause,setBoxes,boxes,gameTimer,setGameTimer,guardPos,bombPos,bombText}=useContext(GameContext)
 
     const inputRef = useRef(null);
@@ -38,6 +48,9 @@ export const GameBoard=()=>{
 
     return(
         <main className="main">
+          {emptyBoard.map((space)=>{
+            return <div style={{gridRow:space.y,gridColumn:space.x}} className="empty">tnt</div>
+          })}
         {boxes.map((box) => {
           return <Box key={box.id} box={box} />;
         })}

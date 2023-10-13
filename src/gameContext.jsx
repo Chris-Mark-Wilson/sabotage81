@@ -83,7 +83,8 @@ const[guard,setGuard]=useState(guardGraphic)
            earshotDistance,setEarShotDistance,
            maxBoxes,setMaxBoxes,
            timer,setTimer,
-           explosionGraphic,setExplosionGraphic
+           explosionGraphic,setExplosionGraphic,
+           limit,setLimit
           
 
         }}>

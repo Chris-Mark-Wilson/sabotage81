@@ -8,8 +8,7 @@ import "../startScreen.css";
 
 export const StartScreen = () => {
   const {
-    newGame,
-    setNewGame,
+     setNewGame,
     numGuards,
     setNumGuards,
     setGuardPos,
@@ -136,7 +135,7 @@ export const StartScreen = () => {
               value={godSpeed}
               onChange={(e) => setGodSpeed(e.target.value)}
             />
-            <p className="zx">{(100/500*godSpeed).toFixed(0)} KPH</p>
+            <p className="zx">{((100/500*godSpeed)/2).toFixed(0)} KPH</p>
           </section>
 
           <section className="sliders">
@@ -151,6 +150,20 @@ export const StartScreen = () => {
               onChange={(e) => setEarShotDistance(e.target.value)}
             />
             <p className="zx">{(100/32*earshotDistance).toFixed(0)}%</p>
+          </section>
+
+          <section className="sliders">
+            <p className="zx">CHARGE COUNTDOWN?</p>
+            <input
+              type="range"
+              id="count"
+              name="count"
+              min="0"
+              max="10"
+              value={count}
+              onChange={(e) => setCount(e.target.value)}
+            />
+            <p className="zx">{count}</p>
           </section>
 
           <button className="zx" onClick={() => setSettings(false)}>

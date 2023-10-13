@@ -43,6 +43,7 @@ export const StartScreen = () => {
         });
       }
       setGuardPos(guardArray);
+      setGodSpeed(500-godSpeed)
       setNewGame(false);
     }
   }, [start]);
@@ -110,6 +111,20 @@ export const StartScreen = () => {
               onChange={(e) => setMaxBoxes(e.target.value)}
             />
             <p className="zx">{maxBoxes}</p>
+          </section>
+
+          <section className="sliders">
+            <p className="zx">GUARD SPEED?</p>
+            <input
+              type="range"
+              id="speed"
+              name="speed"
+              min="0"
+              max="500"
+              value={godSpeed}
+              onChange={(e) => setGodSpeed(e.target.value)}
+            />
+            <p className="zx">{(100/500*godSpeed).toFixed(0)}%</p>
           </section>
 
           <button className="zx" onClick={() => setSettings(false)}>

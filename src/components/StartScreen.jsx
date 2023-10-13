@@ -67,6 +67,7 @@ export const StartScreen = () => {
             SABOTAGE
           </h1>
           <p className="zx">BASED ON AN ORIGINAL ZX81 GAME BY DON PREISTLEY</p>
+          <p className="zx">PLAY THE ORIGINAL <a href="https://www.zx81stuff.org.uk/zx81/jtyone.html?track=Sabotage.tzx.zip@0&title=Sabotage&scale=2&speed=4" target="_blank">HERE</a>(KEYS - W,S,H,J AND E)</p>
           <p className="zx">
             THE OBJECT IS TO CREATE AS MUCH HAVOC WITHIN THE MUNITIONS YARD AS
             POSSIBLE

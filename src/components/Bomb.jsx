@@ -6,9 +6,9 @@ import { settings } from "../settings";
 
 export const Bomb=({bombPos,bombText})=>{
 
-    const{setBombText,count,setCount,explosions,setExplosions,bombSet,setBombSet,setBombPos,pause,setIgnition,myPos}=useContext(GameContext)
+    const{limit,timer,setBombText,count,setCount,explosions,setExplosions,bombSet,setBombSet,setBombPos,pause,setIgnition,myPos}=useContext(GameContext)
 
-    const{limit,timer}=settings;
+
 
     useEffect(() => {
         if (!pause) {

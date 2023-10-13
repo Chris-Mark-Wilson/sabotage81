@@ -7,8 +7,8 @@ import { settings } from "../settings"
 import { getUniquePosition } from "../utils/getUniquePosition"
 
 export const Fireball=()=>{
-    const{explosions,setExplosions,exp,pause,ignition,setExp,setScore,guardCaught,setGuardCaught,playerCaught,setPlayerCaught,setBoxes,setIgnition,myPos,setGuardPos,guardPos,boxes,score,setHeaderText,lives,setLives,setGameOver,explosionSound,guardDeadEffect,playerDeadEffect}=useContext(GameContext)
-    const {explosionGraphic}=settings
+    const{explosionGraphic,explosions,setExplosions,exp,pause,ignition,setExp,setScore,guardCaught,setGuardCaught,playerCaught,setPlayerCaught,setBoxes,setIgnition,myPos,setGuardPos,guardPos,boxes,score,setHeaderText,lives,setLives,setGameOver,explosionSound,guardDeadEffect,playerDeadEffect}=useContext(GameContext)
+
 
     useEffect(() => {
         if (!pause) {

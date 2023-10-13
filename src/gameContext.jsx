@@ -3,7 +3,7 @@ import { settings } from "./settings";
 import { useState } from "react";
 import getRnd from "./utils/getRnd";
 import { useRef } from "react"
-import { useEffect } from "react";
+
 
 export const GameContext=createContext()
 
@@ -13,13 +13,14 @@ export const GameProvider=({children})=>{
   const gameTune=useRef();
   const guardDeadEffect=useRef();
   const playerDeadEffect=useRef();
-  const {timer,playerGraphic,guardGraphic,difficulty}=settings;
+  const {initialExplosionGraphic,bombTimer,playerGraphic,initialLimit,guardGraphic,difficulty,gameSpeed,shotDistance,maximumBoxes}=settings;
 
   const [pause, setPause] = useState(false);
   const [headerText, setHeaderText] = useState("--Start Game--");
   const [myPos, setMyPos] = useState({});
   const [guardPos, setGuardPos] = useState([]);
-  const [count, setCount] = useState(timer);
+  const [count, setCount] = useState(bombTimer);
+  const[timer,setTimer]=useState(bombTimer)
   const [bombText, setBombText] = useState({
     text: "",
     colour: " rgb(184, 185, 141)",
@@ -39,16 +40,14 @@ const[guard,setGuard]=useState(guardGraphic)
   const [waypoint, setWaypoint] = useState({ x: getRnd(settings.boardWidth), y: getRnd(settings.boardHeight) });
   const [guardCaught, setGuardCaught] = useState(false);
   const [playerCaught, setPlayerCaught] = useState(false);
-useEffect(()=>{
+  const [newGame,setNewGame]=useState(true)
+  const[godSpeed,setGodSpeed]=useState(gameSpeed)
+  const [numGuards,setNumGuards]=useState(difficulty)
+  const[earshotDistance,setEarShotDistance]=useState(shotDistance)
+  const[maxBoxes,setMaxBoxes]=useState(maximumBoxes)
+  const[explosionGraphic,setExplosionGraphic]=useState(initialExplosionGraphic)
+  const[limit,setLimit]=useState(initialLimit)
 
-  let guardArray=[]
-  for( let i=0;i<=difficulty;i++){
-    guardArray.push({id:i,x:0,y:0,xx:getRnd(settings.boardWidth),yy:getRnd(settings.boardHeight)})
-  }
-  setGuardPos(guardArray)
-
-
-},[])
 
 
     return(
@@ -77,7 +76,16 @@ useEffect(()=>{
            explosionSound,
            gameTune,
            guardDeadEffect,
-           playerDeadEffect
+           playerDeadEffect,
+           newGame,setNewGame,
+           numGuards,setNumGuards,
+           godSpeed,setGodSpeed,
+           earshotDistance,setEarShotDistance,
+           maxBoxes,setMaxBoxes,
+           timer,setTimer,
+           explosionGraphic,setExplosionGraphic
+          
+
         }}>
             {children}
         </GameContext.Provider>

@@ -1,6 +1,7 @@
 import getRnd from "./getRnd";
 import { settings } from "../settings";
 
+
 const canMoveUp = ({ boxes, guard_id }) => {
   if (
     guard_id.y > 0 &&
@@ -56,9 +57,9 @@ const getNewWaypoint = ( guard_id) => {
 
 //////////MAIN FUNCTION///////////////
 
-const moveGuard = ({ boxes, myPos, guard_id }) => {
+const moveGuard = ({ boxes, myPos, guard_id,earshotDistance }) => {
 
-  const { earshotDistance } = settings;
+  
   // AI here //
   //move up,down,left or right returns true if ok, or false if blocked
   // waypoint - random point for guard to head towards;

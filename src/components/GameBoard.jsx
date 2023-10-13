@@ -12,8 +12,8 @@ import { useEffect } from "react";
 
 
 export const GameBoard=()=>{
-    const {maxBoxes,godSpeed}=settings
-    const {gameOver,pause,setBoxes,boxes,gameTimer,setGameTimer,guardPos,bombPos,bombText}=useContext(GameContext)
+    
+    const {maxBoxes,godSpeed,gameOver,pause,setBoxes,boxes,gameTimer,setGameTimer,guardPos,bombPos,bombText}=useContext(GameContext)
 
     const inputRef = useRef(null);
     useEffect(() => {

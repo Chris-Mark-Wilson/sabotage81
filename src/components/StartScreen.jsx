@@ -15,7 +15,7 @@ export const StartScreen = () => {
     setGuardPos,
     godSpeed,
     setGodSpeed,
-    earShotDistance,
+    earshotDistance,
     setEarShotDistance,
     maxBoxes,
     setMaxBoxes,
@@ -46,7 +46,19 @@ export const StartScreen = () => {
       setGodSpeed(500-godSpeed)
       setNewGame(false);
     }
-  }, [start]);
+  }, [start]);      <section className="sliders">
+  <p className="zx">GUARD SPEED?</p>
+  <input
+    type="range"
+    id="speed"
+    name="speed"
+    min="5"
+    max="500"
+    value={godSpeed}
+    onChange={(e) => setGodSpeed(e.target.value)}
+  />
+  <p className="zx">{(100/500*godSpeed).toFixed(0)} KPH</p>
+</section>
 
   return (
     <>
@@ -119,12 +131,26 @@ export const StartScreen = () => {
               type="range"
               id="speed"
               name="speed"
-              min="0"
+              min="5"
               max="500"
               value={godSpeed}
               onChange={(e) => setGodSpeed(e.target.value)}
             />
-            <p className="zx">{(100/500*godSpeed).toFixed(0)}%</p>
+            <p className="zx">{(100/500*godSpeed).toFixed(0)} KPH</p>
+          </section>
+
+          <section className="sliders">
+            <p className="zx">GUARD SENSE?</p>
+            <input
+              type="range"
+              id="sense"
+              name="sense"
+              min="0"
+              max="32"
+              value={earshotDistance}
+              onChange={(e) => setEarShotDistance(e.target.value)}
+            />
+            <p className="zx">{(100/32*earshotDistance).toFixed(0)}%</p>
           </section>
 
           <button className="zx" onClick={() => setSettings(false)}>

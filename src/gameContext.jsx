@@ -16,7 +16,7 @@ export const GameProvider=({children})=>{
   const {initialExplosionGraphic,bombTimer,playerGraphic,initialLimit,guardGraphic,difficulty,gameSpeed,shotDistance,maximumBoxes}=settings;
 
   const [pause, setPause] = useState(false);
-  const [headerText, setHeaderText] = useState("--Start Game--");
+  const [headerText, setHeaderText] = useState("--Click here to start--");
   const [myPos, setMyPos] = useState({});
   const [guardPos, setGuardPos] = useState([]);
   const [count, setCount] = useState(bombTimer);

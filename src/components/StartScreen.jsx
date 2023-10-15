@@ -29,6 +29,10 @@ export const StartScreen = () => {
   } = useContext(GameContext);
   const [start, setStart] = useState(false);
   const [settings, setSettings] = useState(false);
+  const playerSelect=["🤖","😎","🤠","🥸","🎃","🥷","🥷🏿","🐸","🐵","🐭"]
+  const guardSelect=["👿","💀","🤡","👻","👾","👮","🐱","💩","👹","💂"]
+  const [playerNum,setPlayerNum]=useState(1);
+  const[guardNum,setGuardNum]=useState(5)
   useEffect(() => {
     if (start) {
       let guardArray = [];
@@ -94,6 +98,7 @@ export const StartScreen = () => {
         </section>
       )}
       {settings && (
+        <>
         <section className="settingsPage">
 
           <section className="sliders">
@@ -167,10 +172,40 @@ export const StartScreen = () => {
             <p className="zx">{count}</p>
           </section>
 
-          <button className="zx" onClick={() => setSettings(false)}>
-            RETURN
-          </button>
+          <section className="sliders">
+            <p className="zx">PLAYER GRAPHIC</p>
+            <input
+              type="range"
+              id="player"
+              name="player"
+              min="0"
+              max="9"
+              value={playerNum}
+              onChange={(e) => {setPlayer(playerSelect[e.target.value]); setPlayerNum(e.target.value)}}
+            />
+
+            <p className="zx"><span className="graphic">{player}</span></p>
+          </section>
+          <section className="sliders">
+            <p className="zx">GUARD GRAPHIC</p>
+            <input
+              type="range"
+              id="guard"
+              name="guard"
+              min="0"
+              max="9"
+              value={guardNum}
+              onChange={(e) => {setGuard(guardSelect[e.target.value]); setGuardNum(e.target.value)}}
+            />
+            <p className="zx"><span className="graphic">{guard}</span></p>
+          </section>
+
+         
         </section>
+         <button className="zx" onClick={() => setSettings(false)}>
+         RETURN
+       </button>
+       </>
       )}
     </>
   );

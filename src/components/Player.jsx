@@ -9,7 +9,7 @@ import { getUniquePosition } from "../utils/getUniquePosition";
  
 export const Player=({inputRef})=>{
 
-    const {pause,gameOver,player,setBombPos,setBombSet,setBombText,setMyPos,boxes,myPos,count,gameTune}=useContext(GameContext)
+    const {up,down,left,right,fire,pause,gameOver,player,setBombPos,setBombSet,setBombText,setMyPos,boxes,myPos,count,gameTune}=useContext(GameContext)
     const handleKeyDown = (e) => {
         // if (e.key === " ") {
       
@@ -19,8 +19,8 @@ export const Player=({inputRef})=>{
         if (!gameOver && !pause) {
     
         gameTune.current.play();
-          if (e.key != "l") movePlayer(setMyPos, boxes, myPos, e);
-          if (e.key === "l") {
+          if (e.key != fire) movePlayer(setMyPos, boxes, myPos, e,up,down,left,right,fire);
+          if (e.key === fire) {
             setBombSet(true); 
             setBombPos(myPos);
             setBombText({ text: count, colour: "black" });  

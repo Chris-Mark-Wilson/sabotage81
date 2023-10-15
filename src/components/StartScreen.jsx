@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import getRnd from "../utils/getRnd";
 import { Instructions } from "./InstructionsPage";
 import { Settings } from "./SettingsPage";
+import { RedefineKeys } from "./RedefineKeys";
 import "../startScreen.css";
 
 export const StartScreen = () => {
@@ -32,6 +33,7 @@ export const StartScreen = () => {
   } = useContext(GameContext);
   const [start, setStart] = useState(false);
   const [settings, setSettings] = useState(false);
+  const [keys,setKeys]=useState(false)
 
   useEffect(() => {
     if (start) {
@@ -53,11 +55,14 @@ export const StartScreen = () => {
 
   return (
     <>
-      {!settings && (
-        <Instructions setSettings={setSettings} setStart={setStart} />
+      {!settings && !keys && (
+        <Instructions setSettings={setSettings} setStart={setStart} setKeys={setKeys}/>
       )}
-      {settings && (
+      {settings && !keys &&(
            <Settings setSettings={setSettings}/>
+      )}
+      {!settings && keys && (
+<RedefineKeys setKeys={setKeys}/>
       )}
     </>
   );

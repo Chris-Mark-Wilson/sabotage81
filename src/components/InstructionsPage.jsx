@@ -1,4 +1,4 @@
-export const Instructions=({setSettings,setStart})=>{
+export const Instructions=({setSettings,setStart,setKeys})=>{
     return(
         <section>
           <h1 className="title" style={{ fontSize: "60px" }}>
@@ -17,7 +17,8 @@ export const Instructions=({setSettings,setStart})=>{
           <p className="zx">TRY NOT TO GET CAUGHT!</p>
           <br/>
           <p className="zx" >KEYS ARE: Z-LEFT, X-RIGHT, K-UP, M-DOWN AND L-PLACE CHARGE</p>
-          <br/>
+          <button className="zx" onClick={()=>setKeys(true)}>REDEFINE KEYS</button>
+          <br/><br/>
           <hr />
           <br />
           <br />

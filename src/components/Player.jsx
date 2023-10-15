@@ -19,8 +19,8 @@ export const Player=({inputRef})=>{
         if (!gameOver && !pause) {
     
         gameTune.current.play();
-          if (e.key != fire) movePlayer(setMyPos, boxes, myPos, e,up,down,left,right,fire);
-          if (e.key === fire) {
+          if (e.key.toLowerCase() != fire) movePlayer(setMyPos, boxes, myPos, e,up,down,left,right,fire);
+          if (e.key.toLowerCase() === fire) {
             setBombSet(true); 
             setBombPos(myPos);
             setBombText({ text: count, colour: "black" });  

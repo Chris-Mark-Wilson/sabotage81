@@ -53,20 +53,6 @@ export const Settings =({setSettings})=>{
           </section>
 
           <section className="sliders">
-            <p className="zx">GUARD SPEED?</p>
-            <input
-              type="range"
-              id="speed"
-              name="speed"
-              min="5"
-              max="500"
-              value={godSpeed}
-              onChange={(e) => setGodSpeed(e.target.value)}
-            />
-            <p className="zx">{((100 / 500) * godSpeed).toFixed(0)} KPH</p>
-          </section>
-
-          <section className="sliders">
             <p className="zx">HOW MANY EXPLOSIVES?</p>
             <input
               type="range"

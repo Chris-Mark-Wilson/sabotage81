@@ -26,12 +26,15 @@ export const StartScreen = () => {
     setGuard,
     explosionGraphic,
     setExplosionGraphic,
+    tnt,setTnt
   } = useContext(GameContext);
   const [start, setStart] = useState(false);
   const [settings, setSettings] = useState(false);
-  const playerSelect=["🤖","😎","🤠","🥸","🎃","🥷","🥷🏿","🐸","🐵","🐭"]
-  const guardSelect=["👿","💀","🤡","👻","👾","👮","🐱","💩","👹","💂"]
+  const playerSelect=["🤖","😎","🤠","🥸","🎃","🥷","s","🐸","🐵","🐭"]
+  const guardSelect=["👿","💀","🤡","👻","👾","👮","🐱","*","👹","💂"]
   const expSelect=["💥","🌼","🕸","☣","⛔","✴","✳","🔆","✖","🔴"]
+  const tntSelect=["X","☢️","🟥","☠","🍄","🍒","🍗","🧀","🎈","🧨"]
+  const [tntNum,setTntNum]=useState(0)
   const [playerNum,setPlayerNum]=useState(1);
   const[guardNum,setGuardNum]=useState(5)
   const[expNum,setExpNum]=useState(0)
@@ -215,6 +218,20 @@ export const StartScreen = () => {
               onChange={(e) => {setExplosionGraphic(expSelect[e.target.value]); setExpNum(e.target.value)}}
             />
             <p className="zx"><span className="graphic">{explosionGraphic}</span></p>
+          </section>
+
+          <section className="sliders">
+            <p className="zx">BOX GRAPHIC</p>
+            <input
+              type="range"
+              id="boxes"
+              name="boxes"
+              min="0"
+              max="9"
+              value={tntNum}
+              onChange={(e) => {setTnt(tntSelect[e.target.value]); setTntNum(e.target.value)}}
+            />
+            <p className="zx"><span className="graphic">{tnt}</span></p>
           </section>
 
          

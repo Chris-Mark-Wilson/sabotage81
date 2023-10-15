@@ -48,8 +48,8 @@ export const GameBoard=()=>{
 
     return(
         <main className="main">
-          {emptyBoard.map((space)=>{
-            return <div style={{gridRow:space.y,gridColumn:space.x}} className="empty">tnt</div>
+          {emptyBoard.map((space,index)=>{
+            return <div key={index} style={{gridRow:space.y,gridColumn:space.x}} className="empty">tnt</div>
           })}
         {boxes.map((box) => {
           return <Box key={box.id} box={box} />;

@@ -36,5 +36,17 @@
     align-items: center;
 }
 .graphic{
+    font-family:"zx81";
     font-size: 40px;
+
+    color:rgb(224, 204, 204);
+}
+.me-original{
+    width:3vh;
+  height:3vh;
+    font-family:"zx81";
+    font-size: 30px;
+    outline: none; /*removes on focus ring */
+    color:black;
+    background-color: rgb(184, 185, 141);
 }

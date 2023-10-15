@@ -39,7 +39,7 @@ export const Fireball=()=>{
                 setExplosions(() => [...newExps]);
                 const remainingBoxes = getRemainingBoxes(explosions[0], boxes);
                 setBoxes(remainingBoxes);
-              }, 100);
+              }, 75);
             } else {
               setIgnition(false);
               setExp("");

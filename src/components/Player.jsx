@@ -39,7 +39,7 @@ export const Player=({inputRef})=>{
     return (
         <div
         ref={inputRef}
-        className="me"
+        className={player!="s"?"me":"me-original"}
         tabIndex={0}
         onKeyDown={handleKeyDown}
         style={{ gridColumn: myPos.x, gridRow: myPos.y }}

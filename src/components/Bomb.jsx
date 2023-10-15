@@ -6,7 +6,7 @@ import { settings } from "../settings";
 
 export const Bomb=({bombPos,bombText})=>{
 
-    const{limit,timer,setBombText,count,setCount,explosions,setExplosions,bombSet,setBombSet,setBombPos,pause,setIgnition,myPos}=useContext(GameContext)
+    const{tnt,limit,timer,setBombText,count,setCount,explosions,setExplosions,bombSet,setBombSet,setBombPos,pause,setIgnition,myPos}=useContext(GameContext)
 
 
 
@@ -19,7 +19,7 @@ export const Bomb=({bombPos,bombText})=>{
               if (count === 0) {
                 //sends bombPos as index 1 in detonationQueue
                 let detonationQueue = [bombPos];
-                detonationQueue = getDetonationQueue(detonationQueue, limit);
+                detonationQueue = getDetonationQueue(tnt,detonationQueue, limit);
                 console.log(detonationQueue, "queue");
                 // detonationQueue.forEach((positionObject, index) => {
                 //   positionObject.id = index + 1;

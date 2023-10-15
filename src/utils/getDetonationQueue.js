@@ -1,4 +1,4 @@
-const getDetonationQueue = (detonationQueue, limit, stop = false) => {
+const getDetonationQueue = (tnt,detonationQueue, limit, stop = false) => {
   
   //// FOR GODS SAKE DO NOT MESS WITH THIS FUNCTION YET!! ///////////
 
@@ -16,12 +16,13 @@ const getDetonationQueue = (detonationQueue, limit, stop = false) => {
 
     return detonationQueue;
   }
-
-  const tntElements = Array.from(document.getElementsByClassName("tnt"));
+console.log(tnt)
+  const tntElements = tnt==="X"?Array.from(document.getElementsByClassName("x")):tnt==="☠"?Array.from(document.getElementsByClassName("skull")):Array.from(document.getElementsByClassName("tnt"))
   //tnt elements = array of tnt divs existing on screen
 
   const tntPositions = tntElements.map((element) => {
     const obj = {};
+  
     obj.x = +element.style.gridArea.split("/")[1];
     obj.y = +element.style.gridArea.split("/")[0];
     return obj;
@@ -69,7 +70,7 @@ const getDetonationQueue = (detonationQueue, limit, stop = false) => {
   }); // end detonationQueue.forEach()
 
   //add newBoxes to detonationQueue and return
-  return getDetonationQueue([...detonationQueue, ...newBoxes], limit, stop); //recursive call
+  return getDetonationQueue(tnt,[...detonationQueue, ...newBoxes], limit, stop); //recursive call
 };
 
 export default getDetonationQueue;

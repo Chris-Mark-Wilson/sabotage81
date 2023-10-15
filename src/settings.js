@@ -5,6 +5,7 @@ export const settings={
     playerGraphic:"😎",
     guardGraphic:"👮‍♂️",
     initialExplosionGraphic:"💥",
+    boxGraphic:"X",
      explosionEffect : "/hq-explosion-6288.mp3",
      startGameEffect : "/wrong-place-129242.mp3",
      guardDie :"/pretty-sure-i-just-died-103109.mp3",

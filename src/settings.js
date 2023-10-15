@@ -14,5 +14,10 @@ export const settings={
      shotDistance : 4,
      difficulty:5,
      boardWidth:32,
-     boardHeight:21
+     boardHeight:21,
+     initup:"k",
+     initdown:"m",
+     initleft:"z",
+     initright:"x",
+     initfire:"l"
 }

@@ -1,8 +1,8 @@
 import { settings } from "../settings";
 
-const movePlayer = (setMyPos, boxes, myPos, e) => {
+const movePlayer = (setMyPos, boxes, myPos, e,up,down,left,right,fire) => {
 
-  if (e.key === "k") {
+  if (e.key === up) {
     if (
       myPos.y > 0 &&
       !boxes.some((box) => {
@@ -13,7 +13,7 @@ const movePlayer = (setMyPos, boxes, myPos, e) => {
     }
   }
 
-  if (e.key === "m") {
+  if (e.key === down) {
     if (
       myPos.y < settings.boardHeight &&
       !boxes.some((box) => {
@@ -24,7 +24,7 @@ const movePlayer = (setMyPos, boxes, myPos, e) => {
     }
   }
 
-  if (e.key === "x") {
+  if (e.key === right) {
     if (
       myPos.x < settings.boardWidth &&
       !boxes.some((box) => {
@@ -35,7 +35,7 @@ const movePlayer = (setMyPos, boxes, myPos, e) => {
     }
   }
 
-  if (e.key === "z") {
+  if (e.key === left) {
     if (
       myPos.x > 0 &&
       !boxes.some((box) => {

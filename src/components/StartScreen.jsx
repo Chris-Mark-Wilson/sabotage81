@@ -31,8 +31,10 @@ export const StartScreen = () => {
   const [settings, setSettings] = useState(false);
   const playerSelect=["🤖","😎","🤠","🥸","🎃","🥷","🥷🏿","🐸","🐵","🐭"]
   const guardSelect=["👿","💀","🤡","👻","👾","👮","🐱","💩","👹","💂"]
+  const expSelect=["💥","🌼","🕸","☣","⛔","✴","✳","🔆","✖","🔴"]
   const [playerNum,setPlayerNum]=useState(1);
   const[guardNum,setGuardNum]=useState(5)
+  const[expNum,setExpNum]=useState(0)
   useEffect(() => {
     if (start) {
       let guardArray = [];
@@ -198,6 +200,21 @@ export const StartScreen = () => {
               onChange={(e) => {setGuard(guardSelect[e.target.value]); setGuardNum(e.target.value)}}
             />
             <p className="zx"><span className="graphic">{guard}</span></p>
+          </section>
+
+      
+          <section className="sliders">
+            <p className="zx">EXPOSION GRAPHIC</p>
+            <input
+              type="range"
+              id="explosions"
+              name="explosions"
+              min="0"
+              max="9"
+              value={expNum}
+              onChange={(e) => {setExplosionGraphic(expSelect[e.target.value]); setExpNum(e.target.value)}}
+            />
+            <p className="zx"><span className="graphic">{explosionGraphic}</span></p>
           </section>
 
          

@@ -13,7 +13,7 @@ export const GameProvider=({children})=>{
   const gameTune=useRef();
   const guardDeadEffect=useRef();
   const playerDeadEffect=useRef();
-  const {initialExplosionGraphic,bombTimer,playerGraphic,initialLimit,guardGraphic,difficulty,gameSpeed,shotDistance,maximumBoxes}=settings;
+  const {boxGraphic,initialExplosionGraphic,bombTimer,playerGraphic,initialLimit,guardGraphic,difficulty,gameSpeed,shotDistance,maximumBoxes}=settings;
 
   const [pause, setPause] = useState(false);
   const [headerText, setHeaderText] = useState("--Click here to start--");
@@ -27,6 +27,7 @@ export const GameProvider=({children})=>{
   });
   const [bombSet, setBombSet] = useState(false);
   const [boxes, setBoxes] = useState([]);
+  const[tnt,setTnt]=useState(boxGraphic)
   const [bombPos, setBombPos] = useState({});
   const [explosions, setExplosions] = useState([]);
   const [ignition, setIgnition] = useState(false);
@@ -84,7 +85,8 @@ const[guard,setGuard]=useState(guardGraphic)
            maxBoxes,setMaxBoxes,
            timer,setTimer,
            explosionGraphic,setExplosionGraphic,
-           limit,setLimit
+           limit,setLimit,
+           tnt,setTnt
           
 
         }}>

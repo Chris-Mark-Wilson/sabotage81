@@ -53,7 +53,7 @@ export const Guard=({guard_id})=>{
 
     return   (
     <div
-    className="guard"
+    className={guard!="*"?"guard":"me-original"}
     style={{ gridColumn: guard_id.x, gridRow: guard_id.y }}
   >
     {guard}

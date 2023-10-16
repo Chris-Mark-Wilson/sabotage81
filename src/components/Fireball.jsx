@@ -26,13 +26,23 @@ export const Fireball=()=>{
                 if (newExps.length > 0) {
                   const blastCentre = newExps.shift();
                   //test caught in blast
-                  if (checkBlastArea(blastCentre, myPos, guardPos) === "guard") {
+                  const gotCaughtArray=checkBlastArea(blastCentre, myPos, guardPos)
+
+                  //test for guards caught
+                  if (gotCaughtArray.some(item=>/\d/.test(item))) {
                     console.log("Got the guard!");
-                    setGuardCaught(true);
+                    setGuardCaught(()=>{
+                      if(gotCaughtArray.includes("player")) gotCaughtArray.shift()
+                      return [...gotCaughtArray]
+                    });
+                    ///sets guardCaught to array of guard ids caught i blast and fires effect below
                   }
-                  if (checkBlastArea(blastCentre, myPos, guardPos) === "player") {
+
+                  //test for player caught
+                  if (checkBlastArea(blastCentre, myPos, guardPos).includes("player")) {
                     console.log("You are toast...");
                     setPlayerCaught(true);
+                    //fires effect below
                   }
                 }
                 //// removes one box at a time ///////
@@ -41,6 +51,7 @@ export const Fireball=()=>{
                 setBoxes(remainingBoxes);
               }, 75);
             } else {
+              //when no more explosions in detonation queue
               setIgnition(false);
               setExp("");
             }
@@ -49,7 +60,7 @@ export const Fireball=()=>{
       }, [ignition, explosions, pause]);
 
       useEffect(() => {
-        if (guardCaught) {
+        if (guardCaught.length) {
         guardDeadEffect.current.play()
           setScore(score + 100);
           setHeaderText("--GOT THE GUARD!--");
@@ -57,9 +68,9 @@ export const Fireball=()=>{
             setHeaderText("--Sabotage--");
             setGuardCaught(false);
           }, 3000);
-          setGuardPos((guardPos) => {
-            return getUniquePosition(boxes,myPos)
-          });
+          // setGuardPos((guardPos) => {
+          //   return getUniquePosition(boxes,myPos)
+          // });
         }
       }, [guardCaught]);
 

@@ -12,7 +12,7 @@ const getDetonationQueue = (tnt,detonationQueue, limit, stop = false) => {
     stop ||
     detonationQueue.length >= limit //base case reached
   ) {
-    console.log("Finished getting queue");
+
 
     return detonationQueue;
   }

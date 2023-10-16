@@ -1,6 +1,6 @@
 import { settings } from "../settings";
 
-const movePlayer = (setMyPos, boxes, myPos, e,up,down,left,right,fire) => {
+const movePlayer = (setMyPos, boxes, myPos, e,up,down,left,right) => {
 
   if (e.key.toLowerCase()=== up) {
     if (

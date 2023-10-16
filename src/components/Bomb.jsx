@@ -20,10 +20,8 @@ export const Bomb=({bombPos,bombText})=>{
                 //sends bombPos as index 1 in detonationQueue
                 let detonationQueue = [bombPos];
                 detonationQueue = getDetonationQueue(tnt,detonationQueue, limit);
-                console.log(detonationQueue, "queue");
-                // detonationQueue.forEach((positionObject, index) => {
-                //   positionObject.id = index + 1;
-                // });
+                // console.log(detonationQueue, "queue");
+              
                 setExplosions((explosions) => {
                   return [...detonationQueue];
                 }); // sets visual explosion on screen

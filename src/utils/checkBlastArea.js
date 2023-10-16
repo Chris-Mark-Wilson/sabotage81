@@ -2,7 +2,7 @@ const checkBlastArea = (pos, myPos, guardPos) => {
   //guardPos is an array of all guards => {id,x,y,xx,yy}
   //pos is position of tnt box being checked,blast centre
   //mypos is player position
-  console.log(guardPos);
+
   const findArray = [
     { x: pos.x - 1, y: pos.y - 1 },
     { x: pos.x - 1, y: pos.y },

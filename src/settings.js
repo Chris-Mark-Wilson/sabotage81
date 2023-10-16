@@ -1,7 +1,7 @@
 export const settings={
     maximumBoxes:300,
     bombTimer:3,
-    initialLimit:50,
+    initialLimit:100,
     playerGraphic:"😎",
     guardGraphic:"👮‍♂️",
     initialExplosionGraphic:"💥",

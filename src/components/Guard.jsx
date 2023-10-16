@@ -15,6 +15,7 @@ export const Guard=({guard_id})=>{
     myPos: myPos,
     guard_id: guard_id,
     earshotDistance:earshotDistance
+    //guard_id is an actual guard object
 
   };
   useEffect(() => {
@@ -29,7 +30,8 @@ export const Guard=({guard_id})=>{
           x:newPos.x,
           y:newPos.y,
           xx:newPos.xx,
-          yy:newPos.yy})
+          yy:newPos.yy,
+        img:guard_id.img})
          
       return newArray
     })
@@ -45,7 +47,8 @@ export const Guard=({guard_id})=>{
       const newPos=getUniquePosition(boxes,myPos)
       setGuardPos(array=>{
         const newArray=[...array]
-        newArray.splice(guard_id.id,1,{id:guard_id.id,x:newPos.x,y:newPos.y,xx:guard_id.xx,yy:guard_id.yy})
+        newArray.splice(guard_id.id,1,{id:guard_id.id,x:newPos.x,y:newPos.y,xx:guard_id.xx,yy:guard_id.yy,
+        img:guard_id.img})
         return newArray
       });
     }
@@ -56,7 +59,7 @@ export const Guard=({guard_id})=>{
     className={guard!="*"?"guard":"me-original"}
     style={{ gridColumn: guard_id.x, gridRow: guard_id.y }}
   >
-    {guard}
+    {guard_id.img}
   </div>
     )
 } 

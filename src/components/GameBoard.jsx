@@ -61,7 +61,7 @@ export const GameBoard=()=>{
                    < Guard key={guard_id.id} guard_id={guard_id}/>
                 )
         })}
-        {/* <Guard /> */}
+    
         <Fireball />
       </main>
     )

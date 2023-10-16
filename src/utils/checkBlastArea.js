@@ -28,7 +28,7 @@ findArray.forEach(position=>{
 })
 // returns an array of anything caught in blast
 //e.g. ["player",0,2,3] - guard ids...
-console.log(caughtArray,"caught array")
+
   if (caughtArray.length) {
     return caughtArray;
   } else return undefined;

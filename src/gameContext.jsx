@@ -93,7 +93,7 @@ const[guard,setGuard]=useState(guardGraphic)
            tnt,setTnt,
            up,setUp,
            down,setDown,
-           left,setLeft,
+           left,setLeft,   
            right,setRight,
            fire,setFire
           

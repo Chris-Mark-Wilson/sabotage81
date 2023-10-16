@@ -45,6 +45,7 @@ export const StartScreen = () => {
           y: 0,
           xx: getRnd(settings.boardWidth),
           yy: getRnd(settings.boardHeight),
+          img:guard
         });
       }
       setGuardPos(guardArray);

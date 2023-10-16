@@ -205,7 +205,7 @@ export const Fireball = () => {
 
       <div
         className="exp"
-        tyle={{
+        style={{
           gridRow:
             explosions[0] &&
             explosions[0].y < settings.boardHeight &&

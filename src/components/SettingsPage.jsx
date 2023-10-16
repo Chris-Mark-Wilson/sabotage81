@@ -53,7 +53,7 @@ export const Settings =({setSettings})=>{
           </section>
 
           <section className="sliders">
-            <p className="zx">HOW MANY EXPLOSIVES?</p>
+            <p className="zx">EXPLOSIVES?</p>
             <input
               type="range"
               id="explosives"

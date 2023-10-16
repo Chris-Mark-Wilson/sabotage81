@@ -99,10 +99,10 @@ export const Fireball = () => {
 
   useEffect(() => {
     if (guardCaught.length) {
-      console.log(guardCaught, "guardCaught in effect");
+//if any guards been caught in the array
       const caughtIds = new Set([...guardCaught]); //remove dupicates
       const caughtGuardIds = [...caughtIds]; //turn back into an array
-      killGuards(caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect);
+      killGuards(caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos);
     }
   }, [guardCaught]);
 

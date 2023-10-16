@@ -58,8 +58,10 @@ const getNewWaypoint = ( guard_id) => {
 //////////MAIN FUNCTION///////////////
 
 const moveGuard = ({ boxes, myPos, guard_id,earshotDistance }) => {
+//return without moving if dying in a blast
+if(guard_id.img==="😵") return guard_id
+  //guard_id is an actual guard object
 
-  
   // AI here //
   //move up,down,left or right returns true if ok, or false if blocked
   // waypoint - random point for guard to head towards;

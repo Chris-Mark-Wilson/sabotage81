@@ -1,6 +1,8 @@
+
 const getDetonationQueue = (tntType, detonationQueue, limit, stop = false) => {
   if (stop || detonationQueue.length >= limit) {
     console.log("Finished getting queue");
+
     return detonationQueue;
   }
 

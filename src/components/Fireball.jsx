@@ -28,10 +28,10 @@ export const Fireball=()=>{
                   //test caught in blast
                   const gotCaughtArray=checkBlastArea(blastCentre, myPos, guardPos)
 
+                  if(gotCaughtArray!=undefined){
                   //test for guards caught
                   if (gotCaughtArray.some(item=>/\d/.test(item))) {
-                    console.log("Got the guard!");
-                    setGuardCaught(()=>{
+                      setGuardCaught(()=>{
                       if(gotCaughtArray.includes("player")) gotCaughtArray.shift()
                       return [...gotCaughtArray]
                     });
@@ -45,6 +45,8 @@ export const Fireball=()=>{
                     //fires effect below
                   }
                 }
+              }
+
                 //// removes one box at a time ///////
                 setExplosions(() => [...newExps]);
                 const remainingBoxes = getRemainingBoxes(explosions[0], boxes);
@@ -61,6 +63,10 @@ export const Fireball=()=>{
 
       useEffect(() => {
         if (guardCaught.length) {
+          console.log(guardCaught,"guardCaught in effect")
+    const caughtIds=new Set([...guardCaught])//remove dupicates
+    const caughtGuardIds=[...caughtIds]//turn back into an array
+
         guardDeadEffect.current.play()
           setScore(score + 100);
           setHeaderText("--GOT THE GUARD!--");

@@ -1,7 +1,7 @@
 export const Instructions=({setSettings,setStart,setKeys})=>{
     return(
         <section>
-          <h1 className="title" style={{ fontSize: "60px" }}>
+          <h1 className="title" style={{ fontSize: "40px" }}>
             SABOTAGE
           </h1>
           <p className="zx">BASED ON AN ORIGINAL ZX81 GAME BY DON PREISTLEY</p>
@@ -15,12 +15,12 @@ export const Instructions=({setSettings,setStart,setKeys})=>{
             GUARDS
           </p>
           <p className="zx">TRY NOT TO GET CAUGHT!</p>
-          <br/>
+     
           <p className="zx" >KEYS ARE: Z-LEFT, X-RIGHT, K-UP, M-DOWN AND L-PLACE CHARGE</p>
           <button className="zx" onClick={()=>setKeys(true)}>REDEFINE KEYS</button>
-          <br/><br/>
-          <hr />
-          <br />
+          <br/>
+      
+        
           <br />
           <section className="settingsButtons">
             <button className="zx" onClick={() => setSettings(true)}>

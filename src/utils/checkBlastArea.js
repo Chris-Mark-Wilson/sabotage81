@@ -21,7 +21,7 @@ const checkBlastArea = (pos, myPos, guardPos) => {
 
 findArray.forEach(position=>{
     guardPos.forEach(guard=>{
-        if(position.x===guard.x&&position.y===guard.y){
+        if(position.x===guard.x&&position.y===guard.y&&guard.img!="😵"){
             caughtArray.push(guard.id)
         }
     })

@@ -51,7 +51,7 @@ export const Fireball = () => {
 
             const newExps = [...explosions];
             if (newExps.length > 0) {
-              const blastCentre = newExps.shift();
+              const blastCentre = newExps.shift();//delete last explosion centre
               //test caught in blast
               const gotCaughtArray = checkBlastArea(
                 blastCentre,

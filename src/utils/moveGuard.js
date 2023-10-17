@@ -1,5 +1,6 @@
 import getRnd from "./getRnd";
 import { settings } from "../settings";
+import { playerSeen } from "./playerSeen";
 
 
 const canMoveUp = ({ boxes, guard_id }) => {
@@ -62,7 +63,11 @@ const moveGuard = ({ boxes, myPos, guard_id,earshotDistance }) => {
 if(guard_id.img==="😵") return guard_id
 if(!guard_id.xx)guard_id=getNewWaypoint(guard_id)
   //guard_id is an actual guard object
-
+let direction=false;
+if(direction=playerSeen(myPos,guard_id,boxes,earshotDistance))
+{
+  console.log(`I see you! ${direction}`)
+}
   // AI here //
   //move up,down,left or right returns true if ok, or false if blocked
   // waypoint - random point for guard to head towards;

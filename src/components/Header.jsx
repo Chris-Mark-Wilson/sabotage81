@@ -32,10 +32,10 @@ export const Header=()=>{
 
     return(
         <header className="header" onClick={handleStartGame}>
-        <span className="score">Score: {score * 10}</span>
+        <span className="score">SCORE: {score * 10}</span>
         <span className="title">{headerText}-</span>
         <span className="lives">
-          Lives: {lives === 3 ? "😎😎😎" : lives === 2 ? "😎😎" : "😎"}
+          LIVES: {lives === 3 ? "😎😎😎" : lives === 2 ? "😐😐" : "😬"}
         </span>
       </header>
     )

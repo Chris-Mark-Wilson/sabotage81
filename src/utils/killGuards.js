@@ -1,6 +1,9 @@
-export const killGuards=(caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos)=>{
+import { killedAllGuards } from "./killedAllGuards";
+
+export const killGuards=(boxes,myPos,setPause,guard,caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos)=>{
     guardDeadEffect.current.play()
     const deadGuard="😵"
+    const liveGuard=guard;
 
     setScore((score)=>score + (100 * caughtGuardIds.length));
 
@@ -11,7 +14,7 @@ console.log(caughtGuardIds,"ids")
 console.log(guardPos,"guardPos")
 const caughtGuardsArray=guardPos.filter(guard=>{
     return caughtGuardIds.includes(guard.id)
-})//got copy all actual caught guard objects
+})//got copy of all actual caught guard objects
 caughtGuardsArray.forEach(guard=>{
     guard.img=deadGuard
 })
@@ -24,14 +27,14 @@ setGuardPos(array=>{
             })[0])//kills the actual guard in guardPos array
         }
     })
+    if(newArray.every(guard=>guard.img===deadGuard)){
+        killedAllGuards(boxes,myPos,setScore,setHeaderText,guardPos,setGuardPos,setPause)
+        newArray.forEach(guard=>guard.img=liveGuard)
+    }
     console.log(newArray)
     return newArray
-
 })
-// setGuardPos(guardPos=>{
-//     const guardsArray=[...guardPos]
 
-// })
 
 console.log(caughtGuardsArray,"caught guards")
 

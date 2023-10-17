@@ -14,6 +14,7 @@ export const Fireball = () => {
     setExplosions,
     exp,
     pause,
+    setPause,
     ignition,
     setExp,
     setScore,
@@ -35,6 +36,7 @@ export const Fireball = () => {
     explosionSound,
     guardDeadEffect,
     playerDeadEffect,
+    guard
   } = useContext(GameContext);
 
   useEffect(() => {
@@ -102,7 +104,7 @@ export const Fireball = () => {
 //if any guards been caught in the array
       const caughtIds = new Set([...guardCaught]); //remove dupicates
       const caughtGuardIds = [...caughtIds]; //turn back into an array
-      killGuards(caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos);
+      killGuards(boxes,myPos,setPause,guard,caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos);
     }
   }, [guardCaught]);
 

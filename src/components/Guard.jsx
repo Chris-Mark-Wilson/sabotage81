@@ -43,8 +43,9 @@ export const Guard=({guard_id})=>{
 
 
   useEffect(()=>{
-    if(gameOver){
-      const newPos=getUniquePosition(boxes,myPos)
+    if(gameOver&&myPos.x!=undefined){
+      let g=true;
+      const newPos=getUniquePosition(boxes,myPos,g)
       setGuardPos(array=>{
         const newArray=[...array]
         newArray.splice(guard_id.id,1,{id:guard_id.id,x:newPos.x,y:newPos.y,xx:guard_id.xx,yy:guard_id.yy,
@@ -52,7 +53,7 @@ export const Guard=({guard_id})=>{
         return newArray
       });
     }
-  },[gameOver,boxes])//needs boxes to be set
+  },[gameOver,boxes,myPos])//needs boxes to be set
 
     return   (
     <div

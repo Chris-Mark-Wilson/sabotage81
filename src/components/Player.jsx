@@ -29,7 +29,8 @@ export const Player=({inputRef})=>{
       };
       useEffect(()=>{
       if (gameOver) {
-      const newPos=getUniquePosition(boxes,myPos)
+        const g=false;
+      const newPos=getUniquePosition(boxes,myPos,g)
         setMyPos(newPos);
         setBombPos(newPos);
     }

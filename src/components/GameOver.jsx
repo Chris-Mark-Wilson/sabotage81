@@ -59,7 +59,7 @@ export const GameOver = () => {
       <p className="zx">REFRESH PAGE FOR START SCREEN</p>
       <p className="zx">HIGH SCORE TABLE COMING SOON,</p>
       <p className="zx">WHEN I'VE SQUISHED ALL THE BUGS</p>
-      <p className="zx">AND SET A DIFFICULTY SCORE METRIC</p>
+     
     </section>
   );
 };

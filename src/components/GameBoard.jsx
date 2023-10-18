@@ -9,6 +9,8 @@ import { GameContext } from "../gameContext";
 import createBoxArray from "../utils/createBoxArray";
 import { settings } from "../settings";
 import { useEffect } from "react";
+import { Bullet } from "./Bullet";
+import { GameOver } from "./GameOver";
 
 
 export const GameBoard=()=>{
@@ -22,8 +24,8 @@ export const GameBoard=()=>{
         })
       }
     }
-    const emptySpace=" ";
-    const {maxBoxes,godSpeed,gameOver,pause,setBoxes,boxes,gameTimer,setGameTimer,guardPos,bombPos,bombText}=useContext(GameContext)
+
+    const {setFreeze,endGame,lives,setEndGame,bulletArray,maxBoxes,godSpeed,gameOver,pause,setBoxes,boxes,gameTimer,setGameTimer,guardPos,bombPos,bombText}=useContext(GameContext)
 
     const inputRef = useRef(null);
     useEffect(() => {
@@ -31,9 +33,10 @@ export const GameBoard=()=>{
     }, [gameOver, pause]);
 
     useEffect(() => {
+      if(gameOver){
         setBoxes(createBoxArray(maxBoxes));
-    
-      }, []);
+      }
+      }, [gameOver,endGame]);
 
   useEffect(() => {
     if (gameTimer > 99) {
@@ -44,6 +47,14 @@ export const GameBoard=()=>{
       }, godSpeed);
     // move guard depends on the speed of this timer....
   }, [guardPos, gameTimer]);
+
+  useEffect(()=>{
+    if(lives<=0){
+      setFreeze(true)
+      setEndGame(true)
+     
+    }
+  },[lives])
 
 
     return(
@@ -61,8 +72,11 @@ export const GameBoard=()=>{
                    < Guard key={guard_id.id} guard_id={guard_id}/>
                 )
         })}
-    
+    {bulletArray.map(shot=>{
+      return <Bullet key={shot.id} shot={shot}/>
+    })}
         <Fireball />
+        {endGame&&<GameOver/>}
       </main>
     )
 }

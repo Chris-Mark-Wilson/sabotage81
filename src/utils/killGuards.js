@@ -10,8 +10,7 @@ export const killGuards=(boxes,myPos,setPause,guard,caughtGuardIds,setScore,setH
     const text=`--GOT ${caughtGuardIds.length} GUARD${caughtGuardIds.length>1?"S":""}`
     setHeaderText(text);
 
-console.log(caughtGuardIds,"ids")
-console.log(guardPos,"guardPos")
+
 const caughtGuardsArray=guardPos.filter(guard=>{
     return caughtGuardIds.includes(guard.id)
 })//got copy of all actual caught guard objects
@@ -31,12 +30,12 @@ setGuardPos(array=>{
         killedAllGuards(boxes,myPos,setScore,setHeaderText,guardPos,setGuardPos,setPause)
         newArray.forEach(guard=>guard.img=liveGuard)
     }
-    console.log(newArray)
+ 
     return newArray
 })
 
 
-console.log(caughtGuardsArray,"caught guards")
+
 
     setTimeout(() => {
       setHeaderText("--Sabotage--");

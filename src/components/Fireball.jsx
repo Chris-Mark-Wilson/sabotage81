@@ -8,7 +8,7 @@ import { getUniquePosition } from "../utils/getUniquePosition";
 import { killGuards } from "../utils/killGuards";
 
 export const Fireball = () => {
-  const {
+  const {freeze,
     explosionGraphic,
     explosions,
     setExplosions,
@@ -76,9 +76,9 @@ export const Fireball = () => {
                 if (
                   checkBlastArea(blastCentre, myPos, guardPos).includes(
                     "player"
-                  )
+                  )&&!freeze
                 ) {
-                  console.log("You are toast...");
+               //if freeze is true player has been shot and the fireball would kill them twice if not frozen first
                   setPlayerCaught(true);
                   //fires effect below
                 }

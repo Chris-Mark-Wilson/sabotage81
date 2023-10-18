@@ -9,14 +9,14 @@ import { getUniquePosition } from "../utils/getUniquePosition";
  
 export const Player=({inputRef})=>{
 
-    const {up,down,left,right,fire,pause,gameOver,player,setBombPos,bombSet,setBombSet,setBombText,setMyPos,boxes,myPos,count,gameTune}=useContext(GameContext)
+    const {guardPos,freeze,up,down,left,right,fire,pause,gameOver,player,setBombPos,bombSet,setBombSet,setBombText,setMyPos,boxes,myPos,count,gameTune}=useContext(GameContext)
     const handleKeyDown = (e) => {
         // if (e.key === " ") {
       
         // gameTune.current.play()
         //   handleStartGame();
         // }
-        if (!gameOver && !pause) {
+        if (!gameOver && !pause&&!freeze) {
     
         gameTune.current.play();
           if (e.key.toLowerCase() != fire) movePlayer(setMyPos, boxes, myPos, e,up,down,left,right,fire);
@@ -30,7 +30,7 @@ export const Player=({inputRef})=>{
       useEffect(()=>{
       if (gameOver) {
         const g=false;
-      const newPos=getUniquePosition(boxes,myPos,g)
+      const newPos=getUniquePosition(guardPos,boxes,myPos,g)
         setMyPos(newPos);
         setBombPos(newPos);
     }

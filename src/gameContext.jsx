@@ -8,12 +8,16 @@ import { useRef } from "react"
 export const GameContext=createContext()
 
 export const GameProvider=({children})=>{
-
+  const {initBullet,initBulletH,initBulletV,initup,initdown,initleft,initright,initfire,boxGraphic,initialExplosionGraphic,bombTimer,playerGraphic,initialLimit,guardGraphic,difficulty,gameSpeed,shotDistance,maximumBoxes}=settings;
+const [bulletH,setBulletH]=useState(initBulletH)
+const[bulletV,setBulletV]=useState(initBulletV)
+const[bulletArray,setBulletArray]=useState([])
+const[bullet,setBullet]=useState(initBullet)
   const explosionSound=useRef();
+  const dieEffect=useRef()
   const gameTune=useRef();
   const guardDeadEffect=useRef();
   const playerDeadEffect=useRef();
-  const {initup,initdown,initleft,initright,initfire,boxGraphic,initialExplosionGraphic,bombTimer,playerGraphic,initialLimit,guardGraphic,difficulty,gameSpeed,shotDistance,maximumBoxes}=settings;
 const [up,setUp]=useState(initup);
 const [down,setDown]=useState(initdown);
 const[left,setLeft]=useState(initleft);
@@ -52,7 +56,8 @@ const[guard,setGuard]=useState(guardGraphic)
   const[maxBoxes,setMaxBoxes]=useState(maximumBoxes)
   const[explosionGraphic,setExplosionGraphic]=useState(initialExplosionGraphic)
   const[limit,setLimit]=useState(initialLimit)
-
+const[freeze,setFreeze]=useState(false)
+const[endGame,setEndGame]=useState(false)
 
 
     return(
@@ -82,6 +87,7 @@ const[guard,setGuard]=useState(guardGraphic)
            gameTune,
            guardDeadEffect,
            playerDeadEffect,
+           dieEffect,
            newGame,setNewGame,
            numGuards,setNumGuards,
            godSpeed,setGodSpeed,
@@ -95,9 +101,13 @@ const[guard,setGuard]=useState(guardGraphic)
            down,setDown,
            left,setLeft,   
            right,setRight,
-           fire,setFire
-          
-
+           fire,setFire,
+           bulletH,setBulletH,
+           bulletV,setBulletV,
+           bulletArray,setBulletArray,
+           bullet,setBullet,
+           freeze,setFreeze,
+           endGame,setEndGame
         }}>
             {children}
         </GameContext.Provider>

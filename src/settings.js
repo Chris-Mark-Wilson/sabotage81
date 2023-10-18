@@ -10,7 +10,7 @@ export const settings={
      startGameEffect : "/wrong-place-129242.mp3",
      guardDie :"/pretty-sure-i-just-died-103109.mp3",
      playerDie : "/manx27s-cry-122258.mp3",
-      gameSpeed : 300,
+      gameSpeed : 350,
      shotDistance : 6,
      difficulty:5,
      boardWidth:32,

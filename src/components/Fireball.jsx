@@ -4,7 +4,6 @@ import checkBlastArea from "../utils/checkBlastArea";
 import { useEffect } from "react";
 import getRemainingBoxes from "../utils/getRemainingBoxes";
 import { settings } from "../settings";
-import { getUniquePosition } from "../utils/getUniquePosition";
 import { killGuards } from "../utils/killGuards";
 
 export const Fireball = () => {
@@ -29,8 +28,7 @@ export const Fireball = () => {
     setGuardPos,
     guardPos,
     boxes,
-    score,
-    setHeaderText,
+        setHeaderText,
     lives,
     setLives,
     setGameOver,
@@ -183,7 +181,7 @@ export const Fireball = () => {
         {exp}
       </div>
 
-      {explosions[0].x<settings.boardWidth-1&&<div
+      {explosions[0].x<boardWidth-1&&<div
         className="exp"
         style={{
           gridRow: explosions[0] && explosions[0].y,
@@ -196,7 +194,7 @@ export const Fireball = () => {
       </div>
 }
 
-      {explosions[0].y<settings.boardHeight-1&&explosions[0].x>1&&<div
+      {explosions[0].y<boardHeight-1&&explosions[0].x>1&&<div
         className="exp"
         style={{
           gridRow:
@@ -209,7 +207,7 @@ export const Fireball = () => {
         {exp}
       </div>
 }
-      {explosions[0].y<settings.boardHeight-1&&<div
+      {explosions[0].y<boardHeight-1&&<div
         className="exp"
         style={{
           gridRow:
@@ -223,7 +221,7 @@ export const Fireball = () => {
       </div>
       }
 
-      {explosions[0].y<settings.boardHeight-1&&explosions[0].x<settings.boardWidth-1&&<div
+      {explosions[0].y<boardHeight-1&&explosions[0].x<boardWidth-1&&<div
         className="exp"
         style={{
           gridRow:

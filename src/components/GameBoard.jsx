@@ -64,7 +64,6 @@ if(!endGame){
 }
   },[freeze,endGame])
 
-
     return(
         <main className="main">
           {emptyBoard.map((space,index)=>{

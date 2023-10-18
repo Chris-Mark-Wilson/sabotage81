@@ -18,6 +18,7 @@ export const GameOver = () => {
     setGuardPos,
     guard,
   } = useContext(GameContext);
+  
   const handleClick = (e) => {
     setHeaderText("--Click to start game--");
     setScore(0);

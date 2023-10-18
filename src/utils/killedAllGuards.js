@@ -1,6 +1,6 @@
 import { getUniquePosition } from "./getUniquePosition"
 
-export const killedAllGuards=(boxes,myPos,setScore,setHeaderText,guardPos,setGuardPos,setPause)=>{
+export const killedAllGuards=(metric,boxes,myPos,setScore,setHeaderText,guardPos,setGuardPos,setPause)=>{
     setFreeze(true)
     setHeaderText(`BONUS ${guardPos.length*200}`)
     setTimeout(()=>{
@@ -16,7 +16,7 @@ export const killedAllGuards=(boxes,myPos,setScore,setHeaderText,guardPos,setGua
             })
             return newGuards;
         })
-        setScore(score=>score+guardPos.length*200)
+        setScore(score=>score+guardPos.length*200*metric)
         setFreeze(false)
 
     },3000)

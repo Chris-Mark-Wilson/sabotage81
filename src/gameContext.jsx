@@ -8,7 +8,7 @@ import { useRef } from "react"
 export const GameContext=createContext()
 
 export const GameProvider=({children})=>{
-  const {initBullet,initBulletH,initBulletV,initup,initdown,initleft,initright,initfire,boxGraphic,initialExplosionGraphic,bombTimer,playerGraphic,initialLimit,guardGraphic,difficulty,gameSpeed,shotDistance,maximumBoxes}=settings;
+  const {initMetric,initBullet,initBulletH,initBulletV,initup,initdown,initleft,initright,initfire,boxGraphic,initialExplosionGraphic,bombTimer,playerGraphic,initialLimit,guardGraphic,difficulty,gameSpeed,shotDistance,maximumBoxes}=settings;
 const [bulletH,setBulletH]=useState(initBulletH)
 const[bulletV,setBulletV]=useState(initBulletV)
 const[bulletArray,setBulletArray]=useState([])
@@ -60,6 +60,7 @@ const[guard,setGuard]=useState(guardGraphic)
   const[limit,setLimit]=useState(initialLimit)
 const[freeze,setFreeze]=useState(true)
 const[endGame,setEndGame]=useState(false)
+const[metric,setMetric]=useState(initMetric)
 
 
     return(
@@ -111,7 +112,8 @@ const[endGame,setEndGame]=useState(false)
            bulletArray,setBulletArray,
            bullet,setBullet,
            freeze,setFreeze,
-           endGame,setEndGame
+           endGame,setEndGame,
+           metric,setMetric
         }}>
             {children}
         </GameContext.Provider>

@@ -8,6 +8,7 @@ import { getUniquePosition } from "../utils/getUniquePosition";
 import { killGuards } from "../utils/killGuards";
 
 export const Fireball = () => {
+  const{boardHeight,boardWidth}=settings;
   const {freeze,
     explosionGraphic,
     explosions,
@@ -121,52 +122,56 @@ export const Fireball = () => {
     }
   }, [playerCaught]);
 
-  return (
+ if(explosions.length) return (
+    
     <>
-      <div
+      {explosions[0].y>1&&explosions[0].x>1&&<div
         className="exp"
         style={{
-          gridRow: explosions[0] && explosions[0].y > 1 && explosions[0].y - 1,
+          gridRow: explosions[0] && explosions[0].y - 1,
           gridColumn:
-            explosions[0] && explosions[0].x > 1 && explosions[0].x - 1,
+            explosions[0]  && explosions[0].x - 1,
         }}
       >
         {exp}
       </div>
+}
 
-      <div
+      {explosions[0].y>1&&<div
         className="exp"
         style={{
-          gridRow: explosions[0] && explosions[0].y > 1 && explosions[0].y - 1,
+          gridRow: explosions[0] &&  explosions[0].y - 1,
           gridColumn: explosions[0] && explosions[0].x,
         }}
       >
         {exp}
       </div>
+}
 
-      <div
+      {explosions[0].y>1&&explosions[0].x<boardWidth-1&&<div
         className="exp"
         style={{
           gridRow:
             explosions[0] &&
-            explosions[0].y < settings.boardWidth &&
             explosions[0].y - 1,
           gridColumn: explosions[0] && explosions[0].x + 1,
         }}
       >
         {exp}
       </div>
+}
 
-      <div
+      {explosions[0].x>1&&<div
         className="exp"
         style={{
           gridRow: explosions[0] && explosions[0].y,
           gridColumn:
-            explosions[0] && explosions[0].x > 1 && explosions[0].x - 1,
+   explosions[0].x - 1,
         }}
       >
         {exp}
       </div>
+}
 
       <div
         className="exp"
@@ -178,61 +183,63 @@ export const Fireball = () => {
         {exp}
       </div>
 
-      <div
+      {explosions[0].x<settings.boardWidth-1&&<div
         className="exp"
         style={{
           gridRow: explosions[0] && explosions[0].y,
           gridColumn:
             explosions[0] &&
-            explosions[0].x < settings.boardWidth &&
             explosions[0].x + 1,
         }}
       >
         {exp}
       </div>
+}
 
-      <div
+      {explosions[0].y<settings.boardHeight-1&&explosions[0].x>1&&<div
         className="exp"
         style={{
           gridRow:
             explosions[0] &&
-            explosions[0].y < settings.boardHeight &&
             explosions[0].y + 1,
           gridColumn:
-            explosions[0] && explosions[0].x > 1 && explosions[0].x - 1,
+          explosions[0].x - 1,
         }}
       >
         {exp}
       </div>
-
-      <div
+}
+      {explosions[0].y<settings.boardHeight-1&&<div
         className="exp"
         style={{
           gridRow:
             explosions[0] &&
-            explosions[0].y < settings.boardHeight &&
+         
             explosions[0].y + 1,
           gridColumn: explosions[0] && explosions[0].x,
         }}
       >
         {exp}
       </div>
+      }
 
-      <div
+      {explosions[0].y<settings.boardHeight-1&&explosions[0].x<settings.boardWidth-1&&<div
         className="exp"
         style={{
           gridRow:
             explosions[0] &&
-            explosions[0].y < settings.boardHeight &&
             explosions[0].y + 1,
           gridColumn:
             explosions[0] &&
-            explosions[0].x < settings.boardWidth &&
             explosions[0].x + 1,
         }}
       >
         {exp}
       </div>
+      }
+ 
     </>
-  );
+  
+  )
 };
+

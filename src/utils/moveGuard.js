@@ -60,7 +60,7 @@ const getNewWaypoint = ( guard_id) => {
 
 //////////MAIN FUNCTION///////////////
 
-const moveGuard = ({setBullet,setLives, bulletH,bulletV,setBulletArray,boxes, myPos, setMyPos,guard_id,earshotDistance,setCount,setBombSet,setBombPos ,freeze,setFreeze,setPlayer,player,dieEffect,guardPos}) => {
+const moveGuard = ({setBullet,setLives, bulletH,bulletV,setBulletArray,boxes, myPos, setMyPos,guard_id,earshotDistance,setCount,setBombSet,setBombPos ,freeze,setFreeze,setPlayer,player,pirate,pistol,guardPos}) => {
 //return without moving if dead in a blast
 if(guard_id.img==="😵"|| freeze) return guard_id
 if(!guard_id.xx)guard_id=getNewWaypoint(guard_id)
@@ -71,7 +71,8 @@ if(direction=playerSeen(myPos,guard_id,boxes,earshotDistance))
   setFreeze(true)
   const playerStore=player;
 
-  dieEffect.current.play();
+  pirate.current.play();
+  pistol.current.play();
   setPlayer("😵")
   setCount(0);//sets bomb count to 0 for chain reaction
   setBombPos(myPos)//makes sure bomb is at player location

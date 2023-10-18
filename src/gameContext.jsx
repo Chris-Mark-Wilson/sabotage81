@@ -18,6 +18,8 @@ const[bullet,setBullet]=useState(initBullet)
   const gameTune=useRef();
   const guardDeadEffect=useRef();
   const playerDeadEffect=useRef();
+  const pistol=useRef();
+  const pirate=useRef()
 const [up,setUp]=useState(initup);
 const [down,setDown]=useState(initdown);
 const[left,setLeft]=useState(initleft);
@@ -88,6 +90,8 @@ const[endGame,setEndGame]=useState(false)
            guardDeadEffect,
            playerDeadEffect,
            dieEffect,
+           pistol,
+           pirate,
            newGame,setNewGame,
            numGuards,setNumGuards,
            godSpeed,setGodSpeed,

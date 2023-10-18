@@ -88,6 +88,8 @@ setPlayer(playerStore)//restores player graphic
 setFreeze(false)//unfreezes guards
 setLives((lives=>lives-1))//removes 1 life
   },5000)
+  return guard_id;// guard doesnt continue to move after firing
+  
 
 }
   // AI here //

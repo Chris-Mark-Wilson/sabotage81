@@ -14,9 +14,7 @@ export const Header=()=>{
     
         gameTune.current.play()
           setGameOver(false);
-          setTimeout(()=>{
-            setFreeze(false)
-          },3000)
+      
           return;
         }
         if (!pause) {
@@ -28,7 +26,7 @@ export const Header=()=>{
           setHeaderText("--Sabotage--");
           setPause(false);
           setTimeout(()=>{
-            setFreeze(false)
+            setFreeze(true)
           },1000)
         gameTune.current.play()
         }

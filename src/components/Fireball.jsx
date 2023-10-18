@@ -9,6 +9,7 @@ import { killGuards } from "../utils/killGuards";
 export const Fireball = () => {
   const{boardHeight,boardWidth}=settings;
   const {freeze,
+    setFreeze,
     explosionGraphic,
     explosions,
     setExplosions,
@@ -103,7 +104,7 @@ export const Fireball = () => {
 //if any guards been caught in the array
       const caughtIds = new Set([...guardCaught]); //remove dupicates
       const caughtGuardIds = [...caughtIds]; //turn back into an array
-      killGuards(metric,boxes,myPos,setPause,guard,caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos);
+      killGuards(setFreeze,metric,boxes,myPos,setPause,guard,caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos);
     }
   }, [guardCaught]);
 

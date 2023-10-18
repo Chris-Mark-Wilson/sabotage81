@@ -1,9 +1,9 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { GameContext } from "../gameContext"
 import { useState } from "react"
 
 export const Settings =({setSettings})=>{
-    const {tnt,setTnt,explosionGraphic,setExplosionGraphic,guard,setGuard,player,setPlayer,count,setCount,earshotDistance,setEarShotDistance,godSpeed,setGodSpeed,maxBoxes,setMaxBoxes,numGuards,setNumGuards}=useContext(GameContext)
+    const {metric,setMetric,tnt,setTnt,explosionGraphic,setExplosionGraphic,guard,setGuard,player,setPlayer,count,setCount,earshotDistance,setEarShotDistance,godSpeed,setGodSpeed,maxBoxes,setMaxBoxes,numGuards,setNumGuards}=useContext(GameContext)
     const playerSelect = [
         "🤖",
         "😎",
@@ -34,6 +34,14 @@ export const Settings =({setSettings})=>{
       const [playerNum, setPlayerNum] = useState(1);
       const [guardNum, setGuardNum] = useState(5);
       const [expNum, setExpNum] = useState(0);
+      const[difficulty,setDiffculty]=useState("MEDIUM")
+
+      useEffect(()=>{
+if(metric<2) setDiffculty("EASY")
+if(metric>=2&&metric<4) setDiffculty("MEDIUM")
+if(metric>=4&&metric<6)setDiffculty("HARD")
+if(metric>5)setDiffculty("SUICIDE")
+      },[metric])
 
     return(    
     <>
@@ -47,7 +55,10 @@ export const Settings =({setSettings})=>{
               min="0"
               max="20"
               value={numGuards}
-              onChange={(e) => setNumGuards(e.target.value)}
+              onChange={(e) => {setNumGuards(e.target.value)
+                setMetric(((earshotDistance/15)+(((100/500)*godSpeed)/25)+(((300)/maxBoxes))*(numGuards)/10)-1)
+              }
+            }
             />
             <p className="zx">{numGuards}</p>
           </section>
@@ -61,7 +72,12 @@ export const Settings =({setSettings})=>{
               min="10"
               max="300"
               value={maxBoxes}
-              onChange={(e) => setMaxBoxes(e.target.value)}
+              onChange={(e) => {
+                setMaxBoxes(e.target.value)
+                setMetric(((earshotDistance/15)+(((100/500)*godSpeed)/25)+(((300)/maxBoxes))*(numGuards)/10)-1)
+                console.log(metric)
+              }
+            }
             />
             <p className="zx">{maxBoxes}</p>
           </section>
@@ -75,7 +91,11 @@ export const Settings =({setSettings})=>{
               min="5"
               max="500"
               value={godSpeed}
-              onChange={(e) => setGodSpeed(e.target.value)}
+              onChange={(e) => {
+                setGodSpeed(e.target.value)
+                setMetric(((earshotDistance/15)+(((100/500)*godSpeed)/25)+(((300)/maxBoxes))*(numGuards)/10)-1)
+              }
+            }
             />
             <p className="zx">
               {(((100 / 500) * godSpeed) / 2).toFixed(0)} KPH
@@ -91,7 +111,10 @@ export const Settings =({setSettings})=>{
               min="0"
               max="32"
               value={earshotDistance}
-              onChange={(e) => setEarShotDistance(e.target.value)}
+              onChange={(e) => {
+                setEarShotDistance(e.target.value)
+                setMetric(((earshotDistance/15)+(((100/500)*godSpeed)/25)+(((300)/maxBoxes))*(numGuards)/10)-1)
+              }}
             />
             <p className="zx">{((100 / 32) * earshotDistance).toFixed(0)}%</p>
           </section>
@@ -186,6 +209,7 @@ export const Settings =({setSettings})=>{
             </p>
           </section>
         </section>
+        <p className="zx">DIFFICULTY: {difficulty}</p>
         <button className="zx" onClick={() => setSettings(false)}>
             RETURN
           </button>

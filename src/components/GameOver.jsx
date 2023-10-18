@@ -52,7 +52,7 @@ export const GameOver = () => {
     <section className="game-over">
       <h1 className="title">GAME OVER</h1>
       <p className="zx">UNLUCKY SABOTEUR!</p>
-      <p className="zx">YOUR SCORE:{score}</p>
+      <p className="zx">YOUR SCORE:{score.toFixed(0)}</p>
       <button className="zx" onClick={handleClick}>
         CLICK TO TRY AGAIN?
       </button>

@@ -7,9 +7,9 @@ export const Sound=()=>{
         dieEffect,
         gameTune,
         guardDeadEffect,
-        playerDeadEffect}=useContext(GameContext)
+        playerDeadEffect,pistol,pirate}=useContext(GameContext)
 
-    const{initdieEffect,explosionEffect,startGameEffect,guardDie,playerDie}=settings
+    const{initPistol,initPirate,initdieEffect,explosionEffect,startGameEffect,guardDie,playerDie}=settings
     return(
         <>
         <audio id="expEffect" src={explosionEffect} ref={explosionSound}></audio>
@@ -17,6 +17,8 @@ export const Sound=()=>{
         <audio id="guardDie" src={guardDie} ref={guardDeadEffect}></audio>
         <audio id="playerDie" src={playerDie} ref={playerDeadEffect}></audio>
         <audio id="initdieEffect" src={initdieEffect} ref={dieEffect}></audio>
+        <audio id="initPistol" src={initPistol} ref={pistol}></audio>
+        <audio id="initPirate" src={initPirate} ref={pirate}></audio>
         </>
     )
 }

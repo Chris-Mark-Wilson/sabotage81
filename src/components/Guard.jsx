@@ -6,12 +6,14 @@ import moveGuard from "../utils/moveGuard";
 import { getUniquePosition } from "../utils/getUniquePosition";
 
 export const Guard=({guard_id})=>{
-  const{bullet,setBullet,lives,setLives,bulletH,bulletV,setBulletArray,earshotDistance,guardPos,setGuardPos,boxes,gameOver,myPos,setMyPos,gameTimer,pause,guardCaught,guard,setCount,setBombSet,setBombPos,freeze,setFreeze,setPlayer,player,dieEffect}=useContext(GameContext)
+  const{bullet,setBullet,lives,setLives,bulletH,bulletV,setBulletArray,earshotDistance,guardPos,setGuardPos,boxes,gameOver,myPos,setMyPos,gameTimer,pause,guardCaught,guard,setCount,setBombSet,setBombPos,freeze,setFreeze,setPlayer,player,pirate,pistol}=useContext(GameContext)
 
 
   const guardParams = {
+    pirate:pirate,
+    pistol:pistol,
     guardPos:guardPos,
-    dieEffect:dieEffect,
+
     setMyPos:setMyPos,
     player:player,
     setPlayer:setPlayer,

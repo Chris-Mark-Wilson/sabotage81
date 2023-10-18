@@ -1,7 +1,7 @@
 import { getUniquePosition } from "./getUniquePosition"
 
 export const killedAllGuards=(boxes,myPos,setScore,setHeaderText,guardPos,setGuardPos,setPause)=>{
-    setPause(true)
+    setFreeze(true)
     setHeaderText(`BONUS ${guardPos.length*200}`)
     setTimeout(()=>{
         setGuardPos(guards=>{
@@ -17,7 +17,7 @@ export const killedAllGuards=(boxes,myPos,setScore,setHeaderText,guardPos,setGua
             return newGuards;
         })
         setScore(score=>score+guardPos.length*200)
-        setPause(false)
+        setFreeze(false)
 
     },3000)
 return 

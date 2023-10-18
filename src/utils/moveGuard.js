@@ -5,58 +5,7 @@ import { shootPlayer } from "./shootPlayer";
 import { getUniquePosition } from "./getUniquePosition";
 
 
-const canMoveUp = ({ boxes, guard_id }) => {
-  if (
-    guard_id.y > 0 &&
-    !boxes.some((box) => {
-      return box.x === guard_id.x && box.y === guard_id.y - 1;
-    })
-  ) {
-    return { x: guard_id.x, y: guard_id.y - 1 };
-  } else return undefined;
-};
 
-const canMoveDown = ({ boxes, guard_id }) => {
-  if (
-    guard_id.y < settings.boardHeight &&
-    !boxes.some((box) => {
-      return box.x === guard_id.x && box.y === guard_id.y + 1;
-    })
-  ) {
-    return { x: guard_id.x, y: guard_id.y + 1 };
-  } else return undefined;
-};
-
-const canMoveLeft = ({ boxes, guard_id }) => {
-  if (
-    guard_id.x > 0 &&
-    !boxes.some((box) => {
-      return box.x === guard_id.x - 1 && box.y === guard_id.y;
-    })
-  ) {
-    return { x: guard_id.x - 1, y: guard_id.y };
-  } else return undefined;
-};
-
-const canMoveRight = ({ boxes, guard_id }) => {
-  if (
-    guard_id.x < settings.boardWidth &&
-    !boxes.some((box) => {
-      return box.x === guard_id.x + 1 && box.y === guard_id.y;
-    })
-  ) {
-    return { x: guard_id.x + 1, y: guard_id.y };
-  } else return undefined;
-};
-
-const getNewWaypoint = ( guard_id) => {
- 
-      guard_id.xx= getRnd(settings.boardWidth)
-      guard_id.yy= getRnd(settings.boardHeight)
-      return guard_id;
-
-
-};
 
 //////////MAIN FUNCTION///////////////
 
@@ -86,6 +35,7 @@ if(direction=playerSeen(myPos,guard_id,boxes,earshotDistance))
     setBulletArray([])//removes bullet trace from screen
 setPlayer(playerStore)//restores player graphic
 setLives((lives=>lives-1))//removes 1 life
+setFreeze(true)
 },1000)
 
   return guard_id;// guard doesnt continue to move after firing
@@ -156,4 +106,57 @@ setLives((lives=>lives-1))//removes 1 life
 return guard_id;
 //all else fails and the guard is trapped
 };
+const canMoveUp = ({ boxes, guard_id }) => {
+  if (
+    guard_id.y > 0 &&
+    !boxes.some((box) => {
+      return box.x === guard_id.x && box.y === guard_id.y - 1;
+    })
+  ) {
+    return { x: guard_id.x, y: guard_id.y - 1 };
+  } else return undefined;
+};
+
+const canMoveDown = ({ boxes, guard_id }) => {
+  if (
+    guard_id.y < settings.boardHeight &&
+    !boxes.some((box) => {
+      return box.x === guard_id.x && box.y === guard_id.y + 1;
+    })
+  ) {
+    return { x: guard_id.x, y: guard_id.y + 1 };
+  } else return undefined;
+};
+
+const canMoveLeft = ({ boxes, guard_id }) => {
+  if (
+    guard_id.x > 0 &&
+    !boxes.some((box) => {
+      return box.x === guard_id.x - 1 && box.y === guard_id.y;
+    })
+  ) {
+    return { x: guard_id.x - 1, y: guard_id.y };
+  } else return undefined;
+};
+
+const canMoveRight = ({ boxes, guard_id }) => {
+  if (
+    guard_id.x < settings.boardWidth &&
+    !boxes.some((box) => {
+      return box.x === guard_id.x + 1 && box.y === guard_id.y;
+    })
+  ) {
+    return { x: guard_id.x + 1, y: guard_id.y };
+  } else return undefined;
+};
+
+const getNewWaypoint = ( guard_id) => {
+ 
+      guard_id.xx= getRnd(settings.boardWidth)
+      guard_id.yy= getRnd(settings.boardHeight)
+      return guard_id;
+
+
+};
 export default moveGuard;
+

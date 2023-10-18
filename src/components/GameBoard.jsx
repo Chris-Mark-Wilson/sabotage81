@@ -25,7 +25,7 @@ export const GameBoard=()=>{
       }
     }
 
-    const {dieEffect,setFreeze,endGame,lives,setEndGame,bulletArray,maxBoxes,godSpeed,gameOver,pause,setBoxes,boxes,gameTimer,setGameTimer,guardPos,bombPos,bombText}=useContext(GameContext)
+    const {dieEffect,freeze,setFreeze,endGame,lives,setEndGame,bulletArray,maxBoxes,godSpeed,gameOver,pause,setBoxes,boxes,gameTimer,setGameTimer,guardPos,bombPos,bombText}=useContext(GameContext)
 
     const inputRef = useRef(null);
     useEffect(() => {
@@ -51,11 +51,18 @@ export const GameBoard=()=>{
   useEffect(()=>{
     if(lives<=0){
       dieEffect.current.play()
-      setFreeze(true)
       setEndGame(true)
+      setFreeze(true)
      
     }
   },[lives])
+  useEffect(()=>{
+if(!endGame){
+  setTimeout(()=>{
+    setFreeze(false)
+  },3000)
+}
+  },[freeze,endGame])
 
 
     return(

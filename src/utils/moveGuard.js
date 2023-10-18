@@ -85,9 +85,9 @@ if(direction=playerSeen(myPos,guard_id,boxes,earshotDistance))
     setMyPos(newPos)//sets player elsewhere on board away from guards
     setBulletArray([])//removes bullet trace from screen
 setPlayer(playerStore)//restores player graphic
-setFreeze(false)//unfreezes guards
 setLives((lives=>lives-1))//removes 1 life
-  },5000)
+},1000)
+
   return guard_id;// guard doesnt continue to move after firing
   
 

@@ -4,7 +4,7 @@ import { GameContext } from "../gameContext"
 
 
 export const Header=()=>{
-    const{score,headerText,setHeaderText,gameOver,pause,setPause,setGameOver,lives,gameTune}=useContext
+    const{setFreeze,score,headerText,setHeaderText,gameOver,pause,setPause,setGameOver,lives,gameTune}=useContext
     (GameContext)
 
     const handleStartGame = (e) => {
@@ -14,17 +14,22 @@ export const Header=()=>{
     
         gameTune.current.play()
           setGameOver(false);
+          setTimeout(()=>{
+            setFreeze(false)
+          },3000)
           return;
         }
         if (!pause) {
           setHeaderText("--Continue--");
- 
+ setFreeze(true)
         gameTune.current.pause()
           setPause(true);
         } else {
           setHeaderText("--Sabotage--");
           setPause(false);
-   
+          setTimeout(()=>{
+            setFreeze(false)
+          },1000)
         gameTune.current.play()
         }
       };

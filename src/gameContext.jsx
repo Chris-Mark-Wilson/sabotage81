@@ -58,7 +58,7 @@ const[guard,setGuard]=useState(guardGraphic)
   const[maxBoxes,setMaxBoxes]=useState(maximumBoxes)
   const[explosionGraphic,setExplosionGraphic]=useState(initialExplosionGraphic)
   const[limit,setLimit]=useState(initialLimit)
-const[freeze,setFreeze]=useState(false)
+const[freeze,setFreeze]=useState(true)
 const[endGame,setEndGame]=useState(false)
 
 

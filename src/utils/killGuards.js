@@ -1,11 +1,11 @@
 import { killedAllGuards } from "./killedAllGuards";
 
-export const killGuards=(boxes,myPos,setPause,guard,caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos)=>{
+export const killGuards=(metric,boxes,myPos,setPause,guard,caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos)=>{
     guardDeadEffect.current.play()
     const deadGuard="😵"
     const liveGuard=guard;
 
-    setScore((score)=>score + (100 * caughtGuardIds.length));
+    setScore((score)=>score + (100 * caughtGuardIds.length*metric));
 
     const text=`--GOT ${caughtGuardIds.length} GUARD${caughtGuardIds.length>1?"S":""}`
     setHeaderText(text);
@@ -27,7 +27,7 @@ setGuardPos(array=>{
         }
     })
     if(newArray.every(guard=>guard.img===deadGuard)){
-        killedAllGuards(boxes,myPos,setScore,setHeaderText,guardPos,setGuardPos,setPause)
+        killedAllGuards(metric,boxes,myPos,setScore,setHeaderText,guardPos,setGuardPos,setPause)
         newArray.forEach(guard=>guard.img=liveGuard)
     }
  

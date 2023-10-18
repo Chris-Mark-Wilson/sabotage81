@@ -25,6 +25,7 @@ export const settings={
      initBullet:"",
      initdieEffect:"/die-47695.mp3",
      initPistol:"9mm-pistol-shot-6349.mp3",
-     initPirate:"/pirate-arr-2-43856.mp3"
+     initPirate:"/pirate-arr-2-43856.mp3",
+     initMetric:2
 
 }

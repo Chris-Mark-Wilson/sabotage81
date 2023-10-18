@@ -11,7 +11,7 @@ export const playerSeen = (myPos, guard_id, boxes, earshotDistance) => {
 };
 
 const lookUp = (myPos, guard_id, boxes, earshotDistance) => {
-  for (let i = guard_id.y; i > guard_id.y - earshotDistance * 2 && i > 0; i--) {
+  for (let i = guard_id.y; i > guard_id.y - earshotDistance  && i > 0; i--) {
     if (boxes.some((box) => box.x === guard_id.x && box.y === i)) return false; //box in way
     if (myPos.x === guard_id.x && myPos.y === i) {
       return true; //player seen
@@ -24,7 +24,7 @@ const lookDown = (myPos, guard_id, boxes, earshotDistance, settings) => {
   const { boardHeight } = settings;
   for (
     let i = guard_id.y;
-    i < guard_id.y + earshotDistance * 2 && i < boardHeight;
+    i < guard_id.y + earshotDistance  && i < boardHeight;
     i++
   ) {
     if (boxes.some((box) => box.x === guard_id.x && box.y === i)) return false; //box in way
@@ -36,7 +36,7 @@ const lookDown = (myPos, guard_id, boxes, earshotDistance, settings) => {
 };
 
 const lookLeft = (myPos, guard_id, boxes, earshotDistance) => {
-  for (let i = guard_id.x; i > guard_id.x - earshotDistance * 2 && i > 0; i--) {
+  for (let i = guard_id.x; i > guard_id.x - earshotDistance  && i > 0; i--) {
     if (boxes.some((box) => box.y === guard_id.y && box.x === i)) return false; //box in way
     if (myPos.y === guard_id.y && myPos.x === i) {
       return true; //player seen
@@ -49,7 +49,7 @@ const lookRight = (myPos, guard_id, boxes, earshotDistance, settings) => {
   const { boardWidth } = settings;
   for (
     let i = guard_id.x;
-    i < guard_id.x + earshotDistance * 2 && i < boardWidth;
+    i < guard_id.x + earshotDistance  && i < boardWidth;
     i++
   ) {
     if (boxes.some((box) => box.y === guard_id.y && box.x === i)) return false; //box in way

@@ -1,4 +1,4 @@
-import { settings } from "../settings";
+
 import { useContext } from "react";
 import { GameContext } from "../gameContext";
 import { useEffect } from "react";
@@ -6,11 +6,26 @@ import moveGuard from "../utils/moveGuard";
 import { getUniquePosition } from "../utils/getUniquePosition";
 
 export const Guard=({guard_id})=>{
-  const{earshotDistance,guardPos,setGuardPos,boxes,gameOver,myPos,gameTimer,pause,guardCaught,guard}=useContext(GameContext)
+  const{bullet,setBullet,lives,setLives,bulletH,bulletV,setBulletArray,earshotDistance,guardPos,setGuardPos,boxes,gameOver,myPos,setMyPos,gameTimer,pause,guardCaught,guard,setCount,setBombSet,setBombPos,freeze,setFreeze,setPlayer,player,dieEffect}=useContext(GameContext)
 
 
   const guardParams = {
-
+    guardPos:guardPos,
+    dieEffect:dieEffect,
+    setMyPos:setMyPos,
+    player:player,
+    setPlayer:setPlayer,
+    setFreeze:setFreeze,
+    setBombPos:setBombPos,
+   setCount:setCount,
+   setBombSet:setBombSet,
+    bullet:bullet,
+    setBullet:setBullet,
+    lives:lives,
+    setLives:setLives,
+    bulletH:bulletH,
+    bulletV:bulletV,
+    setBulletArray:setBulletArray,
     boxes: boxes,
     myPos: myPos,
     guard_id: guard_id,
@@ -19,7 +34,7 @@ export const Guard=({guard_id})=>{
 
   };
   useEffect(() => {
-    if (!pause && !gameOver && !guardCaught) {
+    if (!pause && !gameOver && !guardCaught&&!freeze) {
  
     const newPos=moveGuard(guardParams);
 
@@ -38,14 +53,14 @@ export const Guard=({guard_id})=>{
 
 
     }
-  }, [gameTimer, pause, gameOver, guardCaught]);
+  }, [gameTimer, pause, gameOver, guardCaught,freeze]);
 
 
 
   useEffect(()=>{
     if(gameOver&&myPos.x!=undefined){
       let g=true;
-      const newPos=getUniquePosition(boxes,myPos,g)
+      const newPos=getUniquePosition(guardPos,boxes,myPos,g)
       setGuardPos(array=>{
         const newArray=[...array]
         newArray.splice(guard_id.id,1,{id:guard_id.id,x:newPos.x,y:newPos.y,xx:guard_id.xx,yy:guard_id.yy,

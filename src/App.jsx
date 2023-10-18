@@ -7,7 +7,7 @@ import { GameContext } from "./gameContext"
 import { StartScreen } from "./components/StartScreen";
 
 const App = () => {
-  const {newGame,setNewGame}=useContext(GameContext)
+  const {newGame}=useContext(GameContext)
   ////////RETURN PLAYING AREA/APP///////////////////
 
   return (

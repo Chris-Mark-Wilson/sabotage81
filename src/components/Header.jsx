@@ -11,7 +11,7 @@ export const Header=()=>{
         if (gameOver) {
           setHeaderText("--Sabotage--");
        
-        console.dir(gameTune)
+    
         gameTune.current.play()
           setGameOver(false);
           return;
@@ -32,7 +32,7 @@ export const Header=()=>{
 
     return(
         <header className="header" onClick={handleStartGame}>
-        <span className="score">SCORE: {score * 10}</span>
+        <span className="score">SCORE: {score}</span>
         <span className="title">{headerText}-</span>
         <span className="lives">
           LIVES: {lives === 3 ? "😎😎😎" : lives === 2 ? "😐😐" : "😬"}

@@ -1,6 +1,8 @@
 import getRnd from "./getRnd";
 import { settings } from "../settings";
 import { playerSeen } from "./playerSeen";
+import { shootPlayer } from "./shootPlayer";
+import { getUniquePosition } from "./getUniquePosition";
 
 
 const canMoveUp = ({ boxes, guard_id }) => {
@@ -58,15 +60,34 @@ const getNewWaypoint = ( guard_id) => {
 
 //////////MAIN FUNCTION///////////////
 
-const moveGuard = ({ boxes, myPos, guard_id,earshotDistance }) => {
+const moveGuard = ({setBullet,setLives, bulletH,bulletV,setBulletArray,boxes, myPos, setMyPos,guard_id,earshotDistance,setCount,setBombSet,setBombPos ,freeze,setFreeze,setPlayer,player,dieEffect,guardPos}) => {
 //return without moving if dead in a blast
-if(guard_id.img==="😵") return guard_id
+if(guard_id.img==="😵"|| freeze) return guard_id
 if(!guard_id.xx)guard_id=getNewWaypoint(guard_id)
   //guard_id is an actual guard object
 let direction=false;
 if(direction=playerSeen(myPos,guard_id,boxes,earshotDistance))
 {
-  console.log(`I see you! ${direction}`)
+  setFreeze(true)
+  const playerStore=player;
+
+  dieEffect.current.play();
+  setPlayer("😵")
+  setCount(0);//sets bomb count to 0 for chain reaction
+  setBombPos(myPos)//makes sure bomb is at player location
+  setBombSet(true)//sets of chain reaction when shot
+  shootPlayer(setBullet,myPos,guard_id,direction,bulletH,bulletV,setBulletArray)//draws bullet trace in direction of guard 
+  setTimeout(()=>{
+
+    const g=false;
+    const newPos=getUniquePosition(guardPos,boxes,myPos,g)//
+    setMyPos(newPos)//sets player elsewhere on board away from guards
+    setBulletArray([])//removes bullet trace from screen
+setPlayer(playerStore)//restores player graphic
+setFreeze(false)//unfreezes guards
+setLives((lives=>lives-1))//removes 1 life
+  },5000)
+
 }
   // AI here //
   //move up,down,left or right returns true if ok, or false if blocked

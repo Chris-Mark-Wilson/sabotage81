@@ -1,5 +1,5 @@
 export const settings={
-    maximumBoxes:300,
+    maximumBoxes:200,
     bombTimer:3,
     initialLimit:100,
     playerGraphic:"😎",
@@ -10,8 +10,8 @@ export const settings={
      startGameEffect : "/wrong-place-129242.mp3",
      guardDie :"/pretty-sure-i-just-died-103109.mp3",
      playerDie : "/manx27s-cry-122258.mp3",
-      gameSpeed : 200,
-     shotDistance : 4,
+      gameSpeed : 300,
+     shotDistance : 6,
      difficulty:5,
      boardWidth:32,
      boardHeight:21,
@@ -19,5 +19,9 @@ export const settings={
      initdown:"m",
      initleft:"z",
      initright:"x",
-     initfire:"l"
+     initfire:"l",
+     initBulletH:"-",
+     initBulletV:"|",
+     initBullet:"",
+     initdieEffect:"/die-47695.mp3"
 }

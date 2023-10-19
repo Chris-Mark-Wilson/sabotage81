@@ -47,8 +47,13 @@ export const GameOver = () => {
     <section className="game-over">
       <h1 className="title">GAME OVER</h1>
       <p className="zx">UNLUCKY SABOTEUR!</p>
-      <p className="zx">YOUR SCORE:{score}</p>
-      <section className="settingsButtons">
+
+   
+     
+
+      <p className="zx">YOUR SCORE:{score.toFixed(0)}</p>
+
+ <section className="settingsButtons">
       <button className="zx" onClick={handleClick}>
       RETRY? 
       </button>
@@ -56,7 +61,7 @@ export const GameOver = () => {
       <button className="zx"onClick={handleEnterName}>SUBMIT</button></>}
       </section>
       <p className="zx">REFRESH PAGE FOR START SCREEN</p>
-   
+
     </section>
   );
 };

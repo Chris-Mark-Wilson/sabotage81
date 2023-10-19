@@ -37,7 +37,7 @@ export const Header=()=>{
 
     return(
         <header className="header" onClick={handleStartGame}>
-        <span className="score">SCORE: {score}</span>
+        <span className="score">SCORE: {score.toFixed(0)}</span>
         <span className="title">{headerText}-</span>
         <span className="lives">
           LIVES: {lives === 3 ? "😎😎😎" : lives === 2 ? "😐😐" : "😬"}

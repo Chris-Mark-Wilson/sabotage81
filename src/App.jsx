@@ -5,21 +5,23 @@ import { GameBoard } from "./components/GameBoard";
 import { useContext } from "react"
 import { GameContext } from "./gameContext"
 import { StartScreen } from "./components/StartScreen";
+import { HighScores } from "./components/HighScores";
 
 const App = () => {
-  const {newGame}=useContext(GameContext)
+  const {newGame,hiScores}=useContext(GameContext)
   ////////RETURN PLAYING AREA/APP///////////////////
 
   return (
     <>
-{newGame&&<StartScreen/>}
-{!newGame&&
+{newGame&&!hiScores&&<StartScreen/>}
+{!newGame&&!hiScores&&
     <section className="container">
       <Header />
     <GameBoard/>
       <Sound />
     </section>
     }
+    {hiScores&&<HighScores/>}
   
     </>
   );

@@ -1,8 +1,12 @@
 import { useContext } from "react";
 import { GameContext } from "../gameContext";
 import { getUniquePosition } from "../utils/getUniquePosition";
+import { useState } from "react";
+import { getHighScores,uploadHighScores } from "../utils/firebaseApi";
+import { goAgain } from "../utils/goAgain";
 
 export const GameOver = () => {
+  const [name,setName]=useState("");
   const {
     setHeaderText,
     setEndGame,
@@ -17,49 +21,47 @@ export const GameOver = () => {
     guardPos,
     setGuardPos,
     guard,
+    setHiScores
   } = useContext(GameContext);
+
+  const handleEnterName=()=>{
+    uploadHighScores({})
+   const hiName=name;
+   setName("")
+  return getHighScores()
+  .then(scores=>{
+    console.log(scores)
+    scores[hiName]=score;
+    console.log(scores)
+    uploadHighScores(scores)
+     setHiScores(true)
+  })
+
+
+  }
   
   const handleClick = (e) => {
-    setHeaderText("--Click to start game--");
-    setScore(0);
-    setLives(3);
-
-    setGameOver(true); //stops game ready for click to start
-    setEndGame(false); //removes game over page
-    setFreeze(false); //unfreezes guards
-    let g = false; //for setting new player position
-    let newPos = getUniquePosition(guardPos, boxes, myPos, g);
-    setMyPos(newPos);
-
-    setGuardPos((array) => {
-      const newArray = [...array];
-      g = true;
-      newArray.forEach((newGuard) => {
-        newPos = getUniquePosition(guardPos, boxes, myPos, g);
-        newArray.splice(newGuard.id, 1, {
-          id: newGuard.id,
-          x: newPos.x,
-          y: newPos.y,
-          xx: newGuard.xx,
-          yy: newGuard.yy,
-          img: guard,
-        });
-      }); // reset all guards
-      return newArray;
-    });
+   goAgain(setHeaderText,setScore,setLives,setGameOver,setEndGame,setFreeze,getUniquePosition,setMyPos,setGuardPos,guardPos,boxes,myPos,guard)
   };
   return (
     <section className="game-over">
       <h1 className="title">GAME OVER</h1>
       <p className="zx">UNLUCKY SABOTEUR!</p>
-      <p className="zx">YOUR SCORE:{score.toFixed(0)}</p>
-      <button className="zx" onClick={handleClick}>
-        CLICK TO TRY AGAIN?
-      </button>
-      <p className="zx">REFRESH PAGE FOR START SCREEN</p>
-      <p className="zx">HIGH SCORE TABLE COMING SOON,</p>
-      <p className="zx">WHEN I'VE SQUISHED ALL THE BUGS</p>
+
+   
      
+
+      <p className="zx">YOUR SCORE:{score.toFixed(0)}</p>
+
+ <section className="settingsButtons">
+      <button className="zx" onClick={handleClick}>
+      RETRY? 
+      </button>
+      {score>0&&<><input className="zx" type="text" size="10" maxLength={10} placeholder="ENTER NAME" value={name} onChange={(e)=>setName(e.target.value.toUpperCase())} /> 
+      <button className="zx"onClick={handleEnterName}>SUBMIT</button></>}
+      </section>
+      <p className="zx">REFRESH PAGE FOR START SCREEN</p>
+
     </section>
   );
 };

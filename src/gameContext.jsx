@@ -61,6 +61,7 @@ const[guard,setGuard]=useState(guardGraphic)
 const[freeze,setFreeze]=useState(true)
 const[endGame,setEndGame]=useState(false)
 const[metric,setMetric]=useState(initMetric)
+const[hiScores,setHiScores]=useState(false)
 
 
     return(
@@ -113,7 +114,8 @@ const[metric,setMetric]=useState(initMetric)
            bullet,setBullet,
            freeze,setFreeze,
            endGame,setEndGame,
-           metric,setMetric
+           metric,setMetric,
+           hiScores,setHiScores
         }}>
             {children}
         </GameContext.Provider>

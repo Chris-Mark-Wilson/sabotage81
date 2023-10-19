@@ -162,6 +162,23 @@ border-radius: 8px;
   padding:1vw;
   border-radius: 2vw;;
 }
+.hi-score-table{
+  border:1px solid red;
+  border-radius: 20px;
+  box-shadow: 10px 5px 5px red;
+  justify-content: space-around;
+  height:60vh;
+  overflow-y:hidden;
+  padding:1rem;
+  margin:0 0 3vh 0;
+}
+.scoreline{
+border-bottom:1px dashed rgb(218, 239, 218);
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between;
+  margin:0 0 1vh 0;
+}
 
 @media screen and (max-width: 425px) {
   #main {

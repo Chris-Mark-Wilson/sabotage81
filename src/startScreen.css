@@ -81,7 +81,9 @@
         text-align: center; 
         animation: animate 1.5s linear infinite; 
       }  
-       
+       .flash{
+        animation:animate 2.5s linear infinite;
+       }
       @keyframes animate{ 
         0%{ 
           opacity: 0.2; 

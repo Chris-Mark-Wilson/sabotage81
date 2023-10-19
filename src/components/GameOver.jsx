@@ -25,7 +25,7 @@ export const GameOver = () => {
   } = useContext(GameContext);
 
   const handleEnterName=()=>{
-    uploadHighScores({})
+
    const hiName=name;
    setName("")
   return getHighScores()

@@ -4,12 +4,12 @@ import checkBlastArea from "../utils/checkBlastArea";
 import { useEffect } from "react";
 import getRemainingBoxes from "../utils/getRemainingBoxes";
 import { settings } from "../settings";
-import { getUniquePosition } from "../utils/getUniquePosition";
 import { killGuards } from "../utils/killGuards";
 
 export const Fireball = () => {
   const{boardHeight,boardWidth}=settings;
   const {freeze,
+    setFreeze,
     explosionGraphic,
     explosions,
     setExplosions,
@@ -29,8 +29,7 @@ export const Fireball = () => {
     setGuardPos,
     guardPos,
     boxes,
-    score,
-    setHeaderText,
+        setHeaderText,
     lives,
     setLives,
     setGameOver,
@@ -105,7 +104,7 @@ export const Fireball = () => {
 //if any guards been caught in the array
       const caughtIds = new Set([...guardCaught]); //remove dupicates
       const caughtGuardIds = [...caughtIds]; //turn back into an array
-      killGuards(metric,boxes,myPos,setPause,guard,caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos);
+      killGuards(setFreeze,metric,boxes,myPos,setPause,guard,caughtGuardIds,setScore,setHeaderText,setGuardCaught,guardDeadEffect,guardPos,setGuardPos);
     }
   }, [guardCaught]);
 
@@ -183,7 +182,7 @@ export const Fireball = () => {
         {exp}
       </div>
 
-      {explosions[0].x<settings.boardWidth-1&&<div
+      {explosions[0].x<boardWidth-1&&<div
         className="exp"
         style={{
           gridRow: explosions[0] && explosions[0].y,
@@ -196,7 +195,7 @@ export const Fireball = () => {
       </div>
 }
 
-      {explosions[0].y<settings.boardHeight-1&&explosions[0].x>1&&<div
+      {explosions[0].y<boardHeight-1&&explosions[0].x>1&&<div
         className="exp"
         style={{
           gridRow:
@@ -209,7 +208,7 @@ export const Fireball = () => {
         {exp}
       </div>
 }
-      {explosions[0].y<settings.boardHeight-1&&<div
+      {explosions[0].y<boardHeight-1&&<div
         className="exp"
         style={{
           gridRow:
@@ -223,7 +222,7 @@ export const Fireball = () => {
       </div>
       }
 
-      {explosions[0].y<settings.boardHeight-1&&explosions[0].x<settings.boardWidth-1&&<div
+      {explosions[0].y<boardHeight-1&&explosions[0].x<boardWidth-1&&<div
         className="exp"
         style={{
           gridRow:

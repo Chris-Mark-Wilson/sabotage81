@@ -6,7 +6,7 @@ import { get,ref, set } from 'firebase/database';
 const jsonRef=ref(database,)
 
  export const uploadHighScores=(scoresObject)=>{
-console.log(scoresObject)
+
     const scoresJson=JSON.stringify(scoresObject)
 return set(jsonRef, scoresJson)
  

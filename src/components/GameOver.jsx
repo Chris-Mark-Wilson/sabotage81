@@ -25,7 +25,7 @@ export const GameOver = () => {
   } = useContext(GameContext);
 
   const handleEnterName = () => {
-    console.log("here")
+  
 
    const hiName = name;
    setName("");

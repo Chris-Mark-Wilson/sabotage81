@@ -16,7 +16,7 @@ getHighScores()
     
     const newScoresArray=createHiScoreArray(scoresObject)
     setScores(()=>[...newScoresArray])
-    console.log(newScoresArray)
+  
 })
 },[])
 const handleClick=()=>{

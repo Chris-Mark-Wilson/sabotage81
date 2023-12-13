@@ -55,7 +55,8 @@ export const GameBoard=()=>{
       setFreeze(true)
      
     }
-  },[lives])
+  }, [lives])
+  
   useEffect(()=>{
 if(!endGame){
   setTimeout(()=>{

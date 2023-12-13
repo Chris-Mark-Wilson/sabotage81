@@ -13,7 +13,7 @@ const [scores,setScores]=useState([])
 useEffect(()=>{
 getHighScores()
 .then(scoresObject=>{
-    console.log(scoresObject)
+    
     const newScoresArray=createHiScoreArray(scoresObject)
     setScores(()=>[...newScoresArray])
     console.log(newScoresArray)
@@ -29,8 +29,8 @@ const handleClick=()=>{
         <h1 className="title flash">SABOTAGE ALL TIME GREATS</h1>
         <section className="hi-score-table">  
              {scores.map(score=>{
-            return(<>
-                <section className="zx scoreline" key={score.id}><div>{score.name}</div><div>{score.score}</div></section></>
+            return(
+                <section className="zx scoreline" key={score.id}><div>{score.name}</div><div>{score.score}</div></section>
             )
         })}
         </section>

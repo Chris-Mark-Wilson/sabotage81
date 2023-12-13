@@ -6,20 +6,19 @@ import { get,ref, set } from 'firebase/database';
 const jsonRef=ref(database,)
 
  export const uploadHighScores=(scoresObject)=>{
-
+console.log(scoresObject)
     const scoresJson=JSON.stringify(scoresObject)
-
-    set(jsonRef, scoresJson)
-  .then(() => {
-    console.log('JSON string uploaded successfully');
-  })
+return set(jsonRef, scoresJson)
+ 
   .catch((error) => {
     console.error('Error uploading JSON string:', error);
+    return Promise.reject(error)
   });
     
 }
 
-export const getHighScores=()=>{
+export const getHighScores = () => {
+
    return get(jsonRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -27,11 +26,14 @@ export const getHighScores=()=>{
      
         return JSON.parse(jsonScores)
       } else {
-        console.log('No data available');
+        
+        return {} // return empty scores object if none available
       }
     })
     .catch((error) => {
       console.error('Error retrieving JSON string:', error);
+      return Promise.reject(error)
     });
 }
+
 

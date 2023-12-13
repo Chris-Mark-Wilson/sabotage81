@@ -24,18 +24,24 @@ export const GameOver = () => {
     setHiScores
   } = useContext(GameContext);
 
-  const handleEnterName=()=>{
+  const handleEnterName = () => {
+    console.log("here")
 
-   const hiName=name;
-   setName("")
-  return getHighScores()
-  .then(scores=>{
-    console.log(scores)
-    scores[hiName]=score;
-    console.log(scores)
-    uploadHighScores(scores)
-     setHiScores(true)
-  })
+   const hiName = name;
+   setName("");
+   return getHighScores()
+     .then((scores) => {
+       //scores is the scores object returned from firebase
+       //literally just key value pairs name:score
+       scores[hiName] = score;
+    
+       uploadHighScores(scores).then(() => {
+        
+
+         setHiScores(true);
+       });
+     })
+     .catch((err) => console.log(err,"err in catch"));
 
 
   }

@@ -1,10 +1,11 @@
 
 
-export const goAgain=(setHeaderText,setScore,setLives,setGameOver,setEndGame,setFreeze,getUniquePosition,setMyPos,setGuardPos,guardPos,boxes,myPos,guard)=>{
-    setHeaderText("--Click to start game--");
+export const goAgain=(setHeaderText,setScore,setLives,setGameOver,setEndGame,setFreeze,getUniquePosition,setMyPos,setGuardPos,guardPos,boxes,myPos,guard,setPlayer,playerGraphic)=>{
+    setHeaderText("--Press Enter to start--");
     setScore(0);
-    setLives(3);
+  setLives(3);
 
+  setPlayer(playerGraphic)
     setGameOver(true); //stops game ready for click to start
     setEndGame(false); //removes game over page
     setFreeze(false); //unfreezes guards

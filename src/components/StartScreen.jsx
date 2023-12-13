@@ -12,24 +12,13 @@ export const StartScreen = () => {
   const {
     setNewGame,
     numGuards,
-    setNumGuards,
+  
     setGuardPos,
     godSpeed,
     setGodSpeed,
-    earshotDistance,
-    setEarShotDistance,
-    maxBoxes,
-    setMaxBoxes,
-    count,
-    setCount,
-    player,
-    setPlayer,
+    
     guard,
-    setGuard,
-    explosionGraphic,
-    setExplosionGraphic,
-    tnt,
-    setTnt,
+  
   } = useContext(GameContext);
   const [start, setStart] = useState(false);
   const [settings, setSettings] = useState(false);

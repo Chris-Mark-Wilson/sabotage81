@@ -8,7 +8,7 @@ import { goAgain } from "../utils/goAgain"
 import { getUniquePosition } from "../utils/getUniquePosition"
 
 export const HighScores=()=>{
-const {setHiScores,setHeaderText,setScore,setLives,setGameOver,setEndGame,setFreeze,setMyPos,setGuardPos,guardPos,boxes,myPos,guard}=useContext(GameContext)// switch true or false
+const {setHiScores,setHeaderText,setScore,setLives,setGameOver,setEndGame,setFreeze,setMyPos,setGuardPos,guardPos,boxes,myPos,guard,setPlayer,playerGraphic}=useContext(GameContext)// switch true or false
 const [scores,setScores]=useState([])
 useEffect(()=>{
 getHighScores()
@@ -20,7 +20,7 @@ getHighScores()
 })
 },[])
 const handleClick=()=>{
-    goAgain(setHeaderText,setScore,setLives,setGameOver,setEndGame,setFreeze,getUniquePosition,setMyPos,setGuardPos,guardPos,boxes,myPos,guard)
+    goAgain(setHeaderText,setScore,setLives,setGameOver,setEndGame,setFreeze,getUniquePosition,setMyPos,setGuardPos,guardPos,boxes,myPos,guard,setPlayer,playerGraphic)
     setHiScores(false)
 }
 

@@ -26,7 +26,7 @@ const[left,setLeft]=useState(initleft);
 const[right,setRight]=useState(initright);
 const[fire,setFire]=useState(initfire)
   const [pause, setPause] = useState(false);
-  const [headerText, setHeaderText] = useState("--Click here to start--");
+  const [headerText, setHeaderText] = useState("--Press Enter to start--");
   const [myPos, setMyPos] = useState({});
   const [guardPos, setGuardPos] = useState([]);
   const [count, setCount] = useState(bombTimer);
@@ -81,7 +81,8 @@ const[hiScores,setHiScores]=useState(false)
             lives,setLives,
             score,setScore,
             exp,setExp,
-            player,setPlayer,
+        player, setPlayer,
+            playerGraphic,
             guard,setGuard,
             gameTimer,setGameTimer,
            waypoint,setWaypoint,

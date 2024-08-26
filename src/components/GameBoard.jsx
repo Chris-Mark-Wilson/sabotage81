@@ -74,7 +74,7 @@ if(!endGame){
           return <Box key={box.id} box={box} />;
         })}
         <Bomb bombPos={bombPos} bombText={bombText} />
-        <Player inputRef={inputRef} />
+        <Player inputRef={inputRef} gameTimer={gameTimer} />
         {guardPos.map(guard_id=>{
                 return(
                    < Guard key={guard_id.id} guard_id={guard_id}/>
